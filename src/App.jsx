@@ -5,10 +5,12 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
+import Header from './components/Header'
 
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/category/:categoryName" element={<CategoryPage />} />
