@@ -7,6 +7,8 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Success from './pages/Success'
+import Cancel from './pages/Cancel'
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
       </Routes>
       <Footer />
     </BrowserRouter>
