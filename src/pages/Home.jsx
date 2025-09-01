@@ -2,9 +2,9 @@ import React from 'react';
 import ProductCard from '../components/ProductCard';
 
 const featuredProducts = [
-  { id: 1, name: 'T-shirt Homme', price: 25, image: '/images/tshirt1.jpg' },
-  { id: 2, name: 'Robe Femme', price: 40, image: '/images/robe1.jpg' },
-  { id: 3, name: 'Veste Enfant', price: 30, image: '/images/veste1.jpg' },
+  { id: 1, name: 'T-shirt Homme', price: 25, image: 'https://placehold.co/100' },
+  { id: 2, name: 'Robe Femme', price: 40, image: 'https://placehold.co/100' },
+  { id: 3, name: 'Veste Enfant', price: 30, image: 'https://placehold.co/100' },
 ];
 
 const Home = () => {

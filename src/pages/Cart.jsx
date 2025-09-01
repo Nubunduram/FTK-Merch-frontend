@@ -7,8 +7,8 @@ export default function Cart() {
 
   // Exemple de panier (plus tard on utilisera un CartContext ou Redux)
   const cartItems = [
-    { id: 1, name: "T-shirt FTK", price: 20, quantity: 2, image: "https://via.placeholder.com/100" },
-    { id: 2, name: "Hoodie FTK", price: 45, quantity: 1, image: "https://via.placeholder.com/100" }
+    { id: 1, name: "T-shirt FTK", price: 20, quantity: 2, image: "https://placehold.co/100" },
+    { id: 2, name: "Hoodie FTK", price: 45, quantity: 1, image: "https://placehold.co/100" }
   ]
 
   const handleIncrease = (id) => {

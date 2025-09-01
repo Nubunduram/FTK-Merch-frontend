@@ -3,25 +3,25 @@ import { useState } from "react"
 
 const productsData = {
   hommes: [
-    { id: 1, name: "T-shirt Homme", type: "T-shirt", price: 19.99, image: "/images/tshirt-homme.jpg" },
-    { id: 2, name: "Jeans Homme", type: "Jeans", price: 49.99, image: "/images/jeans-homme.jpg" },
-    { id: 3, name: "Veste Homme", type: "Veste", price: 89.99, image: "/images/veste-homme.jpg" },
-    { id: 4, name: "T-shirt Homme 2", type: "T-shirt", price: 29.99, image: "/images/tshirt-homme.jpg" },
-    { id: 5, name: "Jeans Homme 2", type: "Jeans", price: 59.99, image: "/images/jeans-homme.jpg" },
-    { id: 6, name: "Veste Homme 2", type: "Veste", price: 99.99, image: "/images/veste-homme.jpg" },
-    { id: 7, name: "T-shirt Homme 3", type: "T-shirt", price: 39.99, image: "/images/tshirt-homme.jpg" },
-    { id: 8, name: "Jeans Homme 3", type: "Jeans", price: 69.99, image: "/images/jeans-homme.jpg" },
-    { id: 9, name: "Veste Homme 3", type: "Veste", price: 109.99, image: "/images/veste-homme.jpg" },
+    { id: 1, name: "T-shirt Homme", type: "T-shirt", price: 19.99, image: "https://placehold.co/100" },
+    { id: 2, name: "Jeans Homme", type: "Jeans", price: 49.99, image: "https://placehold.co/100" },
+    { id: 3, name: "Veste Homme", type: "Veste", price: 89.99, image: "https://placehold.co/100" },
+    { id: 4, name: "T-shirt Homme 2", type: "T-shirt", price: 29.99, image: "https://placehold.co/100" },
+    { id: 5, name: "Jeans Homme 2", type: "Jeans", price: 59.99, image: "https://placehold.co/100" },
+    { id: 6, name: "Veste Homme 2", type: "Veste", price: 99.99, image: "https://placehold.co/100" },
+    { id: 7, name: "T-shirt Homme 3", type: "T-shirt", price: 39.99, image: "https://placehold.co/100" },
+    { id: 8, name: "Jeans Homme 3", type: "Jeans", price: 69.99, image: "https://placehold.co/100" },
+    { id: 9, name: "Veste Homme 3", type: "Veste", price: 109.99, image: "https://placehold.co/100" },
   ],
   femmes: [
-    { id: 10, name: "Robe Femme", type: "Robe", price: 39.99, image: "/images/robe-femme.jpg" },
-    { id: 11, name: "T-shirt Femme", type: "T-shirt", price: 24.99, image: "/images/tshirt-femme.jpg" },
-    { id: 12, name: "Jupe Femme", type: "Jupe", price: 29.99, image: "/images/jupe-femme.jpg" },
+    { id: 10, name: "Robe Femme", type: "Robe", price: 39.99, image: "https://placehold.co/100" },
+    { id: 11, name: "T-shirt Femme", type: "T-shirt", price: 24.99, image: "https://placehold.co/100" },
+    { id: 12, name: "Jupe Femme", type: "Jupe", price: 29.99, image: "https://placehold.co/100" },
   ],
   enfants: [
-    { id: 13, name: "Sweat Enfant", type: "Sweat", price: 29.99, image: "/images/sweat-enfant.jpg" },
-    { id: 14, name: "T-shirt Enfant", type: "T-shirt", price: 14.99, image: "/images/tshirt-enfant.jpg" },
-    { id: 15, name: "Pantalon Enfant", type: "Pantalon", price: 34.99, image: "/images/pantalon-enfant.jpg" },
+    { id: 13, name: "Sweat Enfant", type: "Sweat", price: 29.99, image: "https://placehold.co/100" },
+    { id: 14, name: "T-shirt Enfant", type: "T-shirt", price: 14.99, image: "https://placehold.co/100" },
+    { id: 15, name: "Pantalon Enfant", type: "Pantalon", price: 34.99, image: "https://placehold.co/100" },
   ],
 }
 
