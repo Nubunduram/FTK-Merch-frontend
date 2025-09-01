@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom"
-import { useState } from "react"
+import { useParams, Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import ProductCard from "../components/ProductCard";
 
-const productsData = {
+export const productsData = {
   hommes: [
     { id: 1, name: "T-shirt Homme", type: "T-shirt", price: 19.99, image: "https://placehold.co/100" },
     { id: 2, name: "Jeans Homme", type: "Jeans", price: 49.99, image: "https://placehold.co/100" },
@@ -14,52 +15,63 @@ const productsData = {
     { id: 9, name: "Veste Homme 3", type: "Veste", price: 109.99, image: "https://placehold.co/100" },
   ],
   femmes: [
-    { id: 10, name: "Robe Femme", type: "Robe", price: 39.99, image: "https://placehold.co/100" },
-    { id: 11, name: "T-shirt Femme", type: "T-shirt", price: 24.99, image: "https://placehold.co/100" },
-    { id: 12, name: "Jupe Femme", type: "Jupe", price: 29.99, image: "https://placehold.co/100" },
+    { id: 1, name: "Robe Femme", type: "Robe", price: 39.99, image: "https://placehold.co/100" },
+    { id: 2, name: "T-shirt Femme", type: "T-shirt", price: 24.99, image: "https://placehold.co/100" },
+    { id: 3, name: "Jupe Femme", type: "Jupe", price: 29.99, image: "https://placehold.co/100" },
   ],
   enfants: [
-    { id: 13, name: "Sweat Enfant", type: "Sweat", price: 29.99, image: "https://placehold.co/100" },
-    { id: 14, name: "T-shirt Enfant", type: "T-shirt", price: 14.99, image: "https://placehold.co/100" },
-    { id: 15, name: "Pantalon Enfant", type: "Pantalon", price: 34.99, image: "https://placehold.co/100" },
+    { id: 1, name: "Sweat Enfant", type: "Sweat", price: 29.99, image: "https://placehold.co/100" },
+    { id: 2, name: "T-shirt Enfant", type: "T-shirt", price: 14.99, image: "https://placehold.co/100" },
+    { id: 3, name: "Pantalon Enfant", type: "Pantalon", price: 34.99, image: "https://placehold.co/100" },
   ],
-}
+};
 
 const CategoryPage = () => {
-  const { categoryName } = useParams()
-  const [sort, setSort] = useState("asc")
-  const [filters, setFilters] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const productsPerPage = 6
+  const { categoryName } = useParams();
+  const location = useLocation();
+  const prevState = location.state || {};
 
-  const products = productsData[categoryName] || []
+  // Initialisation des states depuis location.state
+  const [sort, setSort] = useState(prevState.sort || "asc");
+  const [filters, setFilters] = useState(prevState.filters || []);
+  const [currentPage, setCurrentPage] = useState(prevState.currentPage || 1);
+  const productsPerPage = 6;
 
-  // Récupérer les types disponibles dans la catégorie
-  const availableTypes = [...new Set(products.map((p) => p.type))]
+  const products = productsData[categoryName] || [];
+  const availableTypes = [...new Set(products.map((p) => p.type))];
 
-  // Gestion du tri et filtres
-  let filteredProducts = [...products]
-  if (filters.length > 0) {
-    filteredProducts = filteredProducts.filter((p) => filters.includes(p.type))
-  }
+  // Filtrage et tri
+  const filteredProducts = filters.length > 0
+    ? products.filter(p => filters.includes(p.type))
+    : products;
+
   const sortedProducts = [...filteredProducts].sort((a, b) =>
     sort === "asc" ? a.price - b.price : b.price - a.price
-  )
+  );
 
   // Pagination
-  const totalPages = Math.ceil(sortedProducts.length / productsPerPage)
-  const startIndex = (currentPage - 1) * productsPerPage
-  const currentProducts = sortedProducts.slice(startIndex, startIndex + productsPerPage)
+  const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const currentProducts = sortedProducts.slice(startIndex, startIndex + productsPerPage);
 
   const toggleFilter = (type) => {
-    setFilters((prev) =>
-      prev.includes(type) ? prev.filter((f) => f !== type) : [...prev, type]
-    )
-    setCurrentPage(1) // Reset page si filtre change
-  }
+    setFilters(prev =>
+      prev.includes(type) ? prev.filter(f => f !== type) : [...prev, type]
+    );
+    setCurrentPage(1);
+  };
 
-  const handlePrev = () => currentPage > 1 && setCurrentPage(currentPage - 1)
-  const handleNext = () => currentPage < totalPages && setCurrentPage(currentPage + 1)
+  const handlePrev = () => currentPage > 1 && setCurrentPage(currentPage - 1);
+  const handleNext = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
+
+  // Met à jour les states si on revient depuis ProductPage
+  useEffect(() => {
+    if (prevState) {
+      setSort(prevState.sort || "asc");
+      setFilters(prevState.filters || []);
+      setCurrentPage(prevState.currentPage || 1);
+    }
+  }, [categoryName, location.state]);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -70,7 +82,7 @@ const CategoryPage = () => {
         <aside className="md:w-1/4">
           <h2 className="text-xl font-semibold mb-4">Filtres</h2>
           <div className="space-y-2">
-            {availableTypes.map((type) => (
+            {availableTypes.map(type => (
               <label key={type} className="flex items-center space-x-2">
                 <input
                   type="checkbox"
@@ -99,19 +111,15 @@ const CategoryPage = () => {
 
           {currentProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {currentProducts.map((product) => (
-                <div
+              {currentProducts.map(product => (
+                <Link
                   key={product.id}
-                  className="border rounded-lg p-4 shadow hover:shadow-lg transition"
+                  to={`/category/${categoryName}/product/${product.id}`}
+                  state={{ filters, sort, currentPage, categoryName }}
+                  className="block"
                 >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-48 object-cover mb-4 rounded"
-                  />
-                  <h2 className="text-lg font-semibold">{product.name}</h2>
-                  <p className="text-gray-700">{product.price.toFixed(2)} €</p>
-                </div>
+                  <ProductCard product={product} />
+                </Link>
               ))}
             </div>
           ) : (
@@ -133,11 +141,7 @@ const CategoryPage = () => {
                 <button
                   key={i + 1}
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`px-3 py-1 rounded ${
-                    currentPage === i + 1
-                      ? "bg-blue-600 text-white"
-                      : "bg-gray-200"
-                  }`}
+                  className={`px-3 py-1 rounded ${currentPage === i + 1 ? "bg-blue-600 text-white" : "bg-gray-200"}`}
                 >
                   {i + 1}
                 </button>
@@ -155,7 +159,7 @@ const CategoryPage = () => {
         </main>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CategoryPage
+export default CategoryPage;
