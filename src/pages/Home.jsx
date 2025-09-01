@@ -11,12 +11,15 @@ const Home = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Hero */}
-      <div className="mb-12 bg-gray-200 rounded-lg h-64 flex flex-col items-center justify-center text-center p-4">
-        <h1 className="text-4xl font-bold mb-4">Bienvenue sur FTK Merch Shop</h1>
-        <p className="text-gray-700 max-w-xl">
-          Découvrez nos collections exclusives pour hommes, femmes et enfants. Trouvez des vêtements tendance, confortables et adaptés à chaque style. Profitez d’une expérience d’achat simple et rapide avec nos promotions et nouveautés chaque semaine.
-        </p>
-      </div>
+<div className="mb-12 bg-gray-200 rounded-lg flex flex-col items-center justify-center text-center p-6">
+  <h1 className="text-4xl font-bold mb-4">Bienvenue sur FTK Merch Shop</h1>
+  <p className="text-gray-700 max-w-xl">
+    Découvrez nos collections exclusives pour hommes, femmes et enfants. 
+    Trouvez des vêtements tendance, confortables et adaptés à chaque style. 
+    Profitez d’une expérience d’achat simple et rapide avec nos promotions et nouveautés chaque semaine.
+  </p>
+</div>
+
 
       {/* Produits à la une */}
       <h2 className="text-2xl font-semibold mb-6">Produits à la une</h2>

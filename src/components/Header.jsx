@@ -25,13 +25,13 @@ export default function Header() {
                     <Link to="/" className="text-gray-700 hover:text-gray-900">
                         Accueil
                     </Link>
-                    <Link to="/category/men" className="text-gray-700 hover:text-gray-900">
+                    <Link to="/category/hommes" className="text-gray-700 hover:text-gray-900">
                         Hommes
                     </Link>
-                    <Link to="/category/women" className="text-gray-700 hover:text-gray-900">
+                    <Link to="/category/femmes" className="text-gray-700 hover:text-gray-900">
                         Femmes
                     </Link>
-                    <Link to="/category/kids" className="text-gray-700 hover:text-gray-900">
+                    <Link to="/category/enfants" className="text-gray-700 hover:text-gray-900">
                         Enfants
                     </Link>
                 </nav>
@@ -60,7 +60,7 @@ export default function Header() {
                     ) : (
                         <button
                             onClick={handleLogout}
-                            className="px-4 py-2 bg-gray-600 text-white font-semibold rounded hover:bg-gray-700 transition"
+                            className="px-4 py-2 cursor-pointer bg-gray-600 text-white font-semibold rounded hover:bg-gray-700 transition"
                         >
                             Déconnexion
                         </button>
@@ -103,7 +103,7 @@ export default function Header() {
                         {!isLoggedIn ? (
                             <Link
                                 to="/login"
-                                className="px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition mt-2"
+                                className="px-4 py-2 cursor-pointer bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition mt-2"
                                 onClick={() => { setIsLoggedIn(true); setIsOpen(false) }}
                             >
                                 Connexion
@@ -111,7 +111,7 @@ export default function Header() {
                         ) : (
                             <button
                                 onClick={() => { handleLogout(); setIsOpen(false) }}
-                                className="px-4 py-2 bg-gray-600 text-white font-semibold rounded hover:bg-gray-700 transition mt-2"
+                                className="px-4 py-2 cursor-pointer bg-gray-600 text-white font-semibold rounded hover:bg-gray-700 transition mt-2"
                             >
                                 Déconnexion
                             </button>
