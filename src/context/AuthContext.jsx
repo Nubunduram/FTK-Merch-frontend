@@ -1,40 +1,65 @@
-import { createContext, useContext, useState, useEffect } from "react"
+import { createContext, useContext, useState, useEffect } from "react";
+import { loginRequest, signup, getMe } from "../api/auth";
 
-const AuthContext = createContext()
-
-export const useAuth = () => useContext(AuthContext)
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true); // loading au démarrage
 
-  // Charger utilisateur depuis localStorage
+  // Vérifie si on a déjà un token et récupère l'utilisateur
   useEffect(() => {
-    const savedUser = localStorage.getItem("user")
-    if (savedUser) setUser(JSON.parse(savedUser))
-  }, [])
+    const initAuth = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const me = await getMe(token);
+          setUser(me);
+        } catch {
+          localStorage.removeItem("token"); // token invalide
+        }
+      }
+      setAuthLoading(false);
+    };
+    initAuth();
+  }, []);
 
-  const login = (email) => {
-    // Check avec le backend
-    const fakeUser = { email }
-    setUser(fakeUser)
-    localStorage.setItem("user", JSON.stringify(fakeUser))
-  }
+  const login = async (email, password) => {
+    setAuthLoading(true);
+    try {
+      const data = await loginRequest(email, password);
+      localStorage.setItem("token", data.authToken);
+      const me = await getMe(data.authToken);
+      setUser(me);
+    } catch (err) {
+      throw err;
+    } finally {
+      setAuthLoading(false);
+    }
+  };
 
-  const signup = (email) => {
-    // Similaire à login pour la démo
-    const fakeUser = { email }
-    setUser(fakeUser)
-    localStorage.setItem("user", JSON.stringify(fakeUser))
+  const signupAndLogin = async (first_name, last_name, email, password) => {
+  setAuthLoading(true);
+  try {
+    const data = await signup(first_name, last_name, email, password);
+    localStorage.setItem("token", data.authToken);
+    const me = await getMe(data.authToken);
+    setUser(me);
+  } finally {
+    setAuthLoading(false);
   }
+};
 
   const logout = () => {
-    setUser(null)
-    localStorage.removeItem("user")
-  }
+    setUser(null);
+    localStorage.removeItem("token");
+  };
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, login, signupAndLogin, logout, authLoading }}>
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
+
+export const useAuth = () => useContext(AuthContext);

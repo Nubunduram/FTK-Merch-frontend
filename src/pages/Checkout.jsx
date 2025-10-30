@@ -15,7 +15,8 @@ export default function Checkout() {
 
   // Formulaire livraison
   const [form, setForm] = useState({
-    name: "",
+    first_name: "",
+    last_name: "",
     email: user?.email || "",
     address: "",
     city: "",

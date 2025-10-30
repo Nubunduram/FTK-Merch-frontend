@@ -1,6 +1,7 @@
-import { useState } from "react"
-import { useParams, useLocation, useNavigate } from "react-router-dom"
-import { productsData } from "./CategoryPage" // On réutilise les produits mock
+import { useState } from "react";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { productsData } from "./CategoryPage"; // On réutilise les produits mock
+import { useAuth } from "../context/AuthContext"; // Contexte d'authentification
 // import { useCart } from "../context/CartContext"
 
 const mockComments = {
@@ -9,56 +10,63 @@ const mockComments = {
     { id: 2, user: "Bob", text: "Bonne qualité et taille conforme." },
   ],
   2: [{ id: 1, user: "Claire", text: "Jeans parfait pour l’hiver." }],
-}
+};
 
 export default function ProductPage() {
-  const { productId, categoryName: paramCategoryName } = useParams()
-  const location = useLocation()
-  const navigate = useNavigate()
-  const state = location.state || {}
-  const { filters, sort, currentPage } = state
+  const { productId, categoryName: paramCategoryName } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const state = location.state || {};
+  const { filters, sort, currentPage } = state;
+
+  const { user } = useAuth(); // Récupère l'utilisateur connecté
 
   // Utiliser categoryName passé via state si présent, sinon param URL
-  const categoryName = state.categoryName || paramCategoryName
+  const categoryName = state.categoryName || paramCategoryName;
 
   const product = (productsData[categoryName] || []).find(
     (p) => p.id === parseInt(productId)
-  )
+  );
 
-  const [selectedSize, setSelectedSize] = useState("")
-  const [comments, setComments] = useState(mockComments[productId] || [])
-  const [newComment, setNewComment] = useState("")
+  const [selectedSize, setSelectedSize] = useState("");
+  const [comments, setComments] = useState(mockComments[productId] || []);
+  const [newComment, setNewComment] = useState("");
 
   if (!product) {
-    return <p>Produit introuvable.</p>
+    return <p>Produit introuvable.</p>;
   }
 
-  const sizes = ["S", "M", "L", "XL"]
+  const sizes = ["S", "M", "L", "XL"];
 
   const handleAddToCart = () => {
     if (!selectedSize) {
-      alert("Veuillez sélectionner une taille.")
-      return
+      alert("Veuillez sélectionner une taille.");
+      return;
     }
     // addToCart({ ...product, size: selectedSize, quantity: 1 })
-    alert("Produit ajouté au panier !")
-  }
+    alert("Produit ajouté au panier !");
+  };
 
   const handleAddComment = () => {
-    if (!newComment.trim()) return
-    const comment = { id: comments.length + 1, user: "Utilisateur", text: newComment }
-    setComments((prev) => [...prev, comment])
-    setNewComment("")
-  }
+    if (!user) {
+      alert("Vous devez être connecté pour commenter.");
+      return;
+    }
+    if (!newComment.trim()) return;
+
+    const comment = { id: comments.length + 1, user: user.name, text: newComment };
+    setComments((prev) => [...prev, comment]);
+    setNewComment("");
+  };
 
   const handleGoBack = () => {
     if (state.categoryName) {
       // Retour à CategoryPage avec le contexte
-      navigate(`/category/${categoryName}`, { state: { filters, sort, currentPage } })
+      navigate(`/category/${categoryName}`, { state: { filters, sort, currentPage } });
     } else {
-      navigate(-1) // fallback si pas de state
+      navigate(-1); // fallback si pas de state
     }
-  }
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -92,11 +100,10 @@ export default function ProductPage() {
                 <button
                   key={size}
                   onClick={() => setSelectedSize(size)}
-                  className={`px-3 py-1 border rounded ${
-                    selectedSize === size
+                  className={`px-3 py-1 border rounded ${selectedSize === size
                       ? "bg-blue-600 text-white"
                       : "bg-white text-gray-700"
-                  }`}
+                    }`}
                 >
                   {size}
                 </button>
@@ -127,23 +134,29 @@ export default function ProductPage() {
               <p>Aucun commentaire pour ce produit.</p>
             )}
 
-            <div className="flex flex-col space-y-2">
-              <textarea
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                placeholder="Ajouter un commentaire..."
-                className="border rounded p-2 w-full"
-              />
-              <button
-                onClick={handleAddComment}
-                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-fit"
-              >
-                Envoyer
-              </button>
-            </div>
+            {user ? (
+              <div className="flex flex-col space-y-2">
+                <textarea
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  placeholder="Ajouter un commentaire..."
+                  className="border rounded p-2 w-full"
+                />
+                <button
+                  onClick={handleAddComment}
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-fit"
+                >
+                  Envoyer
+                </button>
+              </div>
+            ) : (
+              <p className="text-gray-500 italic">
+                Connectez-vous pour ajouter un commentaire.
+              </p>
+            )}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

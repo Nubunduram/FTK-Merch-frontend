@@ -1,36 +1,69 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Signup = () => {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
+  const navigate = useNavigate();
+  const { signupAndLogin } = useAuth();
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
     if (password !== confirmPassword) {
-      alert("Les mots de passe ne correspondent pas !")
-      return
+      setError("Les mots de passe ne correspondent pas !");
+      return;
     }
-    console.log("Signup:", { name, email, password })
-    // TODO: Intégrer logique d’inscription
-  }
+
+    try {
+      setLoading(true);
+      await signupAndLogin(first_name, last_name, email, password); // inscription + connexion
+      navigate("/"); // redirection après succès
+    } catch (err) {
+      setError(err.message || "Erreur lors de l'inscription");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Inscription</h1>
+        {error && (
+          <p className="text-red-600 bg-red-100 p-2 rounded mb-4 text-center">
+            {error}
+          </p>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block mb-1 font-medium">Nom complet</label>
+            <label className="block mb-1 font-medium">Prénom</label>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={first_name}
+              onChange={(e) => setFirstName(e.target.value)}
               required
               className="w-full border rounded px-3 py-2"
-              placeholder="John Doe"
+              placeholder="John"
+            />
+          </div>
+          <div>
+            <label className="block mb-1 font-medium">Nom</label>
+            <input
+              type="text"
+              value={last_name}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+              className="w-full border rounded px-3 py-2"
+              placeholder="Doe"
             />
           </div>
           <div>
@@ -68,9 +101,13 @@ const Signup = () => {
           </div>
           <button
             type="submit"
-            className="w-full cursor-pointer bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
+            disabled={loading}
+            className={`w-full cursor-pointer text-white py-2 rounded-lg transition ${loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-green-600 hover:bg-green-700"
+              }`}
           >
-            S’inscrire
+            {loading ? "Inscription..." : "S’inscrire"}
           </button>
         </form>
         <p className="mt-4 text-center text-sm text-gray-600">
@@ -81,7 +118,7 @@ const Signup = () => {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
