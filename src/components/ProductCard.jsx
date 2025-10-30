@@ -25,9 +25,8 @@ const ProductCard = ({ product }) => {
             return (
               <span
                 key={size}
-                className={`px-2 py-1 border rounded text-sm ${
-                  inStock ? "bg-green-100 text-green-800" : "bg-gray-200 text-gray-500"
-                }`}
+                className={`px-2 py-1 border rounded text-sm ${inStock ? "bg-green-100 text-green-800" : "bg-gray-200 text-gray-500"
+                  }`}
               >
                 {size}
               </span>

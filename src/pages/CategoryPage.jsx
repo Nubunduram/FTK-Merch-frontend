@@ -1,50 +1,48 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
-import { getCategories, getProductsByCategory } from "../api/products";
+import { getCategories, getSubCategories, getProductsBySubCategory } from "../api/products";
+import { getSubCategoriesForCategory } from "../utils/categoryUtils";
 
 const CategoryPage = () => {
-  const { categoryName } = useParams(); // correspond au paramètre dans App.jsx
+  const { categoryName } = useParams();
   const [categories, setCategories] = useState([]);
-  const [categoryId, setCategoryId] = useState(null);
+  const [subCategories, setSubCategories] = useState([]);
+  const [category, setCategory] = useState(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Tri simple
   const [sort, setSort] = useState("asc");
 
-  // Récupérer les catégories
   useEffect(() => {
-    const fetchCategories = async () => {
+    const fetchData = async () => {
       try {
-        const data = await getCategories();
-        setCategories(data);
+        const [cats, subCats] = await Promise.all([getCategories(), getSubCategories()]);
+        setCategories(cats);
+        setSubCategories(subCats);
+
+        const foundCategory = cats.find(c => c.slug === categoryName);
+        if (foundCategory) setCategory(foundCategory);
       } catch (err) {
-        console.error("Erreur categories:", err);
+        console.error("Erreur de chargement:", err);
       }
     };
-    fetchCategories();
-  }, []);
+    fetchData();
+  }, [categoryName]);
 
-  // Déterminer l'ID de la catégorie depuis le slug
-  useEffect(() => {
-    if (!categories.length) return;
-    const cat = categories.find(c => c.slug === categoryName);
-    if (!cat) {
-      console.log("Catégorie introuvable pour le slug:", categoryName);
-      return;
-    }
-    setCategoryId(cat.id);
-  }, [categories, categoryName]);
-
-  // Charger les produits de la catégorie
   useEffect(() => {
     const fetchProducts = async () => {
-      if (!categoryId) return;
+      if (!category || !subCategories.length) return;
       setLoading(true);
       try {
-        const data = await getProductsByCategory(categoryId);
-        setProducts(data);
+        const subCatsForCategory = getSubCategoriesForCategory(category.id, subCategories);
+
+        const allProducts = [];
+        for (const subCat of subCatsForCategory) {
+          const prods = await getProductsBySubCategory(subCat.id);
+          allProducts.push(...prods);
+        }
+
+        setProducts(allProducts);
       } catch (err) {
         console.error("Erreur produits:", err);
         setProducts([]);
@@ -53,9 +51,8 @@ const CategoryPage = () => {
       }
     };
     fetchProducts();
-  }, [categoryId]);
+  }, [category, subCategories]);
 
-  // Tri des produits
   const sortedProducts = [...products].sort((a, b) =>
     sort === "asc" ? a.price_in_cents - b.price_in_cents : b.price_in_cents - a.price_in_cents
   );
@@ -63,12 +60,12 @@ const CategoryPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 capitalize">
-        Collection {categoryName}
+        Collection {category?.name || categoryName}
       </h1>
 
       {/* Sélecteur de tri */}
       <div className="mb-4 flex items-center gap-2">
-        <label>Tri : </label>
+        <label>Tri :</label>
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
@@ -86,8 +83,7 @@ const CategoryPage = () => {
           {sortedProducts.map((product) => (
             <Link
               key={product.id}
-              to={`/category/${categoryName}/product/${product.id}`}
-              className="block"
+              to={`/category/${category?.slug}/product/${product.id}`}
             >
               <ProductCard product={product} />
             </Link>
