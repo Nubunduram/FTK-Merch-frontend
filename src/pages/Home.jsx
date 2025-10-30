@@ -1,14 +1,43 @@
-import React from 'react';
+// src/pages/Home.jsx
+import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import { Link } from 'react-router-dom';
-
-const featuredProducts = [
-  { id: 1, name: 'T-shirt Homme', price: 25, image: 'https://placehold.co/100', category: 'hommes' },
-  { id: 2, name: 'Robe Femme', price: 40, image: 'https://placehold.co/100', category: 'femmes' },
-  { id: 3, name: 'Veste Enfant', price: 30, image: 'https://placehold.co/100', category: 'enfants' },
-];
+import { getFeaturedProducts, getCategories } from '../api/products';
 
 const Home = () => {
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const [productsData, categoriesData] = await Promise.all([
+          getFeaturedProducts(),
+          getCategories()
+        ]);
+        setFeaturedProducts(productsData);
+        setCategories(categoriesData);
+      } catch (err) {
+        console.error(err);
+        setError("Impossible de charger les produits à la une.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const getCategorySlug = (subCatId) => {
+    const cat = categories.find(c => c.id === subCatId);
+    return cat ? cat.slug : "autres";
+  };
+
+  if (loading) return <p>Chargement des produits à la une...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Hero */}
@@ -23,17 +52,21 @@ const Home = () => {
 
       {/* Produits à la une */}
       <h2 className="text-2xl font-semibold mb-6">Produits à la une</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {featuredProducts.map(product => (
-          <Link 
-            key={product.id} 
-            to={`/category/${product.category}/product/${product.id}`}
-            className="block"
-          >
-            <ProductCard product={product} />
-          </Link>
-        ))}
-      </div>
+      {featuredProducts.length === 0 ? (
+        <p>Aucun produit à la une pour l’instant.</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {featuredProducts.map(product => (
+            <Link
+              key={product.id}
+              to={`/category/${getCategorySlug(product.sub_categories_id)}/product/${product.id}`}
+              className="block"
+            >
+              <ProductCard product={product} />
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,8 +1,22 @@
 import { useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { productsData } from "./CategoryPage"; // On réutilise les produits mock
-import { useAuth } from "../context/AuthContext"; // Contexte d'authentification
+// import { productsData } from "./CategoryPage";
+import * as AuthContext from "../context/AuthContext"; // Contexte d'authentification
 // import { useCart } from "../context/CartContext"
+
+const productsData = {
+  homme: [
+    { id: 1, name: "T-shirt Homme", type: "T-shirt", price: 19.99, image: "https://placehold.co/100" },
+    { id: 2, name: "Jeans Homme", type: "Jeans", price: 49.99, image: "https://placehold.co/100" },
+  ],
+  femme: [
+    { id: 1, name: "Robe Femme", type: "Robe", price: 39.99, image: "https://placehold.co/100" },
+  ],
+  enfants: [
+    { id: 1, name: "Sweat Enfant", type: "Sweat", price: 29.99, image: "https://placehold.co/100" },
+  ],
+};
+
 
 const mockComments = {
   1: [
@@ -19,7 +33,7 @@ export default function ProductPage() {
   const state = location.state || {};
   const { filters, sort, currentPage } = state;
 
-  const { user } = useAuth(); // Récupère l'utilisateur connecté
+  const { user } = AuthContext.useAuth(); // Récupère l'utilisateur connecté
 
   // Utiliser categoryName passé via state si présent, sinon param URL
   const categoryName = state.categoryName || paramCategoryName;

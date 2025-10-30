@@ -1,12 +1,26 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { HiMenu, HiX, HiShoppingCart } from "react-icons/hi"
 import { useAuth } from "../context/AuthContext"
+import { getCategories } from "../api/products"
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false)
+    const [categories, setCategories] = useState([])
     const { user, logout } = useAuth()
     const cartItemCount = 0 // plus tard ce sera dynamique via un CartContext
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const data = await getCategories()
+                setCategories(data)
+            } catch (err) {
+                console.error("Erreur de chargement des catégories :", err)
+            }
+        }
+        fetchCategories()
+    }, [])
 
     return (
         <header className="bg-white shadow-md">
@@ -21,20 +35,20 @@ export default function Header() {
                     <Link to="/" className="text-gray-700 hover:text-gray-900">
                         Accueil
                     </Link>
-                    <Link to="/category/hommes" className="text-gray-700 hover:text-gray-900">
-                        Hommes
-                    </Link>
-                    <Link to="/category/femmes" className="text-gray-700 hover:text-gray-900">
-                        Femmes
-                    </Link>
-                    <Link to="/category/enfants" className="text-gray-700 hover:text-gray-900">
-                        Enfants
-                    </Link>
+                    {categories.map((cat) => (
+                        <Link
+                            key={cat.id}
+                            to={`/category/${cat.slug}`}
+                            className="text-gray-700 hover:text-gray-900 capitalize"
+                        >
+                            {cat.name}
+                        </Link>
+                    ))}
                 </nav>
 
                 {/* Desktop Actions */}
                 <div className="hidden md:flex items-center space-x-4">
-                    {/* Cart */}
+                    {/* Panier */}
                     <Link to="/cart" className="relative text-gray-700 hover:text-gray-900">
                         <HiShoppingCart size={24} />
                         {cartItemCount > 0 && (
@@ -44,7 +58,7 @@ export default function Header() {
                         )}
                     </Link>
 
-                    {/* Login / Logout */}
+                    {/* Connexion / Déconnexion */}
                     {!user ? (
                         <Link
                             to="/login"
@@ -62,7 +76,7 @@ export default function Header() {
                     )}
                 </div>
 
-                {/* Mobile menu button */}
+                {/* Mobile Menu Button */}
                 <button
                     className="md:hidden text-gray-700 hover:text-gray-900"
                     onClick={() => setIsOpen(!isOpen)}
@@ -78,15 +92,17 @@ export default function Header() {
                         <Link to="/" className="text-gray-700 hover:text-gray-900" onClick={() => setIsOpen(false)}>
                             Accueil
                         </Link>
-                        <Link to="/category/hommes" className="text-gray-700 hover:text-gray-900" onClick={() => setIsOpen(false)}>
-                            Hommes
-                        </Link>
-                        <Link to="/category/femmes" className="text-gray-700 hover:text-gray-900" onClick={() => setIsOpen(false)}>
-                            Femmes
-                        </Link>
-                        <Link to="/category/enfants" className="text-gray-700 hover:text-gray-900" onClick={() => setIsOpen(false)}>
-                            Enfants
-                        </Link>
+
+                        {categories.map((cat) => (
+                            <Link
+                                key={cat.id}
+                                to={`/category/${cat.slug}`}
+                                className="text-gray-700 hover:text-gray-900 capitalize"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {cat.name}
+                            </Link>
+                        ))}
 
                         <Link to="/cart" className="relative text-gray-700 hover:text-gray-900" onClick={() => setIsOpen(false)}>
                             <HiShoppingCart size={24} />
