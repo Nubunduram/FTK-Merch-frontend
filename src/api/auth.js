@@ -34,7 +34,7 @@ export async function loginRequest(email, password) {
   return data;
 }
 
-export async function getMe(token) {
+export async function getMe() {
   const res = await fetch(`${API_URL}/auth/me`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,

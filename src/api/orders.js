@@ -26,8 +26,6 @@ export async function getOrderById(orderId) {
   return await res.json()
 }
 
-
-
 // POST orders
 export async function postOrder(orderData) {
     const res = await fetch(`${API_URL}/orders`, {

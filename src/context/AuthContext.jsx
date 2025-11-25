@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem("token");
       if (token) {
         try {
-          const me = await getMe(token);
+          const me = await getMe();
           setUser(me);
         } catch {
           localStorage.removeItem("token"); // token invalide
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const data = await loginRequest(email, password);
       localStorage.setItem("token", data.authToken);
-      const me = await getMe(data.authToken);
+      const me = await getMe();
       setUser(me);
     } catch (err) {
       throw err;
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
   try {
     const data = await signup(first_name, last_name, email, password);
     localStorage.setItem("token", data.authToken);
-    const me = await getMe(data.authToken);
+    const me = await getMe();
     setUser(me);
   } finally {
     setAuthLoading(false);

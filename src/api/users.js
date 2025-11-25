@@ -30,10 +30,10 @@ export async function createAddress(data) {
     return res.json();
 }
 
-// PUT update address
+// PATCH update address
 export async function updateAddress(id, data) {
     const res = await fetch(`${API_URL}/addresses/${id}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -56,11 +56,10 @@ export async function deleteAddress(id) {
     return res.json();
 }
 
-
 // PATCH update user
 export async function updateUser(data) {
     const res = await fetch(`${API_URL}/users/me`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -74,7 +73,7 @@ export async function updateUser(data) {
 // PATCH change password (séparé pour éviter d'envoyer password à chaque update)
 export async function updatePassword(data) {
     const res = await fetch(`${API_URL}/users/change_password`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
