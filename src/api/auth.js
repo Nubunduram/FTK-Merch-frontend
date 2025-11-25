@@ -31,17 +31,17 @@ export async function loginRequest(email, password) {
 
   const data = await handleResponse(res);
   if (!res.ok) throw new Error(data?.message || "Erreur de connexion");
-  return data; // attend { authToken: "...", ... } selon Xano
+  return data;
 }
 
 export async function getMe(token) {
   const res = await fetch(`${API_URL}/auth/me`, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
 
   const data = await handleResponse(res);
   if (!res.ok) throw new Error(data?.message || "Token invalide");
-  return data; // devrait retourner l'utilisateur
+  return data;
 }

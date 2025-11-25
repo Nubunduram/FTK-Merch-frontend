@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as AuthContext from "../context/AuthContext";
 import { getProductById } from "../api/products";
+import { useCart } from "../context/CartContext";
 
 export default function ProductPage() {
   const { productId } = useParams();
   const navigate = useNavigate();
   const { user } = AuthContext.useAuth();
+  const { addToCart } = useCart();
 
   const [product, setProduct] = useState(null);
   const [selectedColor, setSelectedColor] = useState("");
@@ -19,13 +21,9 @@ export default function ProductPage() {
       try {
         const data = await getProductById(productId);
         setProduct(data);
-
-        // Si des variantes existent, on pré-sélectionne la première couleur
         if (data._product_variants_of_products?.length > 0) {
           setSelectedColor(data._product_variants_of_products[0].color);
         }
-
-        // Charger les commentaires
         setComments(data._reviews_of_products || []);
         setLoading(false);
       } catch (err) {
@@ -39,19 +37,14 @@ export default function ProductPage() {
   if (loading) return <p>Chargement du produit...</p>;
   if (!product) return <p>Produit introuvable.</p>;
 
-  // Récupérer les couleurs disponibles
-  const availableColors = [
-    ...new Set(product._product_variants_of_products.map(v => v.color)),
-  ];
-
-  // Récupérer les tailles disponibles pour la couleur sélectionnée
+  const availableColors = [...new Set(product._product_variants_of_products.map(v => v.color))];
   const availableSizes = product._product_variants_of_products
-    .filter(v => v.color === selectedColor && v.stock > 0)
-    .map(v => v.size);
+    .filter(v => v.color === selectedColor)
+    .map(v => ({ size: v.size, stock: v.stock }));
 
   const handleSelectColor = (color) => {
     setSelectedColor(color);
-    setSelectedSize(""); // reset taille quand on change de couleur
+    setSelectedSize("");
   };
 
   const handleAddToCart = () => {
@@ -59,34 +52,29 @@ export default function ProductPage() {
       alert("Veuillez sélectionner une taille.");
       return;
     }
-    alert(`Produit ajouté au panier : ${selectedColor} - ${selectedSize}`);
+    const variant = product._product_variants_of_products.find(
+      v => v.color === selectedColor && v.size === selectedSize
+    );
+    addToCart({ ...product, color: selectedColor, size: selectedSize, sku: variant.sku, price: product.price_in_cents / 100 });
+    alert("Produit ajouté au panier !");
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <button
-        onClick={() => navigate(-1)}
-        className="mb-6 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
-      >
+      <button onClick={() => navigate(-1)} className="mb-6 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
         ← Retour
       </button>
 
       <div className="flex flex-col md:flex-row gap-8">
-        {/* Image produit */}
         <div className="md:w-1/2">
-          <img
-            src={product.img_url}
-            alt={product.name}
-            className="w-full h-auto rounded shadow"
-          />
+          <img src={product.img_url} alt={product.name} className="w-full h-auto rounded shadow" />
         </div>
 
-        {/* Détails produit */}
         <div className="md:w-1/2 flex flex-col">
           <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
           <p className="text-gray-700 mb-4">{product.price_in_cents / 100} €</p>
 
-          {/* Sélection couleur */}
+          {/* Couleur */}
           <div className="mb-4">
             <p className="font-semibold mb-2">Couleur :</p>
             <div className="flex space-x-2">
@@ -94,8 +82,7 @@ export default function ProductPage() {
                 <button
                   key={color}
                   onClick={() => handleSelectColor(color)}
-                  className={`px-3 py-1 cursor-pointer border rounded ${selectedColor === color ? "bg-blue-600 text-white" : "bg-white text-gray-700"
-                    }`}
+                  className={`px-3 py-1 border rounded ${selectedColor === color ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`}
                 >
                   {color}
                 </button>
@@ -103,34 +90,24 @@ export default function ProductPage() {
             </div>
           </div>
 
-          {/* Sélection taille */}
+          {/* Taille */}
           <div className="mb-4">
             <p className="font-semibold mb-2">Taille :</p>
             <div className="flex space-x-2">
-              {product._product_variants_of_products
-                .filter(v => v.color === selectedColor)
-                .map((variant) => {
-                  const isAvailable = variant.stock > 0;
-                  return (
-                    <button
-                      key={variant.size}
-                      onClick={() => isAvailable && setSelectedSize(variant.size)}
-                      className={`px-3 py-1 border rounded ${selectedSize === variant.size ? "bg-blue-600 text-white" : "bg-white text-gray-700"
-                        } ${!isAvailable ? "cursor-not-allowed line-through text-red-500" : "cursor-pointer"}`}
-                      disabled={!isAvailable}
-                    >
-                      {variant.size}
-                    </button>
-                  );
-                })}
+              {availableSizes.map(({ size, stock }) => (
+                <button
+                  key={size}
+                  onClick={() => stock > 0 && setSelectedSize(size)}
+                  className={`px-3 py-1 border rounded ${selectedSize === size ? "bg-blue-600 text-white" : "bg-white text-gray-700"} ${stock === 0 ? "cursor-not-allowed line-through text-red-500" : "cursor-pointer"}`}
+                  disabled={stock === 0}
+                >
+                  {size}
+                </button>
+              ))}
             </div>
           </div>
 
-
-          <button
-            onClick={handleAddToCart}
-            className="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 w-fit mt-4"
-          >
+          <button onClick={handleAddToCart} className="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 w-fit mt-4">
             Ajouter au panier
           </button>
 
