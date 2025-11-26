@@ -1,85 +1,71 @@
+// users.js
+import { getHeaders, handleResponse } from './helpers';
+
 const API_URL = "https://x8ki-letl-twmt.n7.xano.io/api:zJjPxf0u";
 
 // GET adresses d'un utilisateur
 export async function getUserAddresses() {
     try {
         const res = await fetch(`${API_URL}/addresses`, {
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem("token")}`,
-            },
+            method: 'GET',
+            headers: getHeaders(false, true),
         });
-        if (!res.ok) throw new Error("Erreur lors de la récupération des adresses");
-        return await res.json();
-    } catch (err) {
-        console.error("getUserAddresses:", err);
+        return await handleResponse(res);
+    } catch (error) {
+        console.error('Erreur getUserAddresses:', error);
         return [];
     }
 }
 
-// POST new address
+// POST nouvelle adresse
 export async function createAddress(data) {
     const res = await fetch(`${API_URL}/addresses`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        method: 'POST',
+        headers: getHeaders(true, true),
         body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error("Erreur création adresse");
-    return res.json();
+    return handleResponse(res);
 }
 
-// PATCH update address
+// PATCH update adresse
 export async function updateAddress(id, data) {
     const res = await fetch(`${API_URL}/addresses/${id}`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(data),
+        method: 'PATCH',
+        headers: getHeaders(true, true),
+        body: JSON.stringify({
+            ...data,
+            adresses_id: id
+        }),
     });
-    if (!res.ok) throw new Error("Erreur modification adresse");
-    return res.json();
+    return handleResponse(res);
 }
 
-// DELETE address
+// DELETE adresse
 export async function deleteAddress(id) {
     const res = await fetch(`${API_URL}/addresses/${id}`, {
-        method: "DELETE",
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        method: 'DELETE',
+        headers: getHeaders(true, true),
+        body: JSON.stringify({ adresses_id: id }),
     });
-    if (!res.ok) throw new Error("Erreur suppression adresse");
-    return res.json();
+    return handleResponse(res);
 }
 
 // PATCH update user
 export async function updateUser(data) {
     const res = await fetch(`${API_URL}/users/me`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        method: 'PATCH',
+        headers: getHeaders(true, true),
         body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error("Erreur mise à jour");
-    return res.json();
+    return handleResponse(res);
 }
 
-// PATCH change password (séparé pour éviter d'envoyer password à chaque update)
+// PATCH change password
 export async function updatePassword(data) {
     const res = await fetch(`${API_URL}/users/change_password`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        method: 'PATCH',
+        headers: getHeaders(true, true),
         body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error("Erreur changement mot de passe");
-    return res.json();
+    return handleResponse(res);
 }
