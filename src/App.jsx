@@ -12,9 +12,27 @@ import ProductPage from './pages/ProductPage'
 import Order from './pages/Order'
 import OrdersHistory from './pages/OrdersHistory'
 import Profile from './pages/Profile'
+import ProductsAdmin from './pages/Admin/ProductsAdmin'
 import { AuthProvider } from './context/AuthContext'
+import { getMe } from './api/auth'
+import { useState, useEffect, Navigate } from 'react'
 
 function App() {
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const me = await getMe();
+        setUser(me);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchUser();
+  }, []);
+
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -31,6 +49,7 @@ function App() {
           <Route path="/order/:id" element={<Order />} />
           <Route path="/orders" element={<OrdersHistory />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admin" element={<ProductsAdmin />} />
         </Routes>
         <Footer />
       </BrowserRouter>

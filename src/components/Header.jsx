@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HiMenu, HiX, HiShoppingCart } from "react-icons/hi";
-import { FaReceipt, FaUser } from "react-icons/fa";
+import { FaReceipt, FaUser, FaCog } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import { getCategories } from "../api/products";
@@ -93,6 +93,16 @@ export default function Header() {
                         >
                             Déconnexion
                         </button>
+                    )}
+
+                    {user && user.role === "admin" && (
+                        <Link
+                            to="/admin"
+                            className="text-gray-700 hover:text-gray-900 ml-2"
+                            title="Administration"
+                        >
+                            <FaCog size={22} />
+                        </Link>
                     )}
                 </div>
 
@@ -187,6 +197,17 @@ export default function Header() {
                                 Déconnexion
                             </button>
                         )}
+
+                        {user && user.role === "admin" && (
+                            <Link
+                                to="/admin"
+                                onClick={() => setIsOpen(false)}
+                                className="flex items-center gap-2 text-gray-700 hover:text-gray-900 mt-2"
+                            >
+                                <FaCog /> <span>Admin</span>
+                            </Link>
+                        )}
+
                     </nav>
                 </div>
             )}
