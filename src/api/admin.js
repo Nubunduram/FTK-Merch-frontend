@@ -50,6 +50,8 @@ export async function createProduct(product) {
     return createdProduct;
 }
 
+
+
 // POST add a variant to an existing product
 export async function createVariant(productId, variant) {
     const { color, size, sku, stock } = variant;
@@ -71,7 +73,7 @@ export async function deleteProduct(productId) {
     return handleResponse(res);
 }
 
-// DELETE a product
+// DELETE a product variant
 export async function deleteVariant(variantId) {
     const res = await fetch(`${API_URL}/product_variants/${variantId}`, {
         method: "DELETE",
@@ -81,3 +83,23 @@ export async function deleteVariant(variantId) {
     return handleResponse(res);
 }
 
+// GET orders
+export async function getAllOrders() {
+    const res = await fetch(`${API_URL}/orders`, {
+        headers: getHeaders(true, true),
+    });
+    return handleResponse(res);
+}
+
+// PATCH order status
+export async function updateOrderStatus(orderId, status) {
+    const res = await fetch(`${API_URL}/orders/${orderId}`, {
+        method: "PATCH",
+        headers: getHeaders(true, true),
+        body: JSON.stringify({
+            status,
+            orders_id: orderId,
+        }),
+    });
+    return handleResponse(res);
+}

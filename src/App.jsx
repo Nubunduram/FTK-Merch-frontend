@@ -13,6 +13,9 @@ import Order from './pages/Order'
 import OrdersHistory from './pages/OrdersHistory'
 import Profile from './pages/Profile'
 import ProductsAdmin from './pages/Admin/ProductsAdmin'
+import OrdersAdmin from './pages/Admin/OrdersAdmin'
+import AdminLayout from './pages/Admin/AdminLayout'
+import AdminRoute from './components/AdminRoute'
 import { AuthProvider } from './context/AuthContext'
 import { getMe } from './api/auth'
 import { useState, useEffect, Navigate } from 'react'
@@ -49,7 +52,11 @@ function App() {
           <Route path="/order/:id" element={<Order />} />
           <Route path="/orders" element={<OrdersHistory />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/admin" element={<ProductsAdmin />} />
+          <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
+            <Route path="products" element={<ProductsAdmin />} />
+            <Route path="orders" element={<OrdersAdmin />} />
+          </Route>
+
         </Routes>
         <Footer />
       </BrowserRouter>

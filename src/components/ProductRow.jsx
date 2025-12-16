@@ -43,9 +43,8 @@ export default function ProductRow({
             {/* BOUTON FEATURED */}
             <button
               onClick={() => onToggleFeatured(product.id, !product.is_featured)}
-              className={`text-xl ${
-                product.is_featured ? "text-yellow-500" : "text-gray-400"
-              }`}
+              className={`text-xl ${product.is_featured ? "text-yellow-500" : "text-gray-400"
+                }`}
             >
               {product.is_featured ? <FaStar /> : <FaRegStar />}
             </button>
@@ -115,6 +114,15 @@ export default function ProductRow({
               className="px-2 py-1 bg-green-600 text-white rounded"
             >
               Ajouter
+            </button>
+            <button
+              onClick={() => {
+                setShowVariantForm(false);
+                setNewVariant({ color: "", size: "", sku: "", stock: 0 });
+              }}
+              className="px-2 py-1 bg-gray-400 text-white rounded hover:bg-gray-500"
+            >
+              Annuler
             </button>
           </td>
         </tr>
