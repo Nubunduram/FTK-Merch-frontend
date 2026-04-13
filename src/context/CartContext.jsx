@@ -9,14 +9,29 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (product, quantity = 1) => {
     setCart(prev => {
-      const existing = prev.find(item => item.id === product.id && item.color === product.color && item.size === product.size);
+      const existing = prev.find(
+        item =>
+          item.product_variants_id === product.product_variants_id &&
+          item.color === product.color &&
+          item.size === product.size
+      );
+
       if (existing) {
         return prev.map(item =>
-          item === existing ? { ...item, quantity: item.quantity + quantity } : item
+          item === existing
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
         );
-      } else {
-        return [...prev, { ...product, quantity }];
       }
+
+      return [
+        ...prev,
+        {
+          ...product,
+          quantity,
+          product_variants_id: product.product_variants_id, // 🔥 IMPORTANT
+        }
+      ];
     });
   };
 

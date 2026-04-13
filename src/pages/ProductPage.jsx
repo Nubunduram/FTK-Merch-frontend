@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import * as AuthContext from "../context/AuthContext";
 import { getProductById } from "../api/products";
 import { useCart } from "../context/CartContext";
+import { sortSizes } from "../utils/sizes";
 
 export default function ProductPage() {
   const { productId } = useParams();
@@ -47,9 +48,12 @@ export default function ProductPage() {
 
   const availableColors = [...new Set(variants.map(v => v.color))];
 
-  const availableSizes = variants
-    .filter(v => v.color === selectedColor)
-    .map(v => ({ size: v.size, stock: v.stock }));
+  const availableSizes = sortSizes(
+    variants
+      .filter(v => v.color === selectedColor)
+      .map(v => ({ size: v.size, stock: v.stock })),
+    item => item.size  // ✅ on indique à sortSizes quelle propriété trier
+  );
 
   const handleSelectColor = (color) => {
     setSelectedColor(color);
@@ -69,11 +73,14 @@ export default function ProductPage() {
     if (!variant) return;
 
     addToCart({
-      ...product,
+      product_id: product.id,
+      product_variants_id: variant.id, // 🔥 important
+      name: product.name,
       color: selectedColor,
       size: selectedSize,
       sku: variant.sku,
-      price: product.price_in_cents / 100
+      price: product.price_in_cents / 100,
+      quantity: 1
     });
 
     alert("Produit ajouté au panier !");
@@ -118,8 +125,8 @@ export default function ProductPage() {
                   key={color}
                   onClick={() => handleSelectColor(color)}
                   className={`px-3 py-1 border rounded ${selectedColor === color
-                      ? "bg-blue-600 text-white"
-                      : "bg-white text-gray-700"
+                    ? "bg-blue-600 text-white"
+                    : "bg-white text-gray-700"
                     }`}
                 >
                   {color}
@@ -138,8 +145,8 @@ export default function ProductPage() {
                   onClick={() => stock > 0 && setSelectedSize(size)}
                   disabled={stock === 0}
                   className={`px-3 py-1 border rounded ${selectedSize === size
-                      ? "bg-blue-600 text-white"
-                      : "bg-white text-gray-700"
+                    ? "bg-blue-600 text-white"
+                    : "bg-white text-gray-700"
                     } ${stock === 0
                       ? "opacity-50 cursor-not-allowed line-through"
                       : ""

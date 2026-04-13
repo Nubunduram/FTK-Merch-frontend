@@ -27,11 +27,11 @@ export default function OrdersHistory() {
 
     const getStatusColor = (status) => {
         switch (status) {
-            case "en attente": return "bg-orange-200 text-orange-800"
-            case "payé": return "bg-green-200 text-green-800"
-            case "envoyé": return "bg-blue-200 text-blue-800"
-            case "livré": return "bg-teal-200 text-teal-800"
-            case "annulé": return "bg-red-200 text-red-800"
+            case "pending": return "bg-orange-200 text-orange-800"
+            case "paid": return "bg-green-200 text-green-800"
+            case "shipped": return "bg-blue-200 text-blue-800"
+            case "delivered": return "bg-teal-200 text-teal-800"
+            case "canceled": return "bg-red-200 text-red-800"
             default: return "bg-gray-200 text-gray-800"
         }
     }

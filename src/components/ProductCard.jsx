@@ -1,8 +1,8 @@
-const ProductCard = ({ product }) => {
-  // Extraire les tailles disponibles et leur stock
-  const variants = product?._product_variants_of_products || [];
+import { sortSizes } from "../utils/sizes";
 
-  const sizes = [...new Set(product.variants?.map(v => v.size) || [])];
+const ProductCard = ({ product }) => {
+
+  const sizes = sortSizes([...new Set(product.variants?.map(v => v.size) || [])]);
   const colors = [...new Set(product.variants?.map(v => v.color) || [])];
 
   return (

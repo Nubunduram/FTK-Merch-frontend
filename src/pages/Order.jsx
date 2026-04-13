@@ -25,11 +25,11 @@ export default function Order() {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "en attente": return "bg-orange-200 text-orange-800"
-      case "payé": return "bg-green-200 text-green-800"
-      case "envoyé": return "bg-blue-200 text-blue-800"
-      case "livré": return "bg-teal-200 text-teal-800"
-      case "annulé": return "bg-red-200 text-red-800"
+      case "pending": return "bg-orange-200 text-orange-800"
+      case "paid": return "bg-green-200 text-green-800"
+      case "shipped": return "bg-blue-200 text-blue-800"
+      case "delivered": return "bg-teal-200 text-teal-800"
+      case "canceled": return "bg-red-200 text-red-800"
       default: return "bg-gray-200 text-gray-800"
     }
   }
@@ -54,7 +54,7 @@ export default function Order() {
           <h2 className="text-xl font-semibold mb-4">Résumé de la commande</h2>
           <p><strong>Date :</strong> {new Date(order.created_at).toLocaleDateString()}</p>
           <p>
-            <strong>Status :</strong> 
+            <strong>Status :</strong>
             <span className={`ml-2 px-2 py-0.25 rounded ${getStatusColor(order.status)} capitalize`}>
               {order.status}
             </span>
@@ -80,18 +80,19 @@ export default function Order() {
               </tr>
             </thead>
             <tbody>
-              {order._order_items_of_orders.map(item => (
+              {/* ✅ order.items au lieu de order._order_items_of_orders */}
+              {(order.items ?? []).map(item => (
                 <tr key={item.id} className="border-b">
                   <td className="p-2">
                     <img
-                      src={item._product_variants._products.img_url}
-                      alt={item._product_variants._products.name}
+                      src={item.img_url}
+                      alt={item.name}
                       className="w-20 h-20 object-cover rounded"
                     />
                   </td>
-                  <td className="p-2">{item._product_variants._products.name}</td>
-                  <td className="p-2">{item._product_variants.color}</td>
-                  <td className="p-2">{item._product_variants.size}</td>
+                  <td className="p-2">{item.name}</td>       {/* ✅ */}
+                  <td className="p-2">{item.color}</td>      {/* ✅ */}
+                  <td className="p-2">{item.size}</td>       {/* ✅ */}
                   <td className="p-2 text-center">{item.quantity}</td>
                   <td className="p-2 text-right">{(item.unit_price_in_cents / 100).toFixed(2)} €</td>
                 </tr>
