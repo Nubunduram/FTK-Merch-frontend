@@ -2,8 +2,8 @@ const ProductCard = ({ product }) => {
   // Extraire les tailles disponibles et leur stock
   const variants = product?._product_variants_of_products || [];
 
-  const sizes = [...new Set(variants.map(v => v.size))];
-  const colors = [...new Set(variants.map(v => v.color))];
+  const sizes = [...new Set(product.variants?.map(v => v.size) || [])];
+  const colors = [...new Set(product.variants?.map(v => v.color) || [])];
 
   return (
     <div className="border rounded-lg p-4 hover:shadow-lg transition">
@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
         <p className="font-semibold text-sm">Tailles :</p>
         <div className="flex gap-2 flex-wrap mt-1">
           {sizes.map(size => {
-            const inStock = product._product_variants_of_products.some(
+            const inStock = product.variants?.some(
               v => v.size === size && v.stock > 0
             );
             return (

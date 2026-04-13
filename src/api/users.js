@@ -32,10 +32,7 @@ export async function updateAddress(id, data) {
     const res = await fetch(`${API_URL}/addresses/${id}`, {
         method: 'PATCH',
         headers: getHeaders(true, true),
-        body: JSON.stringify({
-            ...data,
-            adresses_id: id
-        }),
+        body: JSON.stringify(data),
     });
     return handleResponse(res);
 }
@@ -44,8 +41,7 @@ export async function updateAddress(id, data) {
 export async function deleteAddress(id) {
     const res = await fetch(`${API_URL}/addresses/${id}`, {
         method: 'DELETE',
-        headers: getHeaders(true, true),
-        body: JSON.stringify({ adresses_id: id }),
+        headers: getHeaders(false, true),
     });
     return handleResponse(res);
 }

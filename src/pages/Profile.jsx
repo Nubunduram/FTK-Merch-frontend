@@ -55,6 +55,13 @@ export default function Profile() {
     async function handleUpdateUser(e) {
         e.preventDefault();
         await updateUser(formUser);
+        const me = await getMe();
+        setUser(me);
+        setFormUser({
+            first_name: me.first_name,
+            last_name: me.last_name,
+            email: me.email,
+        });
         alert("Profil mis à jour !");
         setEditingUser(false);
     }
@@ -102,8 +109,7 @@ export default function Profile() {
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
                         className={`px-6 py-2 text-lg font-medium 
-                            ${
-                                activeTab === tab.id
+                            ${activeTab === tab.id
                                 ? "border-b-4 border-blue-600 text-blue-600"
                                 : "text-gray-500 hover:text-gray-700"
                             }`}
