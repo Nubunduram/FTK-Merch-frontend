@@ -1,7 +1,7 @@
 // users.js
 import { getHeaders, handleResponse } from './helpers';
 
-const API_URL = "https://x8ki-letl-twmt.n7.xano.io/api:zJjPxf0u";
+const API_URL = "http://localhost:3001/api";
 
 // GET adresses d'un utilisateur
 export async function getUserAddresses() {

@@ -1,6 +1,6 @@
 import { getHeaders, handleResponse } from "./helpers";
 
-const API_URL = "https://x8ki-letl-twmt.n7.xano.io/api:IZ3jdrGj";
+const API_URL = "http://localhost:3001/api";
 
 export async function signup(first_name, last_name, email, password) {
   const res = await fetch(`${API_URL}/auth/signup`, {

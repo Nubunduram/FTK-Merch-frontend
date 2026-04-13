@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
     setAuthLoading(true);
     try {
       const data = await loginRequest(email, password);
-      localStorage.setItem("token", data.authToken);
+      localStorage.setItem("token", data.token);
       const me = await getMe();
       setUser(me);
     } catch (err) {
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
   setAuthLoading(true);
   try {
     const data = await signup(first_name, last_name, email, password);
-    localStorage.setItem("token", data.authToken);
+    localStorage.setItem("token", data.token);
     const me = await getMe();
     setUser(me);
   } finally {

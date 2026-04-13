@@ -1,7 +1,9 @@
 const ProductCard = ({ product }) => {
   // Extraire les tailles disponibles et leur stock
-  const sizes = [...new Set(product._product_variants_of_products.map(v => v.size))];
-  const colors = [...new Set(product._product_variants_of_products.map(v => v.color))];
+  const variants = product?._product_variants_of_products || [];
+
+  const sizes = [...new Set(variants.map(v => v.size))];
+  const colors = [...new Set(variants.map(v => v.color))];
 
   return (
     <div className="border rounded-lg p-4 hover:shadow-lg transition">

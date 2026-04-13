@@ -1,7 +1,7 @@
 // api/adminProducts.js
 import { getHeaders, handleResponse } from "./helpers";
 
-const API_URL = "https://x8ki-letl-twmt.n7.xano.io/api:p0--DpmS";
+const API_URL = "http://localhost:3001/api";
 
 // GET all products with variants
 export async function getAllProducts() {
@@ -49,8 +49,6 @@ export async function createProduct(product) {
 
     return createdProduct;
 }
-
-
 
 // POST add a variant to an existing product
 export async function createVariant(productId, variant) {

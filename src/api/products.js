@@ -1,7 +1,7 @@
 /* ------------------------------ PRODUCTS -------------------------------- */
 import { handleResponse } from './helpers';
 
-const API_URL = "https://x8ki-letl-twmt.n7.xano.io/api:uEJUS-2_";
+const API_URL = "http://localhost:3001/api";
 
 // GET product by ID
 export async function getProductById(productId) {

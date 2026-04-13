@@ -1,6 +1,6 @@
 import { getHeaders, handleResponse } from "./helpers";
 
-const API_URL = "https://x8ki-letl-twmt.n7.xano.io/api:LOlQSlyq";
+const API_URL = "http://localhost:3001/api";
 
 // GET orders list by user
 export async function getUserOrders() {
