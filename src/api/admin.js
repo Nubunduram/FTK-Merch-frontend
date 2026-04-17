@@ -5,7 +5,7 @@ const API_URL = "http://localhost:3001/api";
 
 // GET all products with variants
 export async function getAllProducts() {
-    const res = await fetch(`${API_URL}/products`, {
+    const res = await fetch(`${API_URL}/products?admin=true`, {
         headers: getHeaders(false, true),
     });
     return handleResponse(res);
@@ -52,11 +52,11 @@ export async function createProduct(product) {
 
 // POST add a variant to an existing product
 export async function createVariant(productId, variant) {
-    const { color, size, sku, stock } = variant;
+    const { color, color_hex, size, sku, stock } = variant; // ✅
     const res = await fetch(`${API_URL}/product_variants`, {
         method: "POST",
         headers: getHeaders(true, true),
-        body: JSON.stringify({ products_id: productId, color, size, sku, stock }),
+        body: JSON.stringify({ products_id: productId, color, color_hex, size, sku, stock }), // ✅
     });
     return handleResponse(res);
 }
@@ -83,7 +83,7 @@ export async function deleteVariant(variantId) {
 
 // GET orders
 export async function getAllOrders() {
-    const res = await fetch(`${API_URL}/orders`, {
+    const res = await fetch(`${API_URL}/admin/orders`, {
         headers: getHeaders(true, true),
     });
     return handleResponse(res);
@@ -91,7 +91,8 @@ export async function getAllOrders() {
 
 // PATCH order status
 export async function updateOrderStatus(orderId, status) {
-    const res = await fetch(`${API_URL}/orders/${orderId}`, {
+    const res = await fetch(`${API_URL}/admin/orders/${orderId}`, {
+
         method: "PATCH",
         headers: getHeaders(true, true),
         body: JSON.stringify({
@@ -100,4 +101,11 @@ export async function updateOrderStatus(orderId, status) {
         }),
     });
     return handleResponse(res);
+}
+
+export async function getAdminStats() {
+  const res = await fetch(`${API_URL}/admin/stats`, {
+    headers: getHeaders(false, true),
+  });
+  return handleResponse(res);
 }

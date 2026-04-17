@@ -19,6 +19,8 @@ import AdminRoute from './components/AdminRoute'
 import { AuthProvider } from './context/AuthContext'
 import { getMe } from './api/auth'
 import { useState, useEffect, Navigate } from 'react'
+import AdminDashboard from './pages/Admin/AdminDashboard'
+
 
 function App() {
 
@@ -53,6 +55,7 @@ function App() {
           <Route path="/orders" element={<OrdersHistory />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
+            <Route index element={<AdminDashboard />} />
             <Route path="products" element={<ProductsAdmin />} />
             <Route path="orders" element={<OrdersAdmin />} />
           </Route>

@@ -12,10 +12,9 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
     try {
-      await login(email, password); // Appel AuthContext -> /auth/login
-      navigate("/"); // Redirection après connexion réussie
+      await login(email, password);
+      navigate("/");
     } catch (err) {
       console.error("Erreur de connexion :", err);
       setError(err.message || "Impossible de se connecter");
@@ -23,48 +22,346 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">Connexion</h1>
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full border rounded px-3 py-2"
-            placeholder="Email"
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="w-full border rounded px-3 py-2"
-            placeholder="Mot de passe"
-          />
+        .login-root {
+          font-family: 'DM Sans', sans-serif;
+          min-height: 100vh;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          background: #fff;
+        }
 
-          {error && (
-            <p className="text-red-600 text-sm text-center">{error}</p>
-          )}
+        @media (max-width: 768px) {
+          .login-root { grid-template-columns: 1fr; }
+          .login-visual { display: none; }
+        }
 
-          <button
-            type="submit"
-            disabled={authLoading}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
-          >
-            {authLoading ? "Connexion..." : "Se connecter"}
-          </button>
-        </form>
+        /* ── Panneau gauche décoratif ── */
+        .login-visual {
+          background: #111827;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 40px;
+          position: relative;
+          overflow: hidden;
+        }
 
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Pas encore de compte ?{" "}
-          <Link to="/signup" className="text-blue-600 hover:underline">
-            Inscription
+        .login-visual-bg {
+          position: absolute;
+          inset: 0;
+          background:
+            radial-gradient(ellipse 70% 60% at 20% 80%, rgba(22,163,74,0.18) 0%, transparent 60%),
+            radial-gradient(ellipse 50% 40% at 80% 20%, rgba(22,163,74,0.08) 0%, transparent 60%);
+          pointer-events: none;
+        }
+
+        .login-visual-logo {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 1.5rem;
+          letter-spacing: 0.08em;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          position: relative;
+          z-index: 1;
+        }
+
+        .login-visual-logo-dot {
+          width: 8px; height: 8px;
+          background: #16a34a;
+          border-radius: 50%;
+        }
+
+        .login-visual-center {
+          position: relative;
+          z-index: 1;
+        }
+
+        .login-visual-title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 4.5rem;
+          letter-spacing: 0.04em;
+          line-height: 0.92;
+          color: #fff;
+          margin-bottom: 20px;
+        }
+
+        .login-visual-title span { color: #22c55e; }
+
+        .login-visual-desc {
+          font-size: 0.82rem;
+          color: #6b7280;
+          line-height: 1.7;
+          max-width: 280px;
+        }
+
+        .login-visual-bottom {
+          position: relative;
+          z-index: 1;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .login-visual-badge {
+          font-size: 0.65rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          background: rgba(22,163,74,0.15);
+          border: 1px solid rgba(22,163,74,0.25);
+          color: #22c55e;
+          padding: 4px 10px;
+          border-radius: 999px;
+        }
+
+        .login-visual-tagline {
+          font-size: 0.72rem;
+          color: #4b5563;
+        }
+
+        /* ── Panneau droite formulaire ── */
+        .login-form-side {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 40px 32px;
+          background: #fff;
+        }
+
+        .login-form-wrap {
+          width: 100%;
+          max-width: 380px;
+        }
+
+        .login-form-eyebrow {
+          font-size: 0.68rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.15em;
+          color: #16a34a;
+          margin-bottom: 8px;
+        }
+
+        .login-form-title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 2.2rem;
+          letter-spacing: 0.06em;
+          color: #111827;
+          margin-bottom: 6px;
+        }
+
+        .login-form-sub {
+          font-size: 0.82rem;
+          color: #9ca3af;
+          margin-bottom: 32px;
+        }
+
+        .login-field {
+          margin-bottom: 14px;
+        }
+
+        .login-label {
+          display: block;
+          font-size: 0.72rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: #374151;
+          margin-bottom: 6px;
+        }
+
+        .login-input {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.88rem;
+          width: 100%;
+          border: 1.5px solid #e5e7eb;
+          border-radius: 10px;
+          padding: 11px 14px;
+          color: #111827;
+          background: #fff;
+          outline: none;
+          transition: border-color 0.18s, box-shadow 0.18s;
+          box-sizing: border-box;
+        }
+
+        .login-input:focus {
+          border-color: #16a34a;
+          box-shadow: 0 0 0 3px rgba(22,163,74,0.08);
+        }
+
+        .login-error {
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          background: #fff1f2;
+          border: 1px solid #fecdd3;
+          border-radius: 8px;
+          padding: 10px 14px;
+          font-size: 0.8rem;
+          color: #e11d48;
+          margin-bottom: 14px;
+        }
+
+        .login-submit {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.82rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          width: 100%;
+          padding: 13px;
+          background: #16a34a;
+          color: #fff;
+          border: 2px solid #16a34a;
+          border-radius: 10px;
+          cursor: pointer;
+          transition: all 0.2s;
+          margin-top: 6px;
+        }
+
+        .login-submit:hover:not(:disabled) {
+          background: transparent;
+          color: #16a34a;
+        }
+
+        .login-submit:disabled {
+          opacity: 0.55;
+          cursor: not-allowed;
+        }
+
+        .login-divider {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin: 24px 0;
+        }
+
+        .login-divider-line {
+          flex: 1;
+          height: 1px;
+          background: #f3f4f6;
+        }
+
+        .login-divider-text {
+          font-size: 0.7rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: #d1d5db;
+        }
+
+        .login-signup-link {
+          text-align: center;
+          font-size: 0.82rem;
+          color: #9ca3af;
+        }
+
+        .login-signup-link a {
+          color: #16a34a;
+          font-weight: 600;
+          text-decoration: none;
+          transition: opacity 0.18s;
+        }
+
+        .login-signup-link a:hover { opacity: 0.75; }
+      `}</style>
+
+      <div className="login-root">
+
+        {/* ── Panneau gauche ── */}
+        <div className="login-visual">
+          <div className="login-visual-bg" />
+
+          <Link to="/" className="login-visual-logo">
+            FTK<span className="login-visual-logo-dot" />MERCH
           </Link>
-        </p>
+
+          <div className="login-visual-center">
+            <h2 className="login-visual-title">
+              Style.<br />
+              <span>Qualité.</span><br />
+              Caractère.
+            </h2>
+            <p className="login-visual-desc">
+              Connectez-vous pour accéder à vos commandes, votre profil et profiter de nos collections exclusives.
+            </p>
+          </div>
+
+          <div className="login-visual-bottom">
+            <span className="login-visual-badge">Collection 2025</span>
+            <span className="login-visual-tagline">Homme · Femme · Enfants</span>
+          </div>
+        </div>
+
+        {/* ── Formulaire ── */}
+        <div className="login-form-side">
+          <div className="login-form-wrap">
+
+            <p className="login-form-eyebrow">Bienvenue</p>
+            <h1 className="login-form-title">Connexion</h1>
+            <p className="login-form-sub">Entrez vos identifiants pour continuer.</p>
+
+            <form onSubmit={handleSubmit}>
+              <div className="login-field">
+                <label className="login-label">Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="login-input"
+                  placeholder="vous@email.com"
+                />
+              </div>
+
+              <div className="login-field">
+                <label className="login-label">Mot de passe</label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="login-input"
+                  placeholder="••••••••"
+                />
+              </div>
+
+              {error && (
+                <div className="login-error">
+                  <span>⚠</span> {error}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={authLoading}
+                className="login-submit"
+              >
+                {authLoading ? "Connexion..." : "Se connecter →"}
+              </button>
+            </form>
+
+            <div className="login-divider">
+              <div className="login-divider-line" />
+              <span className="login-divider-text">ou</span>
+              <div className="login-divider-line" />
+            </div>
+
+            <p className="login-signup-link">
+              Pas encore de compte ?{" "}
+              <Link to="/signup">Créer un compte</Link>
+            </p>
+
+          </div>
+        </div>
+
       </div>
-    </div>
+    </>
   );
 }

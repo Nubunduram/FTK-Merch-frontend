@@ -1,18 +1,156 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { FaShoppingCart, FaArrowLeft } from "react-icons/fa";
 
 export default function Cancel() {
   return (
-    <div className="container mx-auto py-12 text-center">
-      <h1 className="text-3xl font-bold text-red-600 mb-4">Paiement annulé ❌</h1>
-      <p className="mb-6">
-        Votre transaction a été annulée. Vous pouvez réessayer ou revenir à la boutique.
-      </p>
-      <Link
-        to="/cart"
-        className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-900"
-      >
-        Retourner au panier
-      </Link>
-    </div>
-  )
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+        .cancel-root {
+          font-family: 'DM Sans', sans-serif;
+          min-height: 60vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 48px 16px;
+          background: #fff;
+        }
+
+        .cancel-card {
+          text-align: center;
+          max-width: 440px;
+          width: 100%;
+        }
+
+        .cancel-icon-wrap {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          background: #fff1f2;
+          border: 2px solid #fecdd3;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 24px;
+          animation: cancel-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes cancel-pop {
+          from { transform: scale(0.5); opacity: 0; }
+          to   { transform: scale(1);   opacity: 1; }
+        }
+
+        .cancel-x {
+          font-size: 2rem;
+          color: #e11d48;
+          font-weight: 700;
+          line-height: 1;
+        }
+
+        .cancel-title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 2rem;
+          letter-spacing: 0.06em;
+          color: #111827;
+          margin-bottom: 12px;
+        }
+
+        .cancel-sub {
+          font-size: 0.9rem;
+          color: #6b7280;
+          line-height: 1.65;
+          margin-bottom: 32px;
+        }
+
+        .cancel-divider {
+          height: 1px;
+          background: #f3f4f6;
+          margin-bottom: 28px;
+        }
+
+        .cancel-actions {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          align-items: center;
+        }
+
+        .cancel-btn-primary {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.82rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          padding: 10px 24px;
+          background: #111827;
+          color: #fff;
+          border-radius: 9px;
+          border: 2px solid #111827;
+          transition: all 0.2s;
+          width: 100%;
+          justify-content: center;
+        }
+
+        .cancel-btn-primary:hover {
+          background: transparent;
+          color: #111827;
+        }
+
+        .cancel-btn-secondary {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.82rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          padding: 10px 24px;
+          background: transparent;
+          color: #6b7280;
+          border-radius: 9px;
+          border: 2px solid #e5e7eb;
+          transition: all 0.2s;
+          width: 100%;
+          justify-content: center;
+        }
+
+        .cancel-btn-secondary:hover {
+          border-color: #9ca3af;
+          color: #374151;
+        }
+      `}</style>
+
+      <div className="cancel-root">
+        <div className="cancel-card">
+
+          <div className="cancel-icon-wrap">
+            <span className="cancel-x">✕</span>
+          </div>
+
+          <h1 className="cancel-title">Paiement annulé</h1>
+          <p className="cancel-sub">
+            Votre transaction a été annulée et aucun montant n'a été débité.<br />
+            Vous pouvez réessayer ou continuer vos achats.
+          </p>
+
+          <div className="cancel-divider" />
+
+          <div className="cancel-actions">
+            <Link to="/cart" className="cancel-btn-primary">
+              <FaShoppingCart size={13} /> Retourner au panier
+            </Link>
+            <Link to="/" className="cancel-btn-secondary">
+              <FaArrowLeft size={12} /> Continuer mes achats
+            </Link>
+          </div>
+
+        </div>
+      </div>
+    </>
+  );
 }
