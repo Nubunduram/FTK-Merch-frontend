@@ -11,6 +11,8 @@ const CategoryPage = () => {
   const [subCategories, setSubCategories] = useState([]);
   const [category, setCategory] = useState(null);
   const [products, setProducts] = useState([]);
+  const [catSubCategories, setCatSubCategories] = useState([]);
+  const [activeSubCat, setActiveSubCat] = useState(null);
   const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState("asc");
 
@@ -35,10 +37,12 @@ const CategoryPage = () => {
       setLoading(true);
       try {
         const subCatsForCategory = getSubCategoriesForCategory(category.id, subCategories);
+        setCatSubCategories(subCatsForCategory);
+        setActiveSubCat(null);
         const allProducts = [];
         for (const subCat of subCatsForCategory) {
           const prods = await getProductsBySubCategory(subCat.id);
-          allProducts.push(...prods);
+          allProducts.push(...prods.map(p => ({ ...p, _subCatId: subCat.id })));
         }
         setProducts(allProducts);
       } catch (err) {
@@ -51,7 +55,11 @@ const CategoryPage = () => {
     fetchProducts();
   }, [category, subCategories]);
 
-  const sortedProducts = [...products].sort((a, b) =>
+  const filteredProducts = activeSubCat
+    ? products.filter(p => p._subCatId === activeSubCat)
+    : products;
+
+  const sortedProducts = [...filteredProducts].sort((a, b) =>
     sort === "asc" ? a.price_in_cents - b.price_in_cents : b.price_in_cents - a.price_in_cents
   );
 
@@ -71,6 +79,34 @@ const CategoryPage = () => {
             )}
           </div>
         </div>
+
+        {/* ── Filtres sous-catégories ── */}
+        {!loading && catSubCategories.length > 1 && (
+          <div className={styles.catFilters}>
+            <div className={styles.catFiltersInner}>
+              <button
+                className={`${styles.catFilterPill} ${activeSubCat === null ? styles.active : ""}`}
+                onClick={() => setActiveSubCat(null)}
+              >
+                Tout
+                <span className={styles.catFilterCount}>{products.length}</span>
+              </button>
+              {catSubCategories.map(sub => {
+                const count = products.filter(p => p._subCatId === sub.id).length;
+                return (
+                  <button
+                    key={sub.id}
+                    className={`${styles.catFilterPill} ${activeSubCat === sub.id ? styles.active : ""}`}
+                    onClick={() => setActiveSubCat(activeSubCat === sub.id ? null : sub.id)}
+                  >
+                    {sub.name}
+                    <span className={styles.catFilterCount}>{count}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* ── Toolbar ── */}
         <div className={styles.catToolbar}>

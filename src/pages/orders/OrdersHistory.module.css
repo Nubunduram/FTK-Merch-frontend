@@ -1,6 +1,5 @@
 .oh-root {
-  font-family: 'DM Sans', sans-serif;
-  background: #f9fafb;
+  background: var(--color-bg);
   min-height: 60vh;
   padding: 40px 32px 64px;
 }
@@ -12,16 +11,16 @@
 }
 
 .oh-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 2rem;
   letter-spacing: 0.06em;
-  color: #111827;
+  color: var(--color-dark);
   margin-bottom: 4px;
 }
 
 .oh-subtitle {
   font-size: 0.82rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
 }
 
 /* ── Ordre card ── */
@@ -29,8 +28,8 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: #fff;
-  border: 1.5px solid #f3f4f6;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border-light);
   border-radius: 14px;
   padding: 18px 20px;
   margin-bottom: 12px;
@@ -48,20 +47,20 @@
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: #f9fafb;
-  border: 1.5px solid #f3f4f6;
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   flex-shrink: 0;
   transition: all 0.2s;
 }
 
 .oh-card:hover .oh-card-icon {
-  background: #f0fdf4;
-  border-color: #bbf7d0;
-  color: #16a34a;
+  background: var(--color-primary-bg);
+  border-color: var(--color-primary-border);
+  color: var(--color-primary);
 }
 
 .oh-card-info { flex: 1; min-width: 0; }
@@ -76,10 +75,10 @@
 }
 
 .oh-card-id {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1rem;
   letter-spacing: 0.08em;
-  color: #111827;
+  color: var(--color-dark);
 }
 
 .oh-status-badge {
@@ -102,22 +101,22 @@
 
 .oh-card-meta-item {
   font-size: 0.78rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
 .oh-card-meta-sep {
-  color: #e5e7eb;
+  color: var(--color-border);
   font-size: 0.7rem;
 }
 
 .oh-card-amount {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.1rem;
   letter-spacing: 0.04em;
-  color: #16a34a;
+  color: var(--color-primary);
 }
 
 .oh-card-arrow {
@@ -127,7 +126,7 @@
 }
 
 .oh-card:hover .oh-card-arrow {
-  color: #16a34a;
+  color: var(--color-primary);
   transform: translateX(3px);
 }
 
@@ -135,16 +134,16 @@
 .oh-empty {
   text-align: center;
   padding: 80px 16px;
-  background: #fff;
+  background: var(--color-white);
   border-radius: 14px;
-  border: 1.5px solid #f3f4f6;
+  border: 1.5px solid var(--color-border-light);
 }
 
 .oh-empty-icon {
   width: 56px; height: 56px;
   border-radius: 16px;
-  background: #f9fafb;
-  border: 1.5px solid #f3f4f6;
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -153,16 +152,16 @@
 }
 
 .oh-empty-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.3rem;
   letter-spacing: 0.06em;
-  color: #374151;
+  color: var(--color-text);
   margin-bottom: 6px;
 }
 
 .oh-empty-sub {
   font-size: 0.82rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   margin-bottom: 24px;
 }
 
@@ -170,14 +169,13 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-family: 'DM Sans', sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 10px 20px;
-  background: #111827;
-  color: #fff;
+  background: var(--color-dark);
+  color: var(--color-white);
   border-radius: 9px;
   transition: opacity 0.18s;
 }
@@ -188,12 +186,11 @@
 .oh-skeleton {
   height: 82px;
   border-radius: 14px;
-  background: linear-gradient(90deg, #f3f4f6 25%, #eaebec 50%, #f3f4f6 75%);
+  background: linear-gradient(90deg, var(--color-border-light) 25%, #eaebec 50%, var(--color-border-light) 75%);
   background-size: 200% 100%;
   animation: ftk-shimmer 1.4s infinite;
   margin-bottom: 12px;
 }
-
 
 @media (max-width: 600px) {
   .oh-root { padding: 24px 16px 48px; }

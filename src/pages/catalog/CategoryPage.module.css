@@ -1,12 +1,11 @@
 .cat-root {
-  font-family: 'DM Sans', sans-serif;
-  background: #f9fafb;
+  background: var(--color-bg);
   min-height: 60vh;
 }
 
 /* ── Hero banner ── */
 .cat-hero {
-  background: #111827;
+  background: var(--color-dark);
   padding: 40px 32px;
   position: relative;
   overflow: hidden;
@@ -33,23 +32,82 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: #16a34a;
+  color: var(--color-primary);
   margin-bottom: 8px;
 }
 
 .cat-hero-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 3rem;
   letter-spacing: 0.06em;
-  color: #fff;
+  color: var(--color-white);
   text-transform: capitalize;
   line-height: 1;
 }
 
 .cat-hero-count {
   font-size: 0.82rem;
-  color: #6b7280;
+  color: var(--color-text-muted);
   margin-top: 8px;
+}
+
+/* ── Filtres sous-catégories ── */
+.cat-filters {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.cat-filters-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.cat-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+
+.cat-filter-pill:hover {
+  border-color: var(--color-dark);
+  color: var(--color-dark);
+}
+
+.cat-filter-pill.active {
+  background: var(--color-dark);
+  color: var(--color-white);
+  border-color: var(--color-dark);
+}
+
+.cat-filter-count {
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: rgba(0,0,0,0.1);
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+
+.cat-filter-pill.active .cat-filter-count {
+  background: rgba(255,255,255,0.2);
+}
+
+@media (max-width: 900px) {
+  .cat-filters-inner { padding: 12px 20px; }
 }
 
 /* ── Toolbar ── */
@@ -66,7 +124,7 @@
 
 .cat-toolbar-left {
   font-size: 0.82rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
 }
 
 .cat-sort-wrap {
@@ -80,24 +138,23 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #6b7280;
+  color: var(--color-text-muted);
 }
 
 .cat-sort-select {
-  font-family: 'DM Sans', sans-serif;
   font-size: 0.82rem;
   font-weight: 500;
-  border: 1.5px solid #e5e7eb;
+  border: 1.5px solid var(--color-border);
   border-radius: 8px;
   padding: 6px 12px;
-  color: #111827;
-  background: #fff;
+  color: var(--color-dark);
+  background: var(--color-white);
   cursor: pointer;
   outline: none;
   transition: border-color 0.18s;
 }
 
-.cat-sort-select:focus { border-color: #16a34a; }
+.cat-sort-select:focus { border-color: var(--color-primary); }
 
 /* ── Grid ── */
 .cat-grid-wrap {
@@ -128,13 +185,13 @@
 .cat-skeleton {
   border-radius: 14px;
   overflow: hidden;
-  background: #fff;
-  border: 1.5px solid #f3f4f6;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border-light);
 }
 
 .cat-skeleton-img {
   height: 220px;
-  background: linear-gradient(90deg, #f3f4f6 25%, #e9eaec 50%, #f3f4f6 75%);
+  background: linear-gradient(90deg, var(--color-border-light) 25%, #e9eaec 50%, var(--color-border-light) 75%);
   background-size: 200% 100%;
   animation: ftk-shimmer 1.4s infinite;
 }
@@ -146,31 +203,30 @@
 .cat-skeleton-line {
   height: 12px;
   border-radius: 6px;
-  background: linear-gradient(90deg, #f3f4f6 25%, #e9eaec 50%, #f3f4f6 75%);
+  background: linear-gradient(90deg, var(--color-border-light) 25%, #e9eaec 50%, var(--color-border-light) 75%);
   background-size: 200% 100%;
   animation: ftk-shimmer 1.4s infinite;
   margin-bottom: 8px;
 }
 
-
 /* ── Empty ── */
 .cat-empty {
   text-align: center;
   padding: 80px 16px;
-  background: #fff;
+  background: var(--color-white);
   border-radius: 14px;
-  border: 1.5px solid #f3f4f6;
+  border: 1.5px solid var(--color-border-light);
 }
 
 .cat-empty-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.4rem;
   letter-spacing: 0.06em;
-  color: #374151;
+  color: var(--color-text);
   margin-bottom: 8px;
 }
 
 .cat-empty-sub {
   font-size: 0.85rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
 }

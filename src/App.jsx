@@ -22,9 +22,11 @@ import AdminRoute from './components/AdminRoute'
 import { AuthProvider } from './context/AuthContext'
 import { ToastProvider } from './context/ToastContext'
 import { ConfirmProvider } from './context/ConfirmContext'
+import { CategoriesProvider } from './context/CategoriesContext'
 import { getMe } from './api/auth'
 import { useState, useEffect } from 'react'
 import AdminDashboard from './pages/Admin/AdminDashboard'
+import CategoriesAdmin from './pages/Admin/CategoriesAdmin'
 
 
 function App() {
@@ -45,6 +47,7 @@ function App() {
 
   return (
     <AuthProvider>
+      <CategoriesProvider>
       <ToastProvider>
       <ConfirmProvider>
       <BrowserRouter>
@@ -68,6 +71,7 @@ function App() {
             <Route index element={<AdminDashboard />} />
             <Route path="products" element={<ProductsAdmin />} />
             <Route path="orders" element={<OrdersAdmin />} />
+            <Route path="categories" element={<CategoriesAdmin />} />
           </Route>
 
         </Routes>
@@ -75,6 +79,7 @@ function App() {
       </BrowserRouter>
       </ConfirmProvider>
       </ToastProvider>
+      </CategoriesProvider>
     </AuthProvider>
   )
 }

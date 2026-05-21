@@ -1,4 +1,4 @@
-.dash-root { font-family: 'DM Sans', sans-serif; }
+.dash-root { }
 
 /* ── Greeting ── */
 .dash-greeting {
@@ -6,16 +6,16 @@
 }
 
 .dash-greeting-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.8rem;
   letter-spacing: 0.06em;
-  color: #111827;
+  color: var(--color-dark);
   margin-bottom: 4px;
 }
 
 .dash-greeting-sub {
   font-size: 0.82rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
 }
 
 /* ── Grid principale ── */
@@ -31,21 +31,21 @@
 
 /* ── Stat card ── */
 .dash-stat-card {
-  background: #fff;
-  border: 1.5px solid #f3f4f6;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border-light);
   border-radius: 14px;
   padding: 20px;
   transition: border-color 0.18s, box-shadow 0.18s;
 }
 
 .dash-stat-card:hover {
-  border-color: #e5e7eb;
+  border-color: var(--color-border);
   box-shadow: 0 4px 16px rgba(0,0,0,0.05);
 }
 
 .dash-stat-card.highlight {
-  background: #111827;
-  border-color: #111827;
+  background: var(--color-dark);
+  border-color: var(--color-dark);
 }
 
 .dash-stat-label {
@@ -53,7 +53,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -63,19 +63,19 @@
 .dash-stat-card.highlight .dash-stat-label { color: #4b5563; }
 
 .dash-stat-value {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 2.4rem;
   letter-spacing: 0.04em;
-  color: #111827;
+  color: var(--color-dark);
   line-height: 1;
   margin-bottom: 4px;
 }
 
-.dash-stat-card.highlight .dash-stat-value { color: #22c55e; }
+.dash-stat-card.highlight .dash-stat-value { color: var(--color-primary-light); }
 
 .dash-stat-sub {
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
 }
 
 .dash-stat-card.highlight .dash-stat-sub { color: #4b5563; }
@@ -90,16 +90,16 @@
 }
 
 .dash-section-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.1rem;
   letter-spacing: 0.08em;
-  color: #111827;
+  color: var(--color-dark);
 }
 
 .dash-section-line {
   flex: 1;
   height: 1px;
-  background: #f3f4f6;
+  background: var(--color-border-light);
 }
 
 /* ── Statuts commandes ── */
@@ -121,7 +121,7 @@
 }
 
 .dash-status-num {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.8rem;
   letter-spacing: 0.04em;
   line-height: 1;
@@ -150,15 +150,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 18px;
-  background: #fff;
-  border: 1.5px solid #f3f4f6;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border-light);
   border-radius: 12px;
   transition: all 0.18s;
   text-decoration: none;
 }
 
 .dash-shortcut:hover {
-  border-color: #16a34a;
+  border-color: var(--color-primary);
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(22,163,74,0.08);
 }
@@ -172,31 +172,31 @@
 .dash-shortcut-icon {
   width: 38px; height: 38px;
   border-radius: 10px;
-  background: #f9fafb;
-  border: 1.5px solid #f3f4f6;
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #374151;
+  color: var(--color-text);
   transition: all 0.18s;
 }
 
 .dash-shortcut:hover .dash-shortcut-icon {
-  background: #f0fdf4;
-  border-color: #bbf7d0;
-  color: #16a34a;
+  background: var(--color-primary-bg);
+  border-color: var(--color-primary-border);
+  color: var(--color-primary);
 }
 
 .dash-shortcut-title {
   font-weight: 700;
   font-size: 0.88rem;
-  color: #111827;
+  color: var(--color-dark);
   margin-bottom: 2px;
 }
 
 .dash-shortcut-sub {
   font-size: 0.72rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
 }
 
 .dash-shortcut-arrow {
@@ -205,13 +205,13 @@
 }
 
 .dash-shortcut:hover .dash-shortcut-arrow {
-  color: #16a34a;
+  color: var(--color-primary);
   transform: translateX(3px);
 }
 
 /* ── Stock faible ── */
 .dash-alert-card {
-  background: #fff;
+  background: var(--color-white);
   border: 1.5px solid #fde68a;
   border-radius: 14px;
   overflow: hidden;
@@ -227,7 +227,7 @@
 }
 
 .dash-alert-header-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 0.9rem;
   letter-spacing: 0.08em;
   color: #92400e;
@@ -261,17 +261,17 @@
 .dash-alert-name {
   font-size: 0.83rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--color-dark);
   margin-bottom: 2px;
 }
 
 .dash-alert-meta {
   font-size: 0.72rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
 }
 
 .dash-alert-stock {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.1rem;
   letter-spacing: 0.04em;
   padding: 3px 10px;
@@ -281,7 +281,7 @@
 
 .dash-alert-stock.zero {
   background: #fff1f2;
-  color: #e11d48;
+  color: var(--color-danger-text);
   border: 1px solid #fecdd3;
 }
 
@@ -295,7 +295,7 @@
 .dash-skeleton {
   height: 96px;
   border-radius: 14px;
-  background: linear-gradient(90deg, #f3f4f6 25%, #eaebec 50%, #f3f4f6 75%);
+  background: linear-gradient(90deg, var(--color-border-light) 25%, #eaebec 50%, var(--color-border-light) 75%);
   background-size: 200% 100%;
   animation: dash-shimmer 1.4s infinite;
 }

@@ -94,7 +94,11 @@ const Home = () => {
               {categories.map(cat => (
                 <Link key={cat.id} to={`/category/${cat.slug}`} className={styles.hCatPill}>
                   <span className={styles.hCatPillName}>{cat.name}</span>
-                  <span className={styles.hCatPillArrow}>→</span>
+                  <span className={styles.hCatPillArrow}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
                 </Link>
               ))}
             </div>
@@ -160,7 +164,7 @@ const Home = () => {
             to={categories[0] ? `/category/${categories[0].slug}` : "/"}
             className={styles.hBannerBtn}
           >
-            En profiter →
+            En profiter <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style={{display:"inline-block",verticalAlign:"middle",marginLeft:"4px"}}><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </Link>
         </div>
 

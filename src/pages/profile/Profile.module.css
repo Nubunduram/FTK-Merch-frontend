@@ -1,6 +1,5 @@
         .prf-root {
-          font-family: 'DM Sans', sans-serif;
-          background: #f9fafb;
+          background: var(--color-bg);
           min-height: 60vh;
           padding: 40px 32px 64px;
         }
@@ -13,8 +12,8 @@
           align-items: center;
           gap: 18px;
           margin-bottom: 32px;
-          background: #fff;
-          border: 1.5px solid #f3f4f6;
+          background: var(--color-white);
+          border: 1.5px solid var(--color-border-light);
           border-radius: 16px;
           padding: 20px 24px;
         }
@@ -22,29 +21,29 @@
         .prf-avatar {
           width: 56px; height: 56px;
           border-radius: 14px;
-          background: #111827;
+          background: var(--color-dark);
           display: flex;
           align-items: center;
           justify-content: center;
-          font-family: 'Bebas Neue', sans-serif;
+          font-family: var(--font-display);
           font-size: 1.4rem;
           letter-spacing: 0.06em;
-          color: #22c55e;
+          color: var(--color-primary-light);
           flex-shrink: 0;
         }
 
         .prf-header-name {
-          font-family: 'Bebas Neue', sans-serif;
+          font-family: var(--font-display);
           font-size: 1.3rem;
           letter-spacing: 0.06em;
-          color: #111827;
+          color: var(--color-dark);
           line-height: 1;
           margin-bottom: 3px;
         }
 
         .prf-header-email {
           font-size: 0.78rem;
-          color: #9ca3af;
+          color: var(--color-text-faint);
         }
 
         /* ── Toast ── */
@@ -52,12 +51,12 @@
           display: flex;
           align-items: center;
           gap: 8px;
-          background: #f0fdf4;
-          border: 1.5px solid #bbf7d0;
+          background: var(--color-primary-bg);
+          border: 1.5px solid var(--color-primary-border);
           border-radius: 10px;
           padding: 10px 16px;
           font-size: 0.82rem;
-          color: #15803d;
+          color: var(--color-primary-hover);
           font-weight: 500;
           margin-bottom: 20px;
           animation: prf-fade 0.2s ease;
@@ -72,8 +71,8 @@
         .prf-tabs {
           display: flex;
           gap: 4px;
-          background: #fff;
-          border: 1.5px solid #f3f4f6;
+          background: var(--color-white);
+          border: 1.5px solid var(--color-border-light);
           border-radius: 12px;
           padding: 5px;
           margin-bottom: 20px;
@@ -85,7 +84,6 @@
           align-items: center;
           justify-content: center;
           gap: 7px;
-          font-family: 'DM Sans', sans-serif;
           font-size: 0.78rem;
           font-weight: 600;
           text-transform: uppercase;
@@ -95,38 +93,38 @@
           border: none;
           cursor: pointer;
           transition: all 0.18s;
-          color: #9ca3af;
+          color: var(--color-text-faint);
           background: transparent;
         }
 
-        .prf-tab:hover { color: #374151; background: #f9fafb; }
+        .prf-tab:hover { color: var(--color-text); background: var(--color-bg); }
 
         .prf-tab.active {
-          background: #111827;
-          color: #fff;
+          background: var(--color-dark);
+          color: var(--color-white);
         }
 
         /* ── Card ── */
         .prf-card {
-          background: #fff;
-          border: 1.5px solid #f3f4f6;
+          background: var(--color-white);
+          border: 1.5px solid var(--color-border-light);
           border-radius: 16px;
           overflow: hidden;
         }
 
         .prf-card-header {
           padding: 16px 24px;
-          border-bottom: 1px solid #f9fafb;
+          border-bottom: 1px solid var(--color-bg);
           display: flex;
           align-items: center;
           justify-content: space-between;
         }
 
         .prf-card-title {
-          font-family: 'Bebas Neue', sans-serif;
+          font-family: var(--font-display);
           font-size: 1rem;
           letter-spacing: 0.08em;
-          color: #111827;
+          color: var(--color-dark);
         }
 
         .prf-card-body { padding: 20px 24px; }
@@ -137,7 +135,7 @@
           justify-content: space-between;
           align-items: center;
           padding: 10px 0;
-          border-bottom: 1px solid #f9fafb;
+          border-bottom: 1px solid var(--color-bg);
         }
 
         .prf-info-row:last-child { border-bottom: none; }
@@ -147,14 +145,14 @@
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: #9ca3af;
+          color: var(--color-text-faint);
           min-width: 80px;
         }
 
         .prf-info-value {
           font-size: 0.88rem;
           font-weight: 500;
-          color: #111827;
+          color: var(--color-dark);
           flex: 1;
           padding: 0 16px;
         }
@@ -164,7 +162,6 @@
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          font-family: 'DM Sans', sans-serif;
           font-size: 0.75rem;
           font-weight: 600;
           text-transform: uppercase;
@@ -177,24 +174,24 @@
         }
 
         .prf-btn-primary {
-          background: #16a34a;
-          color: #fff;
-          border-color: #16a34a;
+          background: var(--color-primary);
+          color: var(--color-white);
+          border-color: var(--color-primary);
         }
 
-        .prf-btn-primary:hover { background: #15803d; }
+        .prf-btn-primary:hover { background: var(--color-primary-hover); }
 
         .prf-btn-outline {
           background: transparent;
-          color: #374151;
-          border-color: #e5e7eb;
+          color: var(--color-text);
+          border-color: var(--color-border);
         }
 
-        .prf-btn-outline:hover { border-color: #9ca3af; color: #111827; }
+        .prf-btn-outline:hover { border-color: var(--color-text-faint); color: var(--color-dark); }
 
         .prf-btn-danger {
           background: transparent;
-          color: #ef4444;
+          color: var(--color-danger);
           border-color: #fecdd3;
         }
 
@@ -202,28 +199,27 @@
 
         .prf-btn-ghost {
           background: transparent;
-          color: #6b7280;
-          border-color: #e5e7eb;
+          color: var(--color-text-muted);
+          border-color: var(--color-border);
         }
 
-        .prf-btn-ghost:hover { color: #374151; border-color: #9ca3af; }
+        .prf-btn-ghost:hover { color: var(--color-text); border-color: var(--color-text-faint); }
 
         /* ── Inputs ── */
         .prf-input {
-          font-family: 'DM Sans', sans-serif;
           font-size: 0.85rem;
           width: 100%;
-          border: 1.5px solid #e5e7eb;
+          border: 1.5px solid var(--color-border);
           border-radius: 8px;
           padding: 9px 12px;
-          color: #111827;
-          background: #fff;
+          color: var(--color-dark);
+          background: var(--color-white);
           outline: none;
           transition: border-color 0.18s;
           box-sizing: border-box;
         }
 
-        .prf-input:focus { border-color: #16a34a; }
+        .prf-input:focus { border-color: var(--color-primary); }
 
         .prf-input-label {
           display: block;
@@ -231,7 +227,7 @@
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: #374151;
+          color: var(--color-text);
           margin-bottom: 5px;
         }
 
@@ -245,8 +241,8 @@
 
         /* ── Addresses ── */
         .prf-addr-card {
-          background: #f9fafb;
-          border: 1.5px solid #f3f4f6;
+          background: var(--color-bg);
+          border: 1.5px solid var(--color-border-light);
           border-radius: 10px;
           padding: 14px 16px;
           margin-bottom: 10px;
@@ -261,13 +257,13 @@
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: #16a34a;
+          color: var(--color-primary);
           margin-bottom: 4px;
         }
 
         .prf-addr-line {
           font-size: 0.82rem;
-          color: #374151;
+          color: var(--color-text);
           line-height: 1.5;
         }
 
@@ -279,20 +275,20 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          border: 1.5px solid #e5e7eb;
-          background: #fff;
+          border: 1.5px solid var(--color-border);
+          background: var(--color-white);
           cursor: pointer;
-          color: #9ca3af;
+          color: var(--color-text-faint);
           transition: all 0.15s;
         }
 
-        .prf-addr-icon-btn:hover { border-color: #111827; color: #111827; }
-        .prf-addr-icon-btn.del:hover { border-color: #ef4444; color: #ef4444; background: #fff1f2; }
+        .prf-addr-icon-btn:hover { border-color: var(--color-dark); color: var(--color-dark); }
+        .prf-addr-icon-btn.del:hover { border-color: var(--color-danger); color: var(--color-danger); background: #fff1f2; }
 
         /* ── Address form ── */
         .prf-addr-form {
-          background: #f0fdf4;
-          border: 1.5px solid #bbf7d0;
+          background: var(--color-primary-bg);
+          border: 1.5px solid var(--color-primary-border);
           border-radius: 12px;
           padding: 16px;
           margin-top: 12px;
@@ -300,10 +296,10 @@
         }
 
         .prf-addr-form-title {
-          font-family: 'Bebas Neue', sans-serif;
+          font-family: var(--font-display);
           font-size: 0.9rem;
           letter-spacing: 0.08em;
-          color: #15803d;
+          color: var(--color-primary-hover);
           margin-bottom: 12px;
         }
 
@@ -316,24 +312,24 @@
 
         /* ── RGPD ── */
         .prf-rgpd-block {
-          background: #fff;
-          border: 1.5px solid #f3f4f6;
+          background: var(--color-white);
+          border: 1.5px solid var(--color-border-light);
           border-radius: 14px;
           padding: 20px 24px;
           margin-bottom: 16px;
         }
 
         .prf-rgpd-block-title {
-          font-family: 'Bebas Neue', sans-serif;
+          font-family: var(--font-display);
           font-size: 1rem;
           letter-spacing: 0.08em;
-          color: #111827;
+          color: var(--color-dark);
           margin-bottom: 6px;
         }
 
         .prf-rgpd-block-desc {
           font-size: 0.82rem;
-          color: #6b7280;
+          color: var(--color-text-muted);
           line-height: 1.6;
           margin-bottom: 14px;
         }
@@ -346,24 +342,24 @@
         }
 
         .prf-danger-title {
-          font-family: 'Bebas Neue', sans-serif;
+          font-family: var(--font-display);
           font-size: 1rem;
           letter-spacing: 0.08em;
-          color: #e11d48;
+          color: var(--color-danger-text);
           margin-bottom: 6px;
         }
 
         .prf-danger-desc {
           font-size: 0.82rem;
-          color: #9ca3af;
+          color: var(--color-text-faint);
           line-height: 1.6;
           margin-bottom: 14px;
         }
 
         .prf-btn-delete {
-          background: #e11d48;
-          color: #fff;
-          border-color: #e11d48;
+          background: var(--color-danger-text);
+          color: var(--color-white);
+          border-color: var(--color-danger-text);
         }
 
         .prf-btn-delete:hover { background: #be123c; border-color: #be123c; }

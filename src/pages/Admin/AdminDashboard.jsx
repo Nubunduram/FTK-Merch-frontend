@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAdminStats } from "../../api/admin";
-import { FaBoxOpen, FaClipboardList, FaExclamationTriangle, FaArrowRight } from "react-icons/fa";
+import { FaBoxOpen, FaClipboardList, FaLayerGroup, FaExclamationTriangle, FaArrowRight } from "react-icons/fa";
 import styles from './AdminDashboard.module.css';
 
 const STATUS_CONFIG = {
@@ -130,6 +130,17 @@ export default function AdminDashboard() {
                             <div>
                                 <p className={styles.dashShortcutTitle}>Gestion des commandes</p>
                                 <p className={styles.dashShortcutSub}>Suivre et mettre à jour les statuts</p>
+                            </div>
+                        </div>
+                        <FaArrowRight size={13} className={styles.dashShortcutArrow} />
+                    </Link>
+
+                    <Link to="categories" className={styles.dashShortcut}>
+                        <div className={styles.dashShortcutLeft}>
+                            <div className={styles.dashShortcutIcon}><FaLayerGroup size={15} /></div>
+                            <div>
+                                <p className={styles.dashShortcutTitle}>Gestion des catégories</p>
+                                <p className={styles.dashShortcutSub}>Catégories, sous-catégories, ordre</p>
                             </div>
                         </div>
                         <FaArrowRight size={13} className={styles.dashShortcutArrow} />

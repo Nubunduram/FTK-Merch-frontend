@@ -1,6 +1,5 @@
 .cart-root {
-  font-family: 'DM Sans', sans-serif;
-  background: #f9fafb;
+  background: var(--color-bg);
   min-height: 60vh;
   padding: 40px 16px;
 }
@@ -18,24 +17,24 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #6b7280;
+  color: var(--color-text-muted);
   margin-bottom: 24px;
   transition: color 0.18s;
 }
 
-.cart-back:hover { color: #111827; }
+.cart-back:hover { color: var(--color-dark); }
 
 .cart-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 2rem;
   letter-spacing: 0.06em;
-  color: #111827;
+  color: var(--color-dark);
   margin-bottom: 6px;
 }
 
 .cart-count {
   font-size: 0.8rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   margin-bottom: 28px;
 }
 
@@ -52,9 +51,9 @@
 
 /* ── Items ── */
 .cart-items-card {
-  background: #fff;
+  background: var(--color-white);
   border-radius: 14px;
-  border: 1.5px solid #f3f4f6;
+  border: 1.5px solid var(--color-border-light);
   overflow: hidden;
 }
 
@@ -63,7 +62,7 @@
   align-items: center;
   gap: 16px;
   padding: 16px 20px;
-  border-bottom: 1px solid #f9fafb;
+  border-bottom: 1px solid var(--color-bg);
   transition: background 0.15s;
 }
 
@@ -75,7 +74,7 @@
   height: 70px;
   object-fit: cover;
   border-radius: 10px;
-  background: #f3f4f6;
+  background: var(--color-border-light);
   flex-shrink: 0;
 }
 
@@ -83,7 +82,7 @@
   width: 70px;
   height: 70px;
   border-radius: 10px;
-  background: #f3f4f6;
+  background: var(--color-border-light);
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -99,7 +98,7 @@
 .cart-item-name {
   font-weight: 700;
   font-size: 0.9rem;
-  color: #111827;
+  color: var(--color-dark);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -107,15 +106,15 @@
 
 .cart-item-meta {
   font-size: 0.78rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   margin-top: 3px;
 }
 
 .cart-item-price {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.1rem;
   letter-spacing: 0.04em;
-  color: #16a34a;
+  color: var(--color-primary);
   margin-top: 4px;
 }
 
@@ -130,9 +129,9 @@
   width: 28px;
   height: 28px;
   border-radius: 7px;
-  border: 1.5px solid #e5e7eb;
-  background: #fff;
-  color: #374151;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-text);
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
@@ -144,15 +143,15 @@
 }
 
 .cart-qty-btn:hover {
-  border-color: #111827;
-  background: #111827;
-  color: #fff;
+  border-color: var(--color-dark);
+  background: var(--color-dark);
+  color: var(--color-white);
 }
 
 .cart-qty-val {
   font-size: 0.88rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--color-dark);
   min-width: 24px;
   text-align: center;
 }
@@ -163,7 +162,7 @@
   border-radius: 8px;
   border: none;
   background: #fff1f2;
-  color: #e11d48;
+  color: var(--color-danger-text);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -173,8 +172,8 @@
 }
 
 .cart-remove-btn:hover {
-  background: #e11d48;
-  color: #fff;
+  background: var(--color-danger-text);
+  color: var(--color-white);
 }
 
 /* ── Sidebar ── */
@@ -185,58 +184,58 @@
 }
 
 .cart-address-card {
-  background: #fff;
+  background: var(--color-white);
   border-radius: 14px;
-  border: 1.5px solid #f3f4f6;
+  border: 1.5px solid var(--color-border-light);
   padding: 20px;
 }
 
 .cart-section-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1rem;
   letter-spacing: 0.08em;
-  color: #111827;
+  color: var(--color-dark);
   margin-bottom: 14px;
 }
 
 .cart-select {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.82rem;
-  border: 1.5px solid #e5e7eb;
+  border: 1.5px solid var(--color-border);
   border-radius: 8px;
   padding: 8px 12px;
   width: 100%;
-  color: #111827;
-  background: #fff;
+  color: var(--color-dark);
+  background: var(--color-white);
   outline: none;
   cursor: pointer;
   margin-bottom: 12px;
   transition: border-color 0.18s;
 }
 
-.cart-select:focus { border-color: #16a34a; }
+.cart-select:focus { border-color: var(--color-primary); }
 
 .cart-input {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.82rem;
-  border: 1.5px solid #e5e7eb;
+  border: 1.5px solid var(--color-border);
   border-radius: 8px;
   padding: 8px 12px;
   width: 100%;
-  color: #111827;
-  background: #fff;
+  color: var(--color-dark);
+  background: var(--color-white);
   outline: none;
   transition: border-color 0.18s;
   margin-bottom: 8px;
   box-sizing: border-box;
 }
 
-.cart-input:focus { border-color: #16a34a; }
+.cart-input:focus { border-color: var(--color-primary); }
 
 .cart-summary-card {
-  background: #fff;
+  background: var(--color-white);
   border-radius: 14px;
-  border: 1.5px solid #f3f4f6;
+  border: 1.5px solid var(--color-border-light);
   padding: 20px;
 }
 
@@ -245,7 +244,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 0.83rem;
-  color: #6b7280;
+  color: var(--color-text-muted);
   margin-bottom: 8px;
 }
 
@@ -254,36 +253,35 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 12px;
-  border-top: 1.5px solid #f3f4f6;
+  border-top: 1.5px solid var(--color-border-light);
   margin-top: 4px;
 }
 
 .cart-total-label {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1rem;
   letter-spacing: 0.06em;
-  color: #111827;
+  color: var(--color-dark);
 }
 
 .cart-total-price {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.5rem;
   letter-spacing: 0.04em;
-  color: #16a34a;
+  color: var(--color-primary);
 }
 
 .cart-checkout-btn {
   width: 100%;
   margin-top: 14px;
-  font-family: 'DM Sans', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 13px;
-  background: #16a34a;
-  color: #fff;
-  border: 2px solid #16a34a;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: 2px solid var(--color-primary);
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s;
@@ -295,7 +293,7 @@
 
 .cart-checkout-btn:hover:not(:disabled) {
   background: transparent;
-  color: #16a34a;
+  color: var(--color-primary);
 }
 
 .cart-checkout-btn:disabled {
@@ -307,30 +305,30 @@
 .cart-empty {
   text-align: center;
   padding: 80px 16px;
-  background: #fff;
+  background: var(--color-white);
   border-radius: 14px;
-  border: 1.5px solid #f3f4f6;
+  border: 1.5px solid var(--color-border-light);
 }
 
 .cart-empty-icon {
   font-size: 3rem;
-  color: #e5e7eb;
+  color: var(--color-border);
   margin-bottom: 16px;
   display: flex;
   justify-content: center;
 }
 
 .cart-empty-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.5rem;
   letter-spacing: 0.06em;
-  color: #374151;
+  color: var(--color-text);
   margin-bottom: 8px;
 }
 
 .cart-empty-sub {
   font-size: 0.85rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   margin-bottom: 24px;
 }
 
@@ -338,14 +336,13 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-family: 'DM Sans', sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 10px 22px;
-  background: #111827;
-  color: #fff;
+  background: var(--color-dark);
+  color: var(--color-white);
   border-radius: 9px;
   transition: opacity 0.18s;
 }
@@ -354,19 +351,19 @@
 
 /* ── Livraison ── */
 .cart-shipping-banner {
-  background: #f0fdf4;
-  border: 1.5px solid #bbf7d0;
+  background: var(--color-primary-bg);
+  border: 1.5px solid var(--color-primary-border);
   border-radius: 10px;
   padding: 10px 14px;
   margin-bottom: 12px;
   font-size: 0.8rem;
-  color: #15803d;
+  color: var(--color-primary-hover);
   font-weight: 500;
 }
 
 .cart-shipping-banner.free {
-  background: #f0fdf4;
-  color: #15803d;
+  background: var(--color-primary-bg);
+  color: var(--color-primary-hover);
 }
 
 .cart-shipping-progress-track {
@@ -379,7 +376,7 @@
 
 .cart-shipping-progress-bar {
   height: 100%;
-  background: #16a34a;
+  background: var(--color-primary);
   border-radius: 999px;
   transition: width 0.3s ease;
 }
@@ -389,7 +386,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 0.83rem;
-  color: #6b7280;
+  color: var(--color-text-muted);
   margin-bottom: 8px;
 }
 
@@ -398,9 +395,9 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #16a34a;
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
+  color: var(--color-primary);
+  background: var(--color-primary-bg);
+  border: 1px solid var(--color-primary-border);
   padding: 2px 8px;
   border-radius: 999px;
 }
@@ -415,10 +412,10 @@
 }
 
 .cart-stock-error-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1rem;
   letter-spacing: 0.08em;
-  color: #e11d48;
+  color: var(--color-danger-text);
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -437,11 +434,11 @@
 
 .cart-stock-error-name {
   font-weight: 700;
-  color: #111827;
+  color: var(--color-dark);
 }
 
 .cart-stock-error-meta {
-  color: #9ca3af;
+  color: var(--color-text-faint);
   font-size: 0.75rem;
   margin-top: 1px;
 }
@@ -449,7 +446,7 @@
 .cart-stock-error-qty {
   flex-shrink: 0;
   font-size: 0.78rem;
-  color: #e11d48;
+  color: var(--color-danger-text);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -462,15 +459,15 @@
   margin-top: 14px;
   font-size: 0.82rem;
   font-weight: 500;
-  color: #e11d48;
+  color: var(--color-danger-text);
 }
 
 /* ── Auth prompt ── */
 .cart-auth-prompt {
   margin-top: 16px;
   padding: 20px;
-  background: #f9fafb;
-  border: 1.5px solid #e5e7eb;
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
   border-radius: 12px;
   text-align: center;
   display: flex;
@@ -482,25 +479,25 @@
 .cart-auth-prompt-icon {
   width: 36px;
   height: 36px;
-  background: #fff;
-  border: 1px solid #e5e7eb;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #6b7280;
+  color: var(--color-text-muted);
   margin-bottom: 4px;
 }
 
 .cart-auth-prompt-title {
   font-size: 0.88rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--color-dark);
 }
 
 .cart-auth-prompt-sub {
   font-size: 0.78rem;
-  color: #6b7280;
+  color: var(--color-text-muted);
   margin-bottom: 6px;
   line-height: 1.4;
 }
@@ -511,8 +508,8 @@
   justify-content: center;
   width: 100%;
   padding: 10px 20px;
-  background: #111827;
-  color: #fff;
+  background: var(--color-dark);
+  color: var(--color-white);
   border-radius: 999px;
   font-size: 0.76rem;
   font-weight: 700;
@@ -530,8 +527,8 @@
   width: 100%;
   padding: 10px 20px;
   background: transparent;
-  color: #111827;
-  border: 2px solid #e5e7eb;
+  color: var(--color-dark);
+  border: 2px solid var(--color-border);
   border-radius: 999px;
   font-size: 0.76rem;
   font-weight: 700;
@@ -540,5 +537,4 @@
   transition: border-color 0.2s;
 }
 
-.cart-auth-btn-outline:hover { border-color: #111827; }
-
+.cart-auth-btn-outline:hover { border-color: var(--color-dark); }

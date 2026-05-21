@@ -109,3 +109,59 @@ export async function getAdminStats() {
   });
   return handleResponse(res);
 }
+
+// ── Categories ──
+export async function createCategory(data) {
+  const res = await fetch(`${API_URL}/categories`, {
+    method: "POST",
+    headers: getHeaders(true, true),
+    body: JSON.stringify(data),
+  });
+  return handleResponse(res);
+}
+
+export async function updateCategory(id, data) {
+  const res = await fetch(`${API_URL}/categories/${id}`, {
+    method: "PATCH",
+    headers: getHeaders(true, true),
+    body: JSON.stringify(data),
+  });
+  return handleResponse(res);
+}
+
+export async function deleteCategory(id) {
+  const res = await fetch(`${API_URL}/categories/${id}`, {
+    method: "DELETE",
+    headers: getHeaders(true, true),
+  });
+  if (res.status === 204) return;
+  return handleResponse(res);
+}
+
+// ── Sub-categories ──
+export async function createSubCategory(data) {
+  const res = await fetch(`${API_URL}/sub_categories`, {
+    method: "POST",
+    headers: getHeaders(true, true),
+    body: JSON.stringify(data),
+  });
+  return handleResponse(res);
+}
+
+export async function updateSubCategory(id, data) {
+  const res = await fetch(`${API_URL}/sub_categories/${id}`, {
+    method: "PATCH",
+    headers: getHeaders(true, true),
+    body: JSON.stringify(data),
+  });
+  return handleResponse(res);
+}
+
+export async function deleteSubCategory(id) {
+  const res = await fetch(`${API_URL}/sub_categories/${id}`, {
+    method: "DELETE",
+    headers: getHeaders(true, true),
+  });
+  if (res.status === 204) return;
+  return handleResponse(res);
+}

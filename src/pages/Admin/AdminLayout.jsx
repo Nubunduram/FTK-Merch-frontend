@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { FaBoxOpen, FaClipboardList } from "react-icons/fa";
+import { FaBoxOpen, FaClipboardList, FaLayerGroup } from "react-icons/fa";
 import styles from './AdminLayout.module.css';
 
 export default function AdminLayout() {
@@ -29,6 +29,12 @@ export default function AdminLayout() {
               className={`${styles.admNavLink} ${isActive("orders") ? "active" : ""}`}
             >
               <FaClipboardList size={13} /> Commandes
+            </Link>
+            <Link
+              to="categories"
+              className={`${styles.admNavLink} ${isActive("categories") ? "active" : ""}`}
+            >
+              <FaLayerGroup size={13} /> Catégories
             </Link>
           </nav>
         </div>

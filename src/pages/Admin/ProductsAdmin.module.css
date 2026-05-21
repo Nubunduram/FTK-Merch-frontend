@@ -1,5 +1,4 @@
 .padm-root {
-  font-family: 'DM Sans', sans-serif;
 }
 
 .padm-header {
@@ -12,10 +11,10 @@
 }
 
 .padm-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.8rem;
   letter-spacing: 0.06em;
-  color: #111827;
+  color: var(--color-dark);
 }
 
 .padm-stats {
@@ -29,9 +28,9 @@
   font-weight: 600;
   padding: 5px 12px;
   border-radius: 8px;
-  border: 1.5px solid #e5e7eb;
-  color: #6b7280;
-  background: #fff;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-muted);
+  background: var(--color-white);
 }
 
 .padm-stat.warning {
@@ -44,15 +43,14 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-family: 'DM Sans', sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 8px 18px;
-  background: #16a34a;
-  color: #fff;
-  border: 2px solid #16a34a;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: 2px solid var(--color-primary);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.18s;
@@ -60,12 +58,12 @@
 
 .padm-btn-new:hover {
   background: transparent;
-  color: #16a34a;
+  color: var(--color-primary);
 }
 
 /* ── Formulaire ── */
 .padm-form-wrap {
-  background: #fff;
+  background: var(--color-white);
   border: 1.5px solid #d1fae5;
   border-radius: 12px;
   padding: 20px 24px;
@@ -79,10 +77,10 @@
 }
 
 .padm-form-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.1rem;
   letter-spacing: 0.08em;
-  color: #111827;
+  color: var(--color-dark);
   margin-bottom: 16px;
   display: flex;
   align-items: center;
@@ -92,7 +90,7 @@
 .padm-form-close {
   background: none;
   border: none;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   cursor: pointer;
   padding: 4px;
   border-radius: 6px;
@@ -101,7 +99,7 @@
   align-items: center;
 }
 
-.padm-form-close:hover { color: #374151; }
+.padm-form-close:hover { color: var(--color-text); }
 
 .padm-form-grid {
   display: grid;
@@ -111,35 +109,33 @@
 }
 
 .padm-input {
-  font-family: 'DM Sans', sans-serif;
   font-size: 0.83rem;
-  border: 1.5px solid #e5e7eb;
+  border: 1.5px solid var(--color-border);
   border-radius: 8px;
   padding: 8px 12px;
   width: 100%;
-  color: #111827;
-  background: #fff;
+  color: var(--color-dark);
+  background: var(--color-white);
   outline: none;
   transition: border-color 0.18s;
 }
 
-.padm-input:focus { border-color: #16a34a; }
+.padm-input:focus { border-color: var(--color-primary); }
 
 .padm-select {
-  font-family: 'DM Sans', sans-serif;
   font-size: 0.83rem;
-  border: 1.5px solid #e5e7eb;
+  border: 1.5px solid var(--color-border);
   border-radius: 8px;
   padding: 8px 12px;
   width: 100%;
-  color: #111827;
-  background: #fff;
+  color: var(--color-dark);
+  background: var(--color-white);
   outline: none;
   cursor: pointer;
   transition: border-color 0.18s;
 }
 
-.padm-select:focus { border-color: #16a34a; }
+.padm-select:focus { border-color: var(--color-primary); }
 
 .padm-form-footer {
   display: flex;
@@ -150,48 +146,46 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: 'DM Sans', sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.07em;
   padding: 8px 18px;
-  background: #16a34a;
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-white);
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.18s;
 }
 
-.padm-btn-submit:hover { background: #15803d; }
+.padm-btn-submit:hover { background: var(--color-primary-hover); }
 
 .padm-btn-cancel-form {
-  font-family: 'DM Sans', sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.07em;
   padding: 8px 18px;
   background: transparent;
-  color: #9ca3af;
-  border: 1.5px solid #e5e7eb;
+  color: var(--color-text-faint);
+  border: 1.5px solid var(--color-border);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.18s;
 }
 
 .padm-btn-cancel-form:hover {
-  color: #374151;
-  border-color: #9ca3af;
+  color: var(--color-text);
+  border-color: var(--color-text-faint);
 }
 
 /* ── Table ── */
 .padm-table-wrap {
-  background: #fff;
+  background: var(--color-white);
   border-radius: 12px;
-  border: 1.5px solid #f3f4f6;
-  overflow: hidden;
+  border: 1.5px solid var(--color-border-light);
+  overflow-x: auto;
   box-shadow: 0 1px 8px rgba(0,0,0,0.04);
 }
 
@@ -201,17 +195,16 @@
 }
 
 .padm-table thead tr {
-  background: #f9fafb;
-  border-bottom: 1.5px solid #f3f4f6;
+  background: var(--color-bg);
+  border-bottom: 1.5px solid var(--color-border-light);
 }
 
 .padm-table thead th {
-  font-family: 'DM Sans', sans-serif;
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   padding: 10px 16px;
   text-align: left;
 }
@@ -219,6 +212,6 @@
 .padm-empty {
   text-align: center;
   padding: 48px 16px;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   font-size: 0.875rem;
 }

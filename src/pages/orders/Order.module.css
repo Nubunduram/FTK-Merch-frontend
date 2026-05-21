@@ -1,6 +1,5 @@
 .ord-root {
-  font-family: 'DM Sans', sans-serif;
-  background: #f9fafb;
+  background: var(--color-bg);
   min-height: 60vh;
   padding: 40px 32px 64px;
 }
@@ -15,7 +14,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   margin-bottom: 24px;
   transition: color 0.18s;
   background: none;
@@ -24,7 +23,7 @@
   padding: 0;
 }
 
-.ord-back:hover { color: #111827; }
+.ord-back:hover { color: var(--color-dark); }
 
 .ord-header {
   display: flex;
@@ -36,10 +35,10 @@
 }
 
 .ord-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 2rem;
   letter-spacing: 0.06em;
-  color: #111827;
+  color: var(--color-dark);
 }
 
 .ord-status-badge {
@@ -66,22 +65,22 @@
 
 /* ── Carte résumé ── */
 .ord-summary-card {
-  background: #fff;
+  background: var(--color-white);
   border-radius: 14px;
-  border: 1.5px solid #f3f4f6;
+  border: 1.5px solid var(--color-border-light);
   overflow: hidden;
 }
 
 .ord-card-header {
-  background: #111827;
+  background: var(--color-dark);
   padding: 14px 18px;
 }
 
 .ord-card-header-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 0.95rem;
   letter-spacing: 0.1em;
-  color: #fff;
+  color: var(--color-white);
 }
 
 .ord-card-body { padding: 18px; }
@@ -97,12 +96,12 @@
   width: 30px;
   height: 30px;
   border-radius: 8px;
-  background: #f9fafb;
-  border: 1px solid #f3f4f6;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   flex-shrink: 0;
   margin-top: 1px;
 }
@@ -112,20 +111,20 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   margin-bottom: 2px;
 }
 
 .ord-info-value {
   font-size: 0.85rem;
   font-weight: 500;
-  color: #111827;
+  color: var(--color-dark);
   line-height: 1.4;
 }
 
 .ord-card-divider {
   height: 1px;
-  background: #f3f4f6;
+  background: var(--color-border-light);
   margin: 14px 0;
 }
 
@@ -136,24 +135,24 @@
 }
 
 .ord-total-label {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 0.95rem;
   letter-spacing: 0.08em;
-  color: #374151;
+  color: var(--color-text);
 }
 
 .ord-total-value {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.4rem;
   letter-spacing: 0.04em;
-  color: #16a34a;
+  color: var(--color-primary);
 }
 
 /* ── Carte produits ── */
 .ord-items-card {
-  background: #fff;
+  background: var(--color-white);
   border-radius: 14px;
-  border: 1.5px solid #f3f4f6;
+  border: 1.5px solid var(--color-border-light);
   overflow: hidden;
 }
 
@@ -162,7 +161,7 @@
   align-items: center;
   gap: 14px;
   padding: 14px 18px;
-  border-bottom: 1px solid #f9fafb;
+  border-bottom: 1px solid var(--color-bg);
   transition: background 0.15s;
 }
 
@@ -174,7 +173,7 @@
   height: 64px;
   object-fit: cover;
   border-radius: 10px;
-  background: #f3f4f6;
+  background: var(--color-border-light);
   flex-shrink: 0;
 }
 
@@ -182,7 +181,7 @@
   width: 64px;
   height: 64px;
   border-radius: 10px;
-  background: #f3f4f6;
+  background: var(--color-border-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -195,7 +194,7 @@
 .ord-item-name {
   font-weight: 700;
   font-size: 0.875rem;
-  color: #111827;
+  color: var(--color-dark);
   margin-bottom: 3px;
   white-space: nowrap;
   overflow: hidden;
@@ -204,7 +203,7 @@
 
 .ord-item-meta {
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
 }
 
 .ord-item-right {
@@ -213,14 +212,14 @@
 }
 
 .ord-item-price {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.05rem;
   letter-spacing: 0.04em;
-  color: #111827;
+  color: var(--color-dark);
 }
 
 .ord-item-qty {
   font-size: 0.72rem;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   margin-top: 2px;
 }

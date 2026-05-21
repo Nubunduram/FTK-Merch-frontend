@@ -4,13 +4,13 @@ import { HiMenu, HiX, HiShoppingCart } from "react-icons/hi";
 import { FaReceipt, FaUser, FaCog } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
-import { getCategories } from "../api/products";
+import { useCategories } from "../context/CategoriesContext";
 import styles from './Header.module.css';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
-  const [categories, setCategories] = useState([]);
+  const { categories } = useCategories();
   const [scrolled, setScrolled] = useState(false);
   const { user, logout } = useAuth();
   const { cart } = useCart();
@@ -22,8 +22,10 @@ export default function Header() {
 
   const isActive = (path) => location.pathname === path;
   const isActiveSub = (path) => location.pathname.startsWith(path);
-  const isActiveCategory = (slug) =>
-    location.pathname.startsWith(`/category/${slug}`);
+  const isActiveCategory = (slug) => {
+    const path = location.pathname;
+    return path === `/category/${slug}` || path.startsWith(`/category/${slug}/`);
+  };
 
   // ✅ Track scroll
   useEffect(() => {
@@ -48,17 +50,6 @@ export default function Header() {
     setIsOpen(false);
   }, [location.pathname]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const data = await getCategories();
-        setCategories(data);
-      } catch (err) {
-        console.error("Erreur de chargement des catégories :", err);
-      }
-    };
-    fetchCategories();
-  }, []);
 
   return (
     <>

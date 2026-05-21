@@ -1,11 +1,10 @@
         .cancel-root {
-          font-family: 'DM Sans', sans-serif;
           min-height: 60vh;
           display: flex;
           align-items: center;
           justify-content: center;
           padding: 48px 16px;
-          background: #fff;
+          background: var(--color-white);
         }
 
         .cancel-card {
@@ -34,29 +33,29 @@
 
         .cancel-x {
           font-size: 2rem;
-          color: #e11d48;
+          color: var(--color-danger-text);
           font-weight: 700;
           line-height: 1;
         }
 
         .cancel-title {
-          font-family: 'Bebas Neue', sans-serif;
+          font-family: var(--font-display);
           font-size: 2rem;
           letter-spacing: 0.06em;
-          color: #111827;
+          color: var(--color-dark);
           margin-bottom: 12px;
         }
 
         .cancel-sub {
           font-size: 0.9rem;
-          color: #6b7280;
+          color: var(--color-text-muted);
           line-height: 1.65;
           margin-bottom: 32px;
         }
 
         .cancel-divider {
           height: 1px;
-          background: #f3f4f6;
+          background: var(--color-border-light);
           margin-bottom: 28px;
         }
 
@@ -71,16 +70,15 @@
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          font-family: 'DM Sans', sans-serif;
           font-size: 0.82rem;
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.08em;
           padding: 10px 24px;
-          background: #111827;
-          color: #fff;
+          background: var(--color-dark);
+          color: var(--color-white);
           border-radius: 9px;
-          border: 2px solid #111827;
+          border: 2px solid var(--color-dark);
           transition: all 0.2s;
           width: 100%;
           justify-content: center;
@@ -88,29 +86,28 @@
 
         .cancel-btn-primary:hover {
           background: transparent;
-          color: #111827;
+          color: var(--color-dark);
         }
 
         .cancel-btn-secondary {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          font-family: 'DM Sans', sans-serif;
           font-size: 0.82rem;
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.08em;
           padding: 10px 24px;
           background: transparent;
-          color: #6b7280;
+          color: var(--color-text-muted);
           border-radius: 9px;
-          border: 2px solid #e5e7eb;
+          border: 2px solid var(--color-border);
           transition: all 0.2s;
           width: 100%;
           justify-content: center;
         }
 
         .cancel-btn-secondary:hover {
-          border-color: #9ca3af;
-          color: #374151;
+          border-color: var(--color-text-faint);
+          color: var(--color-text);
         }

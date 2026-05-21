@@ -1,11 +1,10 @@
 .conf-root {
-  font-family: 'DM Sans', sans-serif;
-  background: #f9fafb;
+  background: var(--color-bg);
   min-height: 60vh;
 }
 
 .conf-hero {
-  background: #111827;
+  background: var(--color-dark);
   padding: 40px 32px;
 }
 
@@ -16,21 +15,21 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: #16a34a;
+  color: var(--color-primary);
   margin-bottom: 8px;
 }
 
 .conf-hero-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 2.8rem;
   letter-spacing: 0.06em;
-  color: #fff;
+  color: var(--color-white);
   line-height: 1;
 }
 
 .conf-hero-sub {
   font-size: 0.82rem;
-  color: #6b7280;
+  color: var(--color-text-muted);
   margin-top: 10px;
 }
 
@@ -41,26 +40,26 @@
 }
 
 .conf-section {
-  background: #fff;
-  border: 1.5px solid #f3f4f6;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border-light);
   border-radius: 14px;
   padding: 28px 32px;
   margin-bottom: 20px;
 }
 
 .conf-section-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.2rem;
   letter-spacing: 0.08em;
-  color: #111827;
+  color: var(--color-dark);
   margin-bottom: 16px;
   padding-bottom: 12px;
-  border-bottom: 1.5px solid #f3f4f6;
+  border-bottom: 1.5px solid var(--color-border-light);
 }
 
 .conf-p {
   font-size: 0.85rem;
-  color: #374151;
+  color: var(--color-text);
   line-height: 1.7;
   margin-bottom: 10px;
 }
@@ -75,7 +74,7 @@
 
 .conf-list li {
   font-size: 0.85rem;
-  color: #374151;
+  color: var(--color-text);
   line-height: 1.7;
   padding-left: 16px;
   position: relative;
@@ -85,7 +84,7 @@
   content: '→';
   position: absolute;
   left: 0;
-  color: #16a34a;
+  color: var(--color-primary);
   font-size: 0.75rem;
 }
 
@@ -101,12 +100,12 @@
 }
 
 .conf-highlight {
-  background: #f0fdf4;
-  border: 1.5px solid #bbf7d0;
+  background: var(--color-primary-bg);
+  border: 1.5px solid var(--color-primary-border);
   border-radius: 10px;
   padding: 16px 20px;
   font-size: 0.85rem;
-  color: #15803d;
+  color: var(--color-primary-hover);
   line-height: 1.6;
   margin-bottom: 10px;
 }
