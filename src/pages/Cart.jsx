@@ -4,7 +4,10 @@ import { useState, useEffect } from "react";
 import { postOrder } from "../api/orders";
 import { getUserAddresses } from "../api/users";
 import { useAuth } from "../context/AuthContext";
-import { FaTrash, FaShoppingBag, FaArrowLeft } from "react-icons/fa";
+import { FaTrash, FaShoppingBag, FaArrowLeft, FaTruck } from "react-icons/fa";
+
+const SHIPPING_FEE = 5.90;
+const FREE_SHIPPING_THRESHOLD = 60;
 
 export default function Cart() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
@@ -19,10 +22,14 @@ export default function Cart() {
     postal_code: "",
   });
   const [loading, setLoading] = useState(false);
+  const [stockError, setStockError] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
-  const totalPrice = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity, 0
-  );
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const shippingFee = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+  const grandTotal = subtotal + shippingFee;
+  const amountToFreeShipping = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
+  const freeShippingProgress = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100);
 
   useEffect(() => {
     if (!user) return;
@@ -50,9 +57,12 @@ export default function Cart() {
     if (cart.length === 0) return;
     const { street, city, postal_code } = addressForm;
     if (!street || !city || !postal_code) {
-      alert("Veuillez remplir l'adresse complète.");
+      setErrorMsg("Veuillez remplir l'adresse de livraison complète.");
+      setStockError(null);
       return;
     }
+    setErrorMsg(null);
+    setStockError(null);
     setLoading(true);
     try {
       const orderData = {
@@ -66,8 +76,12 @@ export default function Cart() {
       clearCart();
       navigate(`/order/${order.id}`, { state: { order } });
     } catch (err) {
-      console.error("Erreur lors de la commande:", err);
-      alert("Une erreur est survenue. Veuillez réessayer.");
+      if (err.message === "STOCK_ERROR") {
+        setStockError(err.stockItems);
+      } else {
+        console.error("Erreur lors de la commande:", err);
+        setErrorMsg("Une erreur est survenue. Veuillez réessayer.");
+      }
     } finally {
       setLoading(false);
     }
@@ -427,6 +441,119 @@ export default function Cart() {
         }
 
         .cart-empty-btn:hover { opacity: 0.8; }
+
+        /* ── Livraison ── */
+        .cart-shipping-banner {
+          background: #f0fdf4;
+          border: 1.5px solid #bbf7d0;
+          border-radius: 10px;
+          padding: 10px 14px;
+          margin-bottom: 12px;
+          font-size: 0.8rem;
+          color: #15803d;
+          font-weight: 500;
+        }
+
+        .cart-shipping-banner.free {
+          background: #f0fdf4;
+          color: #15803d;
+        }
+
+        .cart-shipping-progress-track {
+          height: 4px;
+          background: #d1fae5;
+          border-radius: 999px;
+          margin-top: 7px;
+          overflow: hidden;
+        }
+
+        .cart-shipping-progress-bar {
+          height: 100%;
+          background: #16a34a;
+          border-radius: 999px;
+          transition: width 0.3s ease;
+        }
+
+        .cart-summary-row-shipping {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 0.83rem;
+          color: #6b7280;
+          margin-bottom: 8px;
+        }
+
+        .cart-shipping-free-badge {
+          font-size: 0.72rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #16a34a;
+          background: #f0fdf4;
+          border: 1px solid #bbf7d0;
+          padding: 2px 8px;
+          border-radius: 999px;
+        }
+
+        /* ── Stock error ── */
+        .cart-stock-error {
+          background: #fff1f2;
+          border: 1.5px solid #fecdd3;
+          border-radius: 12px;
+          padding: 16px 18px;
+          margin-bottom: 16px;
+        }
+
+        .cart-stock-error-title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 1rem;
+          letter-spacing: 0.08em;
+          color: #e11d48;
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+          gap: 7px;
+        }
+
+        .cart-stock-error-item {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          gap: 8px;
+          padding: 7px 0;
+          border-top: 1px solid #fecdd3;
+          font-size: 0.82rem;
+        }
+
+        .cart-stock-error-name {
+          font-weight: 700;
+          color: #111827;
+        }
+
+        .cart-stock-error-meta {
+          color: #9ca3af;
+          font-size: 0.75rem;
+          margin-top: 1px;
+        }
+
+        .cart-stock-error-qty {
+          flex-shrink: 0;
+          font-size: 0.78rem;
+          color: #e11d48;
+          font-weight: 600;
+          white-space: nowrap;
+        }
+
+        .cart-error-banner {
+          background: #fff1f2;
+          border: 1.5px solid #fecdd3;
+          border-radius: 10px;
+          padding: 11px 14px;
+          margin-top: 14px;
+          font-size: 0.82rem;
+          font-weight: 500;
+          color: #e11d48;
+        }
       `}</style>
 
       <div className="cart-root">
@@ -551,10 +678,67 @@ export default function Cart() {
                       </div>
                     ))}
 
+                    <div className="cart-summary-row-shipping">
+                      <span style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                        <FaTruck size={12} /> Livraison
+                      </span>
+                      {shippingFee === 0
+                        ? <span className="cart-shipping-free-badge">Offerte</span>
+                        : <span>{shippingFee.toFixed(2)} €</span>
+                      }
+                    </div>
+
                     <div className="cart-summary-total">
                       <span className="cart-total-label">Total</span>
-                      <span className="cart-total-price">{totalPrice.toFixed(2)} €</span>
+                      <span className="cart-total-price">{grandTotal.toFixed(2)} €</span>
                     </div>
+
+                    {amountToFreeShipping > 0 && (
+                      <div className="cart-shipping-banner" style={{ marginTop: "12px" }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                          <FaTruck size={12} />
+                          Plus que <strong>{amountToFreeShipping.toFixed(2)} €</strong> pour la livraison offerte
+                        </div>
+                        <div className="cart-shipping-progress-track">
+                          <div
+                            className="cart-shipping-progress-bar"
+                            style={{ width: `${freeShippingProgress}%` }}
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {shippingFee === 0 && (
+                      <div className="cart-shipping-banner free" style={{ marginTop: "12px" }}>
+                        <FaTruck size={12} style={{ display: "inline", marginRight: "6px" }} />
+                        Livraison offerte !
+                      </div>
+                    )}
+
+                    {errorMsg && (
+                      <div className="cart-error-banner">{errorMsg}</div>
+                    )}
+
+                    {stockError && (
+                      <div className="cart-stock-error" style={{ marginTop: "14px" }}>
+                        <p className="cart-stock-error-title">
+                          Stock insuffisant
+                        </p>
+                        {stockError.map((item, i) => (
+                          <div key={i} className="cart-stock-error-item">
+                            <div>
+                              <p className="cart-stock-error-name">{item.name}</p>
+                              <p className="cart-stock-error-meta">{item.color} · {item.size}</p>
+                            </div>
+                            <span className="cart-stock-error-qty">
+                              {item.available === 0
+                                ? "Rupture de stock"
+                                : `${item.available} disponible${item.available > 1 ? "s" : ""}`}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
                     <button
                       onClick={handleCheckout}

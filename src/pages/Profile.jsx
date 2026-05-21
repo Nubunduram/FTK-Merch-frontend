@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
-import { updateUser, updatePassword, getUserAddresses, createAddress, updateAddress, deleteAddress } from "../api/users";
+import { useNavigate } from "react-router-dom";
+import { updateUser, updatePassword, getUserAddresses, createAddress, updateAddress, deleteAddress, deleteMe, exportMe } from "../api/users";
 import { getMe } from "../api/auth";
-import { FaUser, FaLock, FaMapMarkerAlt, FaPencilAlt, FaTrash, FaCheck, FaTimes, FaPlus } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
+import { FaUser, FaLock, FaMapMarkerAlt, FaPencilAlt, FaTrash, FaCheck, FaTimes, FaPlus, FaShieldAlt, FaDownload } from "react-icons/fa";
 
 const TABS = [
   { id: "profile",   label: "Profil",    icon: FaUser },
   { id: "security",  label: "Sécurité",  icon: FaLock },
   { id: "addresses", label: "Adresses",  icon: FaMapMarkerAlt },
+  { id: "rgpd",      label: "Données",   icon: FaShieldAlt },
 ];
 
 export default function Profile() {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
   const [activeTab, setActiveTab] = useState("profile");
   const [user, setUser] = useState(null);
+  const [rgpdLoading, setRgpdLoading] = useState(false);
   const [addresses, setAddresses] = useState([]);
   const [editingUser, setEditingUser] = useState(false);
   const [editingPassword, setEditingPassword] = useState(false);
@@ -76,6 +82,42 @@ export default function Profile() {
     if (!confirm("Supprimer cette adresse ?")) return;
     await deleteAddress(id);
     setAddresses(await getUserAddresses());
+  }
+
+  async function handleExportData() {
+    setRgpdLoading(true);
+    try {
+      const data = await exportMe();
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `ftk-merch-mes-donnees-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      alert("Erreur lors de l'export. Veuillez réessayer.");
+    } finally {
+      setRgpdLoading(false);
+    }
+  }
+
+  async function handleDeleteAccount() {
+    const confirmed = window.confirm(
+      "Êtes-vous sûr de vouloir supprimer votre compte ?\n\nCette action est irréversible : toutes vos données (profil, adresses, commandes, avis) seront définitivement supprimées."
+    );
+    if (!confirmed) return;
+    const confirmed2 = window.confirm("Dernière confirmation : supprimer définitivement votre compte ?");
+    if (!confirmed2) return;
+    setRgpdLoading(true);
+    try {
+      await deleteMe();
+      logout();
+      navigate("/");
+    } catch (err) {
+      alert("Erreur lors de la suppression. Veuillez réessayer.");
+      setRgpdLoading(false);
+    }
   }
 
   const initials = user ? `${user.first_name?.[0] || ""}${user.last_name?.[0] || ""}`.toUpperCase() : "?";
@@ -399,6 +441,61 @@ export default function Profile() {
           margin-bottom: 12px;
         }
 
+        /* ── RGPD ── */
+        .prf-rgpd-block {
+          background: #fff;
+          border: 1.5px solid #f3f4f6;
+          border-radius: 14px;
+          padding: 20px 24px;
+          margin-bottom: 16px;
+        }
+
+        .prf-rgpd-block-title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 1rem;
+          letter-spacing: 0.08em;
+          color: #111827;
+          margin-bottom: 6px;
+        }
+
+        .prf-rgpd-block-desc {
+          font-size: 0.82rem;
+          color: #6b7280;
+          line-height: 1.6;
+          margin-bottom: 14px;
+        }
+
+        .prf-danger-zone {
+          background: #fff1f2;
+          border: 1.5px solid #fecdd3;
+          border-radius: 14px;
+          padding: 20px 24px;
+        }
+
+        .prf-danger-title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 1rem;
+          letter-spacing: 0.08em;
+          color: #e11d48;
+          margin-bottom: 6px;
+        }
+
+        .prf-danger-desc {
+          font-size: 0.82rem;
+          color: #9ca3af;
+          line-height: 1.6;
+          margin-bottom: 14px;
+        }
+
+        .prf-btn-delete {
+          background: #e11d48;
+          color: #fff;
+          border-color: #e11d48;
+        }
+
+        .prf-btn-delete:hover { background: #be123c; border-color: #be123c; }
+        .prf-btn-delete:disabled { opacity: 0.6; cursor: not-allowed; }
+
         @media (max-width: 560px) {
           .prf-addr-grid { grid-template-columns: 1fr; }
           .prf-root { padding: 24px 16px 48px; }
@@ -619,6 +716,43 @@ export default function Profile() {
                     </form>
                   </div>
                 )}
+              </div>
+            </div>
+          )}
+
+          {/* ══════════════════════════════
+              TAB — DONNÉES & CONFIDENTIALITÉ
+          ══════════════════════════════ */}
+          {activeTab === "rgpd" && (
+            <div>
+              <div className="prf-rgpd-block">
+                <p className="prf-rgpd-block-title">Exporter mes données</p>
+                <p className="prf-rgpd-block-desc">
+                  Téléchargez une copie de toutes vos données personnelles (profil, adresses, commandes, avis) au format JSON. Droit à la portabilité — Art. 20 RGPD.
+                </p>
+                <button
+                  className="prf-btn prf-btn-primary"
+                  onClick={handleExportData}
+                  disabled={rgpdLoading}
+                >
+                  <FaDownload size={11} />
+                  {rgpdLoading ? "Export en cours..." : "Télécharger mes données"}
+                </button>
+              </div>
+
+              <div className="prf-danger-zone">
+                <p className="prf-danger-title">Zone de danger — Supprimer mon compte</p>
+                <p className="prf-danger-desc">
+                  Cette action est <strong>irréversible</strong>. Toutes vos données personnelles (profil, adresses, commandes, avis) seront définitivement supprimées conformément au droit à l'effacement — Art. 17 RGPD.
+                </p>
+                <button
+                  className="prf-btn prf-btn-delete"
+                  onClick={handleDeleteAccount}
+                  disabled={rgpdLoading}
+                >
+                  <FaTrash size={11} />
+                  Supprimer définitivement mon compte
+                </button>
               </div>
             </div>
           )}

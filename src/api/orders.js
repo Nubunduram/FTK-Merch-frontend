@@ -25,5 +25,11 @@ export async function postOrder(orderData) {
     headers: getHeaders(true, true),
     body: JSON.stringify(orderData),
   });
+  if (res.status === 409) {
+    const data = await res.json();
+    const err = new Error("STOCK_ERROR");
+    err.stockItems = data.items;
+    throw err;
+  }
   return handleResponse(res);
 }

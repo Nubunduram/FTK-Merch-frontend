@@ -189,8 +189,8 @@ export default function Footer() {
               <p className="ftk-footer-heading">Informations</p>
               <a href="#" className="ftk-footer-link">À propos</a>
               <a href="#" className="ftk-footer-link">Livraison & retours</a>
-              <a href="#" className="ftk-footer-link">Mentions légales</a>
-              <a href="#" className="ftk-footer-link">Contact</a>
+              <Link to="/mentions-legales" className="ftk-footer-link">Mentions légales</Link>
+              <a href="mailto:[EMAIL_CONTACT]" className="ftk-footer-link">Contact</a>
 
               <div style={{ marginTop: "1.5rem" }}>
                 <span className="ftk-badge">
@@ -206,8 +206,8 @@ export default function Footer() {
           <div className="ftk-footer-bottom">
             <span>© {year} FTK Merch — Tous droits réservés.</span>
             <div style={{ display: "flex", gap: "1.5rem" }}>
-              <a href="#" className="ftk-footer-link" style={{ marginBottom: 0 }}>Confidentialité</a>
-              <a href="#" className="ftk-footer-link" style={{ marginBottom: 0 }}>CGV</a>
+              <Link to="/confidentialite" className="ftk-footer-link" style={{ marginBottom: 0 }}>Confidentialité</Link>
+              <Link to="/cgv" className="ftk-footer-link" style={{ marginBottom: 0 }}>CGV</Link>
               <a href="#" className="ftk-footer-link" style={{ marginBottom: 0 }}>Cookies</a>
             </div>
           </div>

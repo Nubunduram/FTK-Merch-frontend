@@ -12,6 +12,9 @@ import ProductPage from './pages/ProductPage'
 import Order from './pages/Order'
 import OrdersHistory from './pages/OrdersHistory'
 import Profile from './pages/Profile'
+import MentionsLegales from './pages/MentionsLegales'
+import Confidentialite from './pages/Confidentialite'
+import CGV from './pages/CGV'
 import ProductsAdmin from './pages/Admin/ProductsAdmin'
 import OrdersAdmin from './pages/Admin/OrdersAdmin'
 import AdminLayout from './pages/Admin/AdminLayout'
@@ -54,6 +57,9 @@ function App() {
           <Route path="/order/:id" element={<Order />} />
           <Route path="/orders" element={<OrdersHistory />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
+          <Route path="/confidentialite" element={<Confidentialite />} />
+          <Route path="/cgv" element={<CGV />} />
           <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
             <Route index element={<AdminDashboard />} />
             <Route path="products" element={<ProductsAdmin />} />

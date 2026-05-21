@@ -342,6 +342,23 @@ export default function Order() {
 
                 <div className="ord-card-divider" />
 
+                <div className="ord-total-row" style={{ marginBottom: "6px" }}>
+                  <span style={{ fontSize: "0.78rem", color: "#9ca3af" }}>Sous-total</span>
+                  <span style={{ fontSize: "0.82rem", color: "#374151" }}>
+                    {((order.total_amount_in_cents - (order.shipping_fee_in_cents || 0)) / 100).toFixed(2)} €
+                  </span>
+                </div>
+
+                <div className="ord-total-row" style={{ marginBottom: "10px" }}>
+                  <span style={{ fontSize: "0.78rem", color: "#9ca3af" }}>Livraison</span>
+                  {(order.shipping_fee_in_cents || 0) === 0
+                    ? <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#16a34a" }}>Offerte</span>
+                    : <span style={{ fontSize: "0.82rem", color: "#374151" }}>
+                        {(order.shipping_fee_in_cents / 100).toFixed(2)} €
+                      </span>
+                  }
+                </div>
+
                 <div className="ord-total-row">
                   <span className="ord-total-label">Total</span>
                   <span className="ord-total-value">

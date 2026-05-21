@@ -65,3 +65,21 @@ export async function updatePassword(data) {
     });
     return handleResponse(res);
 }
+
+// DELETE compte utilisateur
+export async function deleteMe() {
+    const res = await fetch(`${API_URL}/users/me`, {
+        method: 'DELETE',
+        headers: getHeaders(false, true),
+    });
+    return handleResponse(res);
+}
+
+// GET export des données utilisateur
+export async function exportMe() {
+    const res = await fetch(`${API_URL}/users/me/export`, {
+        method: 'GET',
+        headers: getHeaders(false, true),
+    });
+    return handleResponse(res);
+}
