@@ -13,8 +13,6 @@ const ProductCard = ({ product, categorySlug }) => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
-
         .ftk-card {
           font-family: 'DM Sans', sans-serif;
           display: block;

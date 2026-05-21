@@ -38,8 +38,6 @@ export default function OrdersHistory() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
-
         .oh-root {
           font-family: 'DM Sans', sans-serif;
           background: #f9fafb;
@@ -232,14 +230,10 @@ export default function OrdersHistory() {
           border-radius: 14px;
           background: linear-gradient(90deg, #f3f4f6 25%, #eaebec 50%, #f3f4f6 75%);
           background-size: 200% 100%;
-          animation: oh-shimmer 1.4s infinite;
+          animation: ftk-shimmer 1.4s infinite;
           margin-bottom: 12px;
         }
 
-        @keyframes oh-shimmer {
-          0%   { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
 
         @media (max-width: 600px) {
           .oh-root { padding: 24px 16px 48px; }

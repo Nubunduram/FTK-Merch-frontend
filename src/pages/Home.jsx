@@ -36,8 +36,6 @@ const Home = () => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap');
-
         .h-root { font-family: 'DM Sans', sans-serif; background: #fff; }
 
         /* ════════════════════════════════
@@ -404,7 +402,7 @@ const Home = () => {
           height: 220px;
           background: linear-gradient(90deg, #f3f4f6 25%, #eaebec 50%, #f3f4f6 75%);
           background-size: 200% 100%;
-          animation: h-shimmer 1.4s infinite;
+          animation: ftk-shimmer 1.4s infinite;
         }
 
         .h-skeleton-body { padding: 14px 16px; }
@@ -414,14 +412,10 @@ const Home = () => {
           border-radius: 6px;
           background: linear-gradient(90deg, #f3f4f6 25%, #eaebec 50%, #f3f4f6 75%);
           background-size: 200% 100%;
-          animation: h-shimmer 1.4s infinite;
+          animation: ftk-shimmer 1.4s infinite;
           margin-bottom: 8px;
         }
 
-        @keyframes h-shimmer {
-          0%   { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
 
         /* ════════════════════════════════
            RESPONSIVE
@@ -452,7 +446,7 @@ const Home = () => {
               <span className="h-hero-tag-dot" />
               Nouvelle saison
             </p>
-            <p className="h-hero-nav-hint">Collection 2025</p>
+            <p className="h-hero-nav-hint">Collection 2026</p>
           </div>
 
           <div className="h-hero-main">

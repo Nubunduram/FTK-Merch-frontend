@@ -1,1 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap');
 @import "tailwindcss";
+
+/* ═══════════════════════════════════
+   VARIABLES GLOBALES
+═══════════════════════════════════ */
+:root {
+  /* Typographie */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  /* Couleurs principales */
+  --color-primary: #16a34a;
+  --color-primary-hover: #15803d;
+  --color-primary-light: #22c55e;
+  --color-primary-bg: #f0fdf4;
+  --color-primary-border: #bbf7d0;
+
+  /* Couleurs neutres */
+  --color-dark: #111827;
+  --color-text: #374151;
+  --color-text-muted: #6b7280;
+  --color-text-faint: #9ca3af;
+  --color-border: #e5e7eb;
+  --color-border-light: #f3f4f6;
+  --color-bg: #f9fafb;
+  --color-white: #ffffff;
+
+  /* Couleurs de statut */
+  --color-danger: #ef4444;
+  --color-danger-text: #e11d48;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+/* ═══════════════════════════════════
+   ANIMATIONS PARTAGÉES
+═══════════════════════════════════ */
+
+/* Skeleton loader — utilisé dans Home, CategoryPage, OrdersHistory, OrdersAdmin */
+@keyframes ftk-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Barre dégradée animée — utilisée dans Header et Footer */
+@keyframes ftk-slide {
+  0%   { background-position: 0% 0; }
+  100% { background-position: 300% 0; }
+}
+
+/* Pulsation avec scale — utilisée dans Footer (logo dot, badge dot) */
+@keyframes ftk-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.75); }
+}

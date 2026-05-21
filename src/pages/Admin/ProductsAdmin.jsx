@@ -99,8 +99,6 @@ export default function ProductsAdmin() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
-
         .padm-root {
           font-family: 'DM Sans', sans-serif;
         }

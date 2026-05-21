@@ -62,8 +62,6 @@ export default function Header() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
-
         .ftk-header {
           font-family: 'DM Sans', sans-serif;
           background: #ffffff;
@@ -81,10 +79,6 @@ export default function Header() {
           animation: ftk-slide 4s linear infinite;
         }
 
-        @keyframes ftk-slide {
-          0% { background-position: 0% 0; }
-          100% { background-position: 300% 0; }
-        }
 
         .ftk-logo {
           font-family: 'Bebas Neue', sans-serif;

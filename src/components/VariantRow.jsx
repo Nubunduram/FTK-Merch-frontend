@@ -33,8 +33,6 @@ export default function VariantRow({ variant, onStockChange, onDelete }) {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
-
         .vrow {
           font-family: 'DM Sans', sans-serif;
           border-bottom: 1px solid #f3f4f6;

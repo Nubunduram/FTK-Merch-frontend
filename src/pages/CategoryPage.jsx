@@ -57,8 +57,6 @@ const CategoryPage = () => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
-
         .cat-root {
           font-family: 'DM Sans', sans-serif;
           background: #f9fafb;
@@ -197,7 +195,7 @@ const CategoryPage = () => {
           height: 220px;
           background: linear-gradient(90deg, #f3f4f6 25%, #e9eaec 50%, #f3f4f6 75%);
           background-size: 200% 100%;
-          animation: cat-shimmer 1.4s infinite;
+          animation: ftk-shimmer 1.4s infinite;
         }
 
         .cat-skeleton-body {
@@ -209,14 +207,10 @@ const CategoryPage = () => {
           border-radius: 6px;
           background: linear-gradient(90deg, #f3f4f6 25%, #e9eaec 50%, #f3f4f6 75%);
           background-size: 200% 100%;
-          animation: cat-shimmer 1.4s infinite;
+          animation: ftk-shimmer 1.4s infinite;
           margin-bottom: 8px;
         }
 
-        @keyframes cat-shimmer {
-          0%   { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
 
         /* ── Empty ── */
         .cat-empty {

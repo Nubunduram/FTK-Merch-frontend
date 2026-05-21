@@ -8,8 +8,6 @@ export default function AdminLayout() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
-
         .adm-layout {
           font-family: 'DM Sans', sans-serif;
           min-height: 100vh;

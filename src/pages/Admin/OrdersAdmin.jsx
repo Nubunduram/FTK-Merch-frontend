@@ -48,8 +48,6 @@ export default function OrdersAdmin() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
-
         .oadm-root { font-family: 'DM Sans', sans-serif; }
 
         /* ── Header ── */
@@ -254,13 +252,9 @@ export default function OrdersAdmin() {
           border-radius: 6px;
           background: linear-gradient(90deg, #f3f4f6 25%, #eaebec 50%, #f3f4f6 75%);
           background-size: 200% 100%;
-          animation: oadm-shimmer 1.4s infinite;
+          animation: ftk-shimmer 1.4s infinite;
         }
 
-        @keyframes oadm-shimmer {
-          0%   { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
       `}</style>
 
       <div className="oadm-root">

@@ -7,8 +7,6 @@ export default function Footer() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
-
         .ftk-footer {
           font-family: 'DM Sans', sans-serif;
           background: #0c0c0c;
@@ -22,10 +20,6 @@ export default function Footer() {
           animation: ftk-slide 4s linear infinite;
         }
 
-        @keyframes ftk-slide {
-          0%   { background-position: 0% 0; }
-          100% { background-position: 300% 0; }
-        }
 
         .ftk-footer-logo {
           font-family: 'Bebas Neue', sans-serif;
@@ -48,10 +42,6 @@ export default function Footer() {
           animation: ftk-pulse 2.5s ease-in-out infinite;
         }
 
-        @keyframes ftk-pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50%       { opacity: 0.5; transform: scale(0.75); }
-        }
 
         .ftk-footer-tagline {
           font-size: 0.72rem;

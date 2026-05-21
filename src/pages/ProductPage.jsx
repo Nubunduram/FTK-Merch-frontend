@@ -104,8 +104,6 @@ export default function ProductPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
-
         .pp-root {
           font-family: 'DM Sans', sans-serif;
           background: #f9fafb;
