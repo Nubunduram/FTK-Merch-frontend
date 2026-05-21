@@ -1,0 +1,224 @@
+.padm-root {
+  font-family: 'DM Sans', sans-serif;
+}
+
+.padm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.padm-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.06em;
+  color: #111827;
+}
+
+.padm-stats {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.padm-stat {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #e5e7eb;
+  color: #6b7280;
+  background: #fff;
+}
+
+.padm-stat.warning {
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #d97706;
+}
+
+.padm-btn-new {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 8px 18px;
+  background: #16a34a;
+  color: #fff;
+  border: 2px solid #16a34a;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.padm-btn-new:hover {
+  background: transparent;
+  color: #16a34a;
+}
+
+/* ── Formulaire ── */
+.padm-form-wrap {
+  background: #fff;
+  border: 1.5px solid #d1fae5;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  animation: padm-fade 0.2s ease;
+}
+
+@keyframes padm-fade {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.padm-form-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: #111827;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.padm-form-close {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: color 0.15s;
+  display: flex;
+  align-items: center;
+}
+
+.padm-form-close:hover { color: #374151; }
+
+.padm-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.padm-input {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.83rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 12px;
+  width: 100%;
+  color: #111827;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.18s;
+}
+
+.padm-input:focus { border-color: #16a34a; }
+
+.padm-select {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.83rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 12px;
+  width: 100%;
+  color: #111827;
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.18s;
+}
+
+.padm-select:focus { border-color: #16a34a; }
+
+.padm-form-footer {
+  display: flex;
+  gap: 8px;
+}
+
+.padm-btn-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 8px 18px;
+  background: #16a34a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.padm-btn-submit:hover { background: #15803d; }
+
+.padm-btn-cancel-form {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 8px 18px;
+  background: transparent;
+  color: #9ca3af;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.padm-btn-cancel-form:hover {
+  color: #374151;
+  border-color: #9ca3af;
+}
+
+/* ── Table ── */
+.padm-table-wrap {
+  background: #fff;
+  border-radius: 12px;
+  border: 1.5px solid #f3f4f6;
+  overflow: hidden;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+}
+
+.padm-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.padm-table thead tr {
+  background: #f9fafb;
+  border-bottom: 1.5px solid #f3f4f6;
+}
+
+.padm-table thead th {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9ca3af;
+  padding: 10px 16px;
+  text-align: left;
+}
+
+.padm-empty {
+  text-align: center;
+  padding: 48px 16px;
+  color: #9ca3af;
+  font-size: 0.875rem;
+}

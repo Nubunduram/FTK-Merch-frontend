@@ -1,27 +1,29 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
-import CategoryPage from './pages/CategoryPage'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
-import Cart from './pages/Cart'
+import CategoryPage from './pages/catalog/CategoryPage'
+import Login from './pages/auth/Login'
+import Signup from './pages/auth/Signup'
+import Cart from './pages/cart/Cart'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Success from './pages/Success'
-import Cancel from './pages/Cancel'
-import ProductPage from './pages/ProductPage'
-import Order from './pages/Order'
-import OrdersHistory from './pages/OrdersHistory'
-import Profile from './pages/Profile'
-import MentionsLegales from './pages/MentionsLegales'
-import Confidentialite from './pages/Confidentialite'
-import CGV from './pages/CGV'
+import Success from './pages/cart/Success'
+import Cancel from './pages/cart/Cancel'
+import ProductPage from './pages/catalog/ProductPage'
+import Order from './pages/orders/Order'
+import OrdersHistory from './pages/orders/OrdersHistory'
+import Profile from './pages/profile/Profile'
+import MentionsLegales from './pages/legal/MentionsLegales'
+import Confidentialite from './pages/legal/Confidentialite'
+import CGV from './pages/legal/CGV'
 import ProductsAdmin from './pages/Admin/ProductsAdmin'
 import OrdersAdmin from './pages/Admin/OrdersAdmin'
 import AdminLayout from './pages/Admin/AdminLayout'
 import AdminRoute from './components/AdminRoute'
 import { AuthProvider } from './context/AuthContext'
+import { ToastProvider } from './context/ToastContext'
+import { ConfirmProvider } from './context/ConfirmContext'
 import { getMe } from './api/auth'
-import { useState, useEffect, Navigate } from 'react'
+import { useState, useEffect } from 'react'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 
 
@@ -43,6 +45,8 @@ function App() {
 
   return (
     <AuthProvider>
+      <ToastProvider>
+      <ConfirmProvider>
       <BrowserRouter>
         <Header />
         <Routes>
@@ -69,6 +73,8 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
+      </ConfirmProvider>
+      </ToastProvider>
     </AuthProvider>
   )
 }

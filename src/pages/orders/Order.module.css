@@ -1,0 +1,226 @@
+.ord-root {
+  font-family: 'DM Sans', sans-serif;
+  background: #f9fafb;
+  min-height: 60vh;
+  padding: 40px 32px 64px;
+}
+
+.ord-inner { max-width: 1000px; margin: 0 auto; }
+
+.ord-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9ca3af;
+  margin-bottom: 24px;
+  transition: color 0.18s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.ord-back:hover { color: #111827; }
+
+.ord-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ord-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.06em;
+  color: #111827;
+}
+
+.ord-status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1.5px solid;
+}
+
+.ord-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .ord-layout { grid-template-columns: 1fr; }
+  .ord-root { padding: 24px 16px 48px; }
+}
+
+/* ── Carte résumé ── */
+.ord-summary-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 1.5px solid #f3f4f6;
+  overflow: hidden;
+}
+
+.ord-card-header {
+  background: #111827;
+  padding: 14px 18px;
+}
+
+.ord-card-header-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+
+.ord-card-body { padding: 18px; }
+
+.ord-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.ord-info-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #f9fafb;
+  border: 1px solid #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.ord-info-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9ca3af;
+  margin-bottom: 2px;
+}
+
+.ord-info-value {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #111827;
+  line-height: 1.4;
+}
+
+.ord-card-divider {
+  height: 1px;
+  background: #f3f4f6;
+  margin: 14px 0;
+}
+
+.ord-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ord-total-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: #374151;
+}
+
+.ord-total-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  color: #16a34a;
+}
+
+/* ── Carte produits ── */
+.ord-items-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 1.5px solid #f3f4f6;
+  overflow: hidden;
+}
+
+.ord-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #f9fafb;
+  transition: background 0.15s;
+}
+
+.ord-item:last-child { border-bottom: none; }
+.ord-item:hover { background: #fafafa; }
+
+.ord-item-img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #f3f4f6;
+  flex-shrink: 0;
+}
+
+.ord-item-img-placeholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d1d5db;
+  flex-shrink: 0;
+}
+
+.ord-item-info { flex: 1; min-width: 0; }
+
+.ord-item-name {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: #111827;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ord-item-meta {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.ord-item-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.ord-item-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  color: #111827;
+}
+
+.ord-item-qty {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  margin-top: 2px;
+}

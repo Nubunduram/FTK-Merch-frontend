@@ -5,6 +5,7 @@ import { FaReceipt, FaUser, FaCog } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import { getCategories } from "../api/products";
+import styles from './Header.module.css';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,238 +62,27 @@ export default function Header() {
 
   return (
     <>
-      <style>{`
-        .ftk-header {
-          font-family: 'DM Sans', sans-serif;
-          background: #ffffff;
-          transition: box-shadow 0.3s ease;
-        }
-
-        .ftk-header.scrolled {
-          box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-        }
-
-        .ftk-topbar {
-          height: 3px;
-          background: linear-gradient(90deg, #15803d, #22c55e, #86efac, #22c55e, #15803d);
-          background-size: 300% 100%;
-          animation: ftk-slide 4s linear infinite;
-        }
-
-
-        .ftk-logo {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 1.6rem;
-          letter-spacing: 0.06em;
-          color: #111827;
-          transition: opacity 0.2s;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-        }
-
-        .ftk-logo-dot {
-          display: inline-block;
-          width: 8px;
-          height: 8px;
-          background: #16a34a;
-          border-radius: 50%;
-          margin-bottom: 2px;
-        }
-
-        .ftk-logo:hover { opacity: 0.75; }
-
-        .ftk-nav-link {
-          position: relative;
-          font-size: 0.8rem;
-          font-weight: 500;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: #6b7280;
-          transition: color 0.2s;
-          padding: 4px 0;
-        }
-
-        .ftk-nav-link::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: #16a34a;
-          border-radius: 2px;
-          transition: width 0.25s ease;
-        }
-
-        .ftk-nav-link:hover { color: #111827; }
-        .ftk-nav-link:hover::after { width: 100%; }
-
-        .ftk-nav-link.ftk-active {
-          color: #111827;
-          font-weight: 700;
-        }
-
-        .ftk-nav-link.ftk-active::after {
-          width: 100%;
-        }
-
-        .ftk-icon-btn {
-          width: 36px;
-          height: 36px;
-          border-radius: 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #6b7280;
-          transition: all 0.18s;
-          position: relative;
-        }
-
-        .ftk-icon-btn:hover {
-          background: #f0fdf4;
-          color: #16a34a;
-        }
-
-        .ftk-icon-btn.ftk-active {
-          background: #dcfce7;
-          color: #16a34a;
-        }
-
-        .ftk-cart-badge {
-          position: absolute;
-          top: -3px;
-          right: -3px;
-          background: #16a34a;
-          color: #fff;
-          font-size: 0.6rem;
-          font-weight: 700;
-          font-family: 'DM Sans', sans-serif;
-          min-width: 17px;
-          height: 17px;
-          border-radius: 999px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 0 3px;
-          border: 2px solid white;
-        }
-
-        .ftk-btn-login {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 0.78rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          padding: 0.45rem 1.1rem;
-          background: #16a34a;
-          color: #fff;
-          border-radius: 8px;
-          border: 2px solid #16a34a;
-          transition: all 0.2s;
-          white-space: nowrap;
-          display: inline-block;
-        }
-
-        .ftk-btn-login:hover {
-          background: transparent;
-          color: #16a34a;
-        }
-
-        .ftk-btn-logout {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 0.78rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          padding: 0.45rem 1.1rem;
-          background: transparent;
-          color: #9ca3af;
-          border-radius: 8px;
-          border: 2px solid #e5e7eb;
-          transition: all 0.2s;
-          cursor: pointer;
-          white-space: nowrap;
-        }
-
-        .ftk-btn-logout:hover {
-          border-color: #ef4444;
-          color: #ef4444;
-        }
-
-        .ftk-drawer {
-          animation: ftk-drop 0.2s ease;
-          border-top: 1px solid #f3f4f6;
-          background: white;
-          padding: 4px 16px 20px;
-        }
-
-        @keyframes ftk-drop {
-          from { opacity: 0; transform: translateY(-6px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .ftk-mobile-link {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 0.95rem;
-          font-weight: 500;
-          text-transform: uppercase;
-          letter-spacing: 0.07em;
-          color: #374151;
-          padding: 0.7rem 0;
-          border-bottom: 1px solid #f3f4f6;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          transition: color 0.18s;
-        }
-
-        .ftk-mobile-link:hover,
-        .ftk-mobile-link.ftk-active {
-          color: #16a34a;
-        }
-
-        .ftk-mobile-link.ftk-active {
-          font-weight: 700;
-        }
-
-        .ftk-pip {
-          display: inline-block;
-          width: 6px;
-          height: 6px;
-          background: #16a34a;
-          border-radius: 50%;
-          flex-shrink: 0;
-        }
-
-        .ftk-divider {
-          height: 1px;
-          background: #f3f4f6;
-          margin: 0.75rem 0;
-        }
-      `}</style>
-
-      <header className={`ftk-header sticky top-0 z-50 ${scrolled ? "scrolled" : ""}`}>
-        <div className="ftk-topbar" />
+      <header className={`${styles.ftkHeader} sticky top-0 z-50 ${scrolled ? styles.scrolled : ""}`}>
+        <div className={styles.ftkTopbar} />
 
         <div className="container mx-auto flex items-center justify-between px-4 py-3">
 
           {/* ── Logo ── */}
-          <Link to="/" className="ftk-logo" style={{ marginRight: "2.5rem" }}>
-            FTK<span className="ftk-logo-dot" />MERCH
+          <Link to="/" className={styles.ftkLogo} style={{ marginRight: "2.5rem" }}>
+            FTK<span className={styles.ftkLogoDot} />MERCH
           </Link>
 
           {/* ── Desktop Nav ── */}
           {!isMobile && (
             <nav style={{ display: "flex", alignItems: "center", gap: "2rem", flex: 1 }}>
-              <Link to="/" className={`ftk-nav-link ${isActive("/") ? "ftk-active" : ""}`}>
+              <Link to="/" className={`${styles.ftkNavLink} ${isActive("/") ? styles.ftkActive : ""}`}>
                 Accueil
               </Link>
               {categories.map((cat) => (
                 <Link
                   key={cat.id}
                   to={`/category/${cat.slug}`}
-                  className={`ftk-nav-link capitalize ${isActiveCategory(cat.slug) ? "ftk-active" : ""}`}
+                  className={`${styles.ftkNavLink} capitalize ${isActiveCategory(cat.slug) ? styles.ftkActive : ""}`}
                 >
                   {cat.name}
                 </Link>
@@ -306,7 +96,7 @@ export default function Header() {
               {user && (
                 <Link
                   to="/profile"
-                  className={`ftk-icon-btn ${isActive("/profile") ? "ftk-active" : ""}`}
+                  className={`${styles.ftkIconBtn} ${isActive("/profile") ? styles.ftkActive : ""}`}
                   title="Mon profil"
                 >
                   <FaUser size={15} />
@@ -316,7 +106,7 @@ export default function Header() {
               {user && (
                 <Link
                   to="/orders"
-                  className={`ftk-icon-btn ${isActiveSub("/order") ? "ftk-active" : ""}`}
+                  className={`${styles.ftkIconBtn} ${isActiveSub("/order") ? styles.ftkActive : ""}`}
                   title="Mes commandes"
                 >
                   <FaReceipt size={15} />
@@ -325,12 +115,12 @@ export default function Header() {
 
               <Link
                 to="/cart"
-                className={`ftk-icon-btn ${isActive("/cart") ? "ftk-active" : ""}`}
+                className={`${styles.ftkIconBtn} ${isActive("/cart") ? styles.ftkActive : ""}`}
                 title="Panier"
               >
                 <HiShoppingCart size={18} />
                 {cartItemCount > 0 && (
-                  <span className="ftk-cart-badge">
+                  <span className={styles.ftkCartBadge}>
                     {cartItemCount > 9 ? "9+" : cartItemCount}
                   </span>
                 )}
@@ -338,11 +128,11 @@ export default function Header() {
 
               <div style={{ marginLeft: "8px" }}>
                 {!user ? (
-                  <Link to="/login" className="ftk-btn-login">
+                  <Link to="/login" className={styles.ftkBtnLogin}>
                     Connexion
                   </Link>
                 ) : (
-                  <button onClick={logout} className="ftk-btn-logout">
+                  <button onClick={logout} className={styles.ftkBtnLogout}>
                     Déconnexion
                   </button>
                 )}
@@ -351,7 +141,7 @@ export default function Header() {
               {user?.role === "admin" && (
                 <Link
                   to="/admin"
-                  className={`ftk-icon-btn ${isActiveSub("/admin") ? "ftk-active" : ""}`}
+                  className={`${styles.ftkIconBtn} ${isActiveSub("/admin") ? styles.ftkActive : ""}`}
                   style={{ marginLeft: "4px" }}
                   title="Administration"
                 >
@@ -366,18 +156,18 @@ export default function Header() {
             <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
               <Link
                 to="/cart"
-                className={`ftk-icon-btn ${isActive("/cart") ? "ftk-active" : ""}`}
+                className={`${styles.ftkIconBtn} ${isActive("/cart") ? styles.ftkActive : ""}`}
               >
                 <HiShoppingCart size={18} />
                 {cartItemCount > 0 && (
-                  <span className="ftk-cart-badge">
+                  <span className={styles.ftkCartBadge}>
                     {cartItemCount > 9 ? "9+" : cartItemCount}
                   </span>
                 )}
               </Link>
 
               <button
-                className="ftk-icon-btn"
+                className={styles.ftkIconBtn}
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Menu"
               >
@@ -389,13 +179,13 @@ export default function Header() {
 
         {/* ── Mobile Drawer — rendu uniquement si mobile ET ouvert ── */}
         {isMobile && isOpen && (
-          <div className="ftk-drawer">
+          <div className={styles.ftkDrawer}>
 
             <Link
               to="/"
-              className={`ftk-mobile-link ${isActive("/") ? "ftk-active" : ""}`}
+              className={`${styles.ftkMobileLink} ${isActive("/") ? styles.ftkActive : ""}`}
             >
-              {isActive("/") && <span className="ftk-pip" />}
+              {isActive("/") && <span className={styles.ftkPip} />}
               Accueil
             </Link>
 
@@ -403,19 +193,19 @@ export default function Header() {
               <Link
                 key={cat.id}
                 to={`/category/${cat.slug}`}
-                className={`ftk-mobile-link capitalize ${isActiveCategory(cat.slug) ? "ftk-active" : ""}`}
+                className={`${styles.ftkMobileLink} capitalize ${isActiveCategory(cat.slug) ? styles.ftkActive : ""}`}
               >
-                {isActiveCategory(cat.slug) && <span className="ftk-pip" />}
+                {isActiveCategory(cat.slug) && <span className={styles.ftkPip} />}
                 {cat.name}
               </Link>
             ))}
 
-            <div className="ftk-divider" />
+            <div className={styles.ftkDivider} />
 
             {user && (
               <Link
                 to="/profile"
-                className={`ftk-mobile-link ${isActive("/profile") ? "ftk-active" : ""}`}
+                className={`${styles.ftkMobileLink} ${isActive("/profile") ? styles.ftkActive : ""}`}
               >
                 <FaUser size={13} /> Mon profil
               </Link>
@@ -424,7 +214,7 @@ export default function Header() {
             {user && (
               <Link
                 to="/orders"
-                className={`ftk-mobile-link ${isActiveSub("/order") ? "ftk-active" : ""}`}
+                className={`${styles.ftkMobileLink} ${isActiveSub("/order") ? styles.ftkActive : ""}`}
               >
                 <FaReceipt size={13} /> Mes commandes
               </Link>
@@ -433,22 +223,22 @@ export default function Header() {
             {user?.role === "admin" && (
               <Link
                 to="/admin"
-                className={`ftk-mobile-link ${isActiveSub("/admin") ? "ftk-active" : ""}`}
+                className={`${styles.ftkMobileLink} ${isActiveSub("/admin") ? styles.ftkActive : ""}`}
               >
                 <FaCog size={13} /> Administration
               </Link>
             )}
 
-            <div className="ftk-divider" />
+            <div className={styles.ftkDivider} />
 
             <div style={{ paddingTop: "4px" }}>
               {!user ? (
-                <Link to="/login" className="ftk-btn-login" style={{ display: "block", textAlign: "center" }}>
+                <Link to="/login" className={styles.ftkBtnLogin} style={{ display: "block", textAlign: "center" }}>
                   Connexion
                 </Link>
               ) : (
                 <button
-                  className="ftk-btn-logout"
+                  className={styles.ftkBtnLogout}
                   style={{ width: "100%", textAlign: "center" }}
                   onClick={logout}
                 >

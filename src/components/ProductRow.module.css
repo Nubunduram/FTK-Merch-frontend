@@ -1,0 +1,161 @@
+.prow-header {
+  background: #111827;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.prow-header td {
+  padding: 10px 16px;
+  color: #f9fafb;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+}
+
+.prow-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prow-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prow-star-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  color: #6b7280;
+}
+
+.prow-star-btn:hover { background: rgba(255,255,255,0.1); }
+.prow-star-btn.featured { color: #fbbf24; }
+
+.prow-delete-btn {
+  background: rgba(239,68,68,0.15);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: #ef4444;
+  border-radius: 7px;
+  padding: 5px 8px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+}
+
+.prow-delete-btn:hover {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+}
+
+.prow-add-row td {
+  background: #f9fafb;
+  padding: 8px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.prow-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 6px 14px;
+  background: transparent;
+  color: #16a34a;
+  border: 1.5px solid #16a34a;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.prow-add-btn:hover {
+  background: #16a34a;
+  color: #fff;
+}
+
+.prow-form-row td {
+  background: #f0fdf4;
+  padding: 10px 8px;
+  border-bottom: 2px solid #bbf7d0;
+}
+
+.prow-input {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  border: 1.5px solid #d1fae5;
+  border-radius: 7px;
+  padding: 6px 10px;
+  width: 100%;
+  background: #fff;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.18s;
+}
+
+.prow-input:focus {
+  border-color: #16a34a;
+}
+
+.prow-form-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.prow-confirm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  background: #16a34a;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.18s;
+  white-space: nowrap;
+}
+
+.prow-confirm-btn:hover { background: #15803d; }
+
+.prow-cancel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  background: transparent;
+  color: #6b7280;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+
+.prow-cancel-btn:hover {
+  border-color: #9ca3af;
+  color: #374151;
+}

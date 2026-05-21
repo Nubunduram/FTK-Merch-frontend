@@ -1,10 +1,3 @@
-import { Link } from "react-router-dom";
-import { FaShoppingCart, FaArrowLeft } from "react-icons/fa";
-
-export default function Cancel() {
-  return (
-    <>
-      <style>{`
         .cancel-root {
           font-family: 'DM Sans', sans-serif;
           min-height: 60vh;
@@ -121,34 +114,3 @@ export default function Cancel() {
           border-color: #9ca3af;
           color: #374151;
         }
-      `}</style>
-
-      <div className="cancel-root">
-        <div className="cancel-card">
-
-          <div className="cancel-icon-wrap">
-            <span className="cancel-x">✕</span>
-          </div>
-
-          <h1 className="cancel-title">Paiement annulé</h1>
-          <p className="cancel-sub">
-            Votre transaction a été annulée et aucun montant n'a été débité.<br />
-            Vous pouvez réessayer ou continuer vos achats.
-          </p>
-
-          <div className="cancel-divider" />
-
-          <div className="cancel-actions">
-            <Link to="/cart" className="cancel-btn-primary">
-              <FaShoppingCart size={13} /> Retourner au panier
-            </Link>
-            <Link to="/" className="cancel-btn-secondary">
-              <FaArrowLeft size={12} /> Continuer mes achats
-            </Link>
-          </div>
-
-        </div>
-      </div>
-    </>
-  );
-}
