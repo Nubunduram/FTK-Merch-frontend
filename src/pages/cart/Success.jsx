@@ -18,7 +18,7 @@ export default function Success() {
   useEffect(() => {
     if (!showConfetti) return
     const container = document.getElementById("sc-confetti")
-    if (!container) return
+    if (!container || container.childElementCount > 0) return
     const COLORS = ["#16a34a", "#22c55e", "#4ade80", "#86efac", "#111827", "#f9fafb"]
     for (let i = 0; i < 90; i++) {
       const el = document.createElement("div")
@@ -31,6 +31,7 @@ export default function Success() {
       el.style.width = el.style.height = 6 + Math.random() * 6 + "px"
       container.appendChild(el)
     }
+    return () => { container.innerHTML = "" }
   }, [showConfetti])
 
   return (

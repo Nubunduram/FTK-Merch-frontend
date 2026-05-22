@@ -1,6 +1,5 @@
 import { getHeaders, handleResponse } from "./helpers";
-
-const API_URL = "http://localhost:3001/api";
+import { API_URL } from "./config";
 
 export async function postReview(productId, comment) {
   const res = await fetch(`${API_URL}/reviews/${productId}`, {

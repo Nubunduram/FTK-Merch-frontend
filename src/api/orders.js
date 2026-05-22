@@ -1,6 +1,5 @@
 import { getHeaders, handleResponse } from "./helpers";
-
-const API_URL = "http://localhost:3001/api";
+import { API_URL } from "./config";
 
 // GET orders list by user
 export async function getUserOrders() {

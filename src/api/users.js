@@ -1,7 +1,6 @@
 // users.js
 import { getHeaders, handleResponse } from './helpers';
-
-const API_URL = "http://localhost:3001/api";
+import { API_URL } from './config';
 
 // GET adresses d'un utilisateur
 export async function getUserAddresses() {

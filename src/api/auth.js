@@ -1,6 +1,5 @@
 import { getHeaders, handleResponse } from "./helpers";
-
-const API_URL = "http://localhost:3001/api";
+import { API_URL } from "./config";
 
 export async function signup(first_name, last_name, email, password) {
   const res = await fetch(`${API_URL}/auth/signup`, {

@@ -1,7 +1,6 @@
 // api/adminProducts.js
 import { getHeaders, handleResponse } from "./helpers";
-
-const API_URL = "http://localhost:3001/api";
+import { API_URL } from "./config";
 
 // GET all products with variants
 export async function getAllProducts() {

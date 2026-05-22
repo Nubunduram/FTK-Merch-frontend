@@ -1,11 +1,23 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 
 export const useCart = () => useContext(CartContext);
 
+const CART_KEY = "ftk_cart";
+
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (product, quantity = 1) => {
     setCart(prev => {
@@ -29,7 +41,7 @@ export const CartProvider = ({ children }) => {
         {
           ...product,
           quantity,
-          product_variants_id: product.product_variants_id, // 🔥 IMPORTANT
+          product_variants_id: product.product_variants_id,
         }
       ];
     });
