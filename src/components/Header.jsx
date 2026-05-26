@@ -53,10 +53,10 @@ export default function Header() {
 
   return (
     <>
-      <header className={`${styles.ftkHeader} sticky top-0 z-50 ${scrolled ? styles.scrolled : ""}`}>
+      <header className={`${styles.ftkHeader} ${scrolled ? styles.scrolled : ""}`}>
         <div className={styles.ftkTopbar} />
 
-        <div className="container mx-auto flex items-center justify-between px-4 py-3">
+        <div className={styles.ftkInner}>
 
           {/* ── Logo ── */}
           <Link to="/" className={styles.ftkLogo} style={{ marginRight: "2.5rem" }}>
@@ -73,7 +73,7 @@ export default function Header() {
                 <Link
                   key={cat.id}
                   to={`/category/${cat.slug}`}
-                  className={`${styles.ftkNavLink} capitalize ${isActiveCategory(cat.slug) ? styles.ftkActive : ""}`}
+                  className={`${styles.ftkNavLink} ${isActiveCategory(cat.slug) ? styles.ftkActive : ""}`}
                 >
                   {cat.name}
                 </Link>

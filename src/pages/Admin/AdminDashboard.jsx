@@ -12,9 +12,12 @@ const STATUS_CONFIG = {
     cancelled: { label: "Annulé", bg: "#fff1f2", color: "#e11d48", border: "#fecdd3" },
 };
 
+const ALERT_PAGE_SIZE = 5;
+
 export default function AdminDashboard() {
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [showAllAlerts, setShowAllAlerts] = useState(false);
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -162,7 +165,7 @@ export default function AdminDashboard() {
                                 <span className={styles.dashAlertCount}>{stats.low_stock.length} variante{stats.low_stock.length > 1 ? "s" : ""}</span>
                             </div>
 
-                            {stats.low_stock.map(item => (
+                            {(showAllAlerts ? stats.low_stock : stats.low_stock.slice(0, ALERT_PAGE_SIZE)).map(item => (
                                 <div key={item.id} className={styles.dashAlertItem}>
                                     <div>
                                         <p className={styles.dashAlertName}>{item.name}</p>
@@ -173,6 +176,16 @@ export default function AdminDashboard() {
                                     </span>
                                 </div>
                             ))}
+                            {stats.low_stock.length > ALERT_PAGE_SIZE && (
+                                <button
+                                    className={styles.dashAlertMoreBtn}
+                                    onClick={() => setShowAllAlerts(v => !v)}
+                                >
+                                    {showAllAlerts
+                                        ? "Réduire"
+                                        : `Voir les ${stats.low_stock.length - ALERT_PAGE_SIZE} autres`}
+                                </button>
+                            )}
                         </div>
                     </>
                 )}

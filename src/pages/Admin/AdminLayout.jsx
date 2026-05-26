@@ -12,31 +12,33 @@ export default function AdminLayout() {
 
         {/* ── Top bar ── */}
         <div className={styles.admTopbar}>
-          <div className={styles.admTitle}>
-            FTK MERCH
-            <span className={styles.admTitleBadge}>Admin</span>
-          </div>
+          <div className={styles.admTopbarInner}>
+            <div className={styles.admTitle}>
+              FTK MERCH
+              <span className={styles.admTitleBadge}>Admin</span>
+            </div>
 
-          <nav className={styles.admNav}>
-            <Link
-              to="products"
-              className={`${styles.admNavLink} ${isActive("products") ? "active" : ""}`}
-            >
-              <FaBoxOpen size={13} /> Produits
-            </Link>
-            <Link
-              to="orders"
-              className={`${styles.admNavLink} ${isActive("orders") ? "active" : ""}`}
-            >
-              <FaClipboardList size={13} /> Commandes
-            </Link>
-            <Link
-              to="categories"
-              className={`${styles.admNavLink} ${isActive("categories") ? "active" : ""}`}
-            >
-              <FaLayerGroup size={13} /> Catégories
-            </Link>
-          </nav>
+            <nav className={styles.admNav}>
+              <Link
+                to="products"
+                className={`${styles.admNavLink} ${isActive("products") ? "active" : ""}`}
+              >
+                <FaBoxOpen size={13} /> Produits
+              </Link>
+              <Link
+                to="orders"
+                className={`${styles.admNavLink} ${isActive("orders") ? "active" : ""}`}
+              >
+                <FaClipboardList size={13} /> Commandes
+              </Link>
+              <Link
+                to="categories"
+                className={`${styles.admNavLink} ${isActive("categories") ? "active" : ""}`}
+              >
+                <FaLayerGroup size={13} /> Catégories
+              </Link>
+            </nav>
+          </div>
         </div>
 
         {/* ── Page content ── */}

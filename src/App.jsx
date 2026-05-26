@@ -52,6 +52,7 @@ function App() {
       <ConfirmProvider>
       <BrowserRouter>
         <Header />
+        <main className="app-main">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/category/:categoryName" element={<CategoryPage />} />
@@ -75,6 +76,7 @@ function App() {
           </Route>
 
         </Routes>
+        </main>
         <Footer />
       </BrowserRouter>
       </ConfirmProvider>

@@ -7,10 +7,13 @@ import AuthRequired from "../../components/AuthRequired"
 import { getOrderStatus } from "../../utils/orderStatus"
 import styles from './OrdersHistory.module.css'
 
+const PAGE_SIZE = 8
+
 export default function OrdersHistory() {
   const { user, authLoading } = useAuth()
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     if (!user) return
@@ -29,6 +32,9 @@ export default function OrdersHistory() {
 
   if (authLoading) return null
   if (!user) return <AuthRequired />
+
+  const pageCount = Math.ceil(orders.length / PAGE_SIZE)
+  const pagedOrders = orders.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
 
   return (
     <>
@@ -56,43 +62,61 @@ export default function OrdersHistory() {
               </Link>
             </div>
           ) : (
-            orders.map(order => {
-              const status = getOrderStatus(order.status)
-              return (
-                <Link key={order.id} to={`/order/${order.id}`} className={styles.ohCard}>
-
-                  <div className={styles.ohCardIcon}>
-                    <FaShoppingBag size={18} />
-                  </div>
-
-                  <div className={styles.ohCardInfo}>
-                    <div className={styles.ohCardTop}>
-                      <span className={styles.ohCardId}>Commande #{order.id}</span>
-                      <span
-                        className={styles.ohStatusBadge}
-                        style={{ background: status.bg, color: status.color, borderColor: status.border }}
-                      >
-                        {status.label}
-                      </span>
+            <>
+              {pagedOrders.map(order => {
+                const status = getOrderStatus(order.status)
+                return (
+                  <Link key={order.id} to={`/order/${order.id}`} className={styles.ohCard}>
+                    <div className={styles.ohCardIcon}>
+                      <FaShoppingBag size={18} />
                     </div>
-
-                    <div className={styles.ohCardMeta}>
-                      <span className={styles.ohCardMetaItem}>
-                        {new Date(order.created_at).toLocaleDateString("fr-FR", {
-                          day: "numeric", month: "short", year: "numeric"
-                        })}
-                      </span>
-                      <span className={styles.ohCardMetaSep}>·</span>
-                      <span className={styles.ohCardAmount}>
-                        {(order.total_amount_in_cents / 100).toFixed(2)} €
-                      </span>
+                    <div className={styles.ohCardInfo}>
+                      <div className={styles.ohCardTop}>
+                        <span className={styles.ohCardId}>Commande #{order.id}</span>
+                        <span
+                          className={styles.ohStatusBadge}
+                          style={{ background: status.bg, color: status.color, borderColor: status.border }}
+                        >
+                          {status.label}
+                        </span>
+                      </div>
+                      <div className={styles.ohCardMeta}>
+                        <span className={styles.ohCardMetaItem}>
+                          {new Date(order.created_at).toLocaleDateString("fr-FR", {
+                            day: "numeric", month: "short", year: "numeric"
+                          })}
+                        </span>
+                        <span className={styles.ohCardMetaSep}>·</span>
+                        <span className={styles.ohCardAmount}>
+                          {(order.total_amount_in_cents / 100).toFixed(2)} €
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                    <FaArrowRight size={13} className={styles.ohCardArrow} />
+                  </Link>
+                )
+              })}
 
-                  <FaArrowRight size={13} className={styles.ohCardArrow} />
-                </Link>
-              )
-            })
+              {pageCount > 1 && (
+                <div className={styles.ohPagination}>
+                  <button
+                    className={styles.ohPageBtn}
+                    onClick={() => setPage(p => p - 1)}
+                    disabled={page === 1}
+                  >
+                    ← Précédent
+                  </button>
+                  <span className={styles.ohPageInfo}>Page {page} / {pageCount}</span>
+                  <button
+                    className={styles.ohPageBtn}
+                    onClick={() => setPage(p => p + 1)}
+                    disabled={page === pageCount}
+                  >
+                    Suivant →
+                  </button>
+                </div>
+              )}
+            </>
           )}
 
         </div>

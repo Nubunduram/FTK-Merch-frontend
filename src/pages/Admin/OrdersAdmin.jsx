@@ -18,10 +18,13 @@ const STATUS_STYLES = {
   canceled: { bg: "#fff1f2", color: "#e11d48", border: "#fecdd3" },
 };
 
+const PAGE_SIZE = 15;
+
 export default function OrdersAdmin() {
   const [orders, setOrders] = useState([]);
   const [filterStatus, setFilterStatus] = useState("");
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     fetchOrders();
@@ -42,6 +45,12 @@ export default function OrdersAdmin() {
   const filteredOrders = filterStatus
     ? orders.filter(o => o.status === filterStatus)
     : orders;
+
+  const pageCount = Math.ceil(filteredOrders.length / PAGE_SIZE);
+  const pagedOrders = filteredOrders.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  // Reset page when filter changes
+  const handleFilterChange = (val) => { setFilterStatus(val); setPage(1); };
 
   // Stats
   const countByStatus = (s) => orders.filter(o => o.status === s).length;
@@ -64,7 +73,7 @@ export default function OrdersAdmin() {
                     key={s.value}
                     className={styles.oadmStat}
                     style={{ background: style.bg, color: style.color, borderColor: style.border }}
-                    onClick={() => setFilterStatus(filterStatus === s.value ? "" : s.value)}
+                    onClick={() => handleFilterChange(filterStatus === s.value ? "" : s.value)}
                   >
                     {s.label} · {count}
                   </span>
@@ -80,7 +89,7 @@ export default function OrdersAdmin() {
             <span className={styles.oadmFilterLabel}>Filtrer</span>
             <select
               value={filterStatus}
-              onChange={e => setFilterStatus(e.target.value)}
+              onChange={e => handleFilterChange(e.target.value)}
               className={styles.oadmSelect}
             >
               <option value="">Tous les statuts</option>
@@ -120,7 +129,7 @@ export default function OrdersAdmin() {
                   <td colSpan={5} className={styles.oadmEmpty}>Aucune commande trouvée.</td>
                 </tr>
               ) : (
-                filteredOrders.map(order => {
+                pagedOrders.map(order => {
                   const style = STATUS_STYLES[order.status] || STATUS_STYLES.pending;
                   return (
                     <tr key={order.id}>
@@ -164,6 +173,25 @@ export default function OrdersAdmin() {
               )}
             </tbody>
           </table>
+          {pageCount > 1 && (
+            <div className={styles.oadmPagination}>
+              <button
+                className={styles.oadmPageBtn}
+                onClick={() => setPage(p => p - 1)}
+                disabled={page === 1}
+              >
+                ← Précédent
+              </button>
+              <span className={styles.oadmPageInfo}>Page {page} / {pageCount}</span>
+              <button
+                className={styles.oadmPageBtn}
+                onClick={() => setPage(p => p + 1)}
+                disabled={page === pageCount}
+              >
+                Suivant →
+              </button>
+            </div>
+          )}
         </div>
 
       </div>

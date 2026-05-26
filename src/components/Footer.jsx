@@ -10,11 +10,11 @@ export default function Footer() {
       <footer className={styles.ftkFooter}>
         <div className={styles.ftkFooterBar} />
 
-        <div className="container mx-auto px-4 pt-12 pb-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className={styles.ftkContainer}>
+          <div className={styles.ftkGrid}>
 
             {/* ── Brand ── */}
-            <div className="md:col-span-1">
+            <div>
               <Link to="/" className={styles.ftkFooterLogo}>
                 FTK<span className={styles.ftkFooterLogoDot} />MERCH
               </Link>
@@ -22,7 +22,7 @@ export default function Footer() {
               <p className={styles.ftkFooterDesc}>
                 Des vêtements pensés pour ceux qui osent s'affirmer. Qualité premium, style unique.
               </p>
-              <div className="flex gap-2 mt-5">
+              <div className={styles.ftkSocialRow}>
                 <a href="#" className={styles.ftkSocial} aria-label="Instagram"><FaInstagram size={15} /></a>
                 <a href="#" className={styles.ftkSocial} aria-label="TikTok"><FaTiktok size={14} /></a>
                 <a href="#" className={styles.ftkSocial} aria-label="Twitter"><FaTwitter size={14} /></a>

@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { useNavigate, useSearchParams, Link } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams, Link } from "react-router-dom";
 import styles from './Login.module.css';
 
 export default function Login() {
-  const { login, authLoading } = useAuth();
+  const { login, authLoading, user } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/";
+
+  if (authLoading) return null;
+  if (user) return <Navigate to={redirectTo} replace />;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

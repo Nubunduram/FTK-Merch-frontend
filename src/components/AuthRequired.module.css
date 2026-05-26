@@ -10,7 +10,7 @@
 .ar-card {
   background: var(--color-white);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
+  border-radius: var(--radius-2xl);
   padding: 48px 40px;
   max-width: 360px;
   width: 100%;
@@ -22,7 +22,7 @@
   height: 48px;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +38,7 @@
 }
 
 .ar-sub {
-  font-size: 0.83rem;
+  font-size: var(--text-base);
   color: var(--color-text-muted);
   margin-bottom: 28px;
   line-height: 1.5;
@@ -57,12 +57,12 @@
   padding: 11px 24px;
   background: var(--color-dark);
   color: var(--color-white);
-  border-radius: 999px;
-  font-size: 0.78rem;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  transition: opacity 0.2s;
+  transition: opacity var(--transition-slow);
 }
 
 .ar-btn-primary:hover {
@@ -77,12 +77,12 @@
   background: transparent;
   color: var(--color-dark);
   border: 2px solid var(--color-border);
-  border-radius: 999px;
-  font-size: 0.78rem;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  transition: border-color 0.2s;
+  transition: border-color var(--transition-slow);
 }
 
 .ar-btn-outline:hover {

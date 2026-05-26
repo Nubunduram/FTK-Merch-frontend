@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import styles from './Signup.module.css';
 
@@ -7,7 +7,10 @@ const Signup = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/";
-  const { signupAndLogin } = useAuth();
+  const { signupAndLogin, authLoading, user } = useAuth();
+
+  if (authLoading) return null;
+  if (user) return <Navigate to={redirectTo} replace />;
 
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");

@@ -28,10 +28,10 @@
 }
 
 .cat-hero-label {
-  font-size: 0.7rem;
+  font-size: var(--text-xs);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: var(--tracking-widest);
   color: var(--color-primary);
   margin-bottom: 8px;
 }
@@ -39,14 +39,14 @@
 .cat-hero-title {
   font-family: var(--font-display);
   font-size: 3rem;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--tracking-normal);
   color: var(--color-white);
   text-transform: capitalize;
   line-height: 1;
 }
 
 .cat-hero-count {
-  font-size: 0.82rem;
+  font-size: var(--text-base);
   color: var(--color-text-muted);
   margin-top: 8px;
 }
@@ -72,14 +72,14 @@
   align-items: center;
   gap: 6px;
   padding: 7px 16px;
-  font-size: 0.78rem;
+  font-size: var(--text-sm);
   font-weight: 600;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   border: 1.5px solid var(--color-border);
   background: var(--color-white);
   color: var(--color-text-muted);
   cursor: pointer;
-  transition: all 0.18s;
+  transition: all var(--transition-base);
   white-space: nowrap;
 }
 
@@ -95,11 +95,11 @@
 }
 
 .cat-filter-count {
-  font-size: 0.68rem;
+  font-size: var(--text-xs);
   font-weight: 700;
   background: rgba(0,0,0,0.1);
   padding: 1px 6px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
 }
 
 .cat-filter-pill.active .cat-filter-count {
@@ -123,7 +123,7 @@
 }
 
 .cat-toolbar-left {
-  font-size: 0.82rem;
+  font-size: var(--text-base);
   color: var(--color-text-faint);
 }
 
@@ -134,24 +134,24 @@
 }
 
 .cat-sort-label {
-  font-size: 0.75rem;
+  font-size: var(--text-sm);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-wide);
   color: var(--color-text-muted);
 }
 
 .cat-sort-select {
-  font-size: 0.82rem;
+  font-size: var(--text-base);
   font-weight: 500;
   border: 1.5px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   padding: 6px 12px;
   color: var(--color-dark);
   background: var(--color-white);
   cursor: pointer;
   outline: none;
-  transition: border-color 0.18s;
+  transition: border-color var(--transition-base);
 }
 
 .cat-sort-select:focus { border-color: var(--color-primary); }
@@ -183,7 +183,7 @@
 
 /* ── Skeleton loader ── */
 .cat-skeleton {
-  border-radius: 14px;
+  border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--color-white);
   border: 1.5px solid var(--color-border-light);
@@ -202,7 +202,7 @@
 
 .cat-skeleton-line {
   height: 12px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   background: linear-gradient(90deg, var(--color-border-light) 25%, #e9eaec 50%, var(--color-border-light) 75%);
   background-size: 200% 100%;
   animation: ftk-shimmer 1.4s infinite;
@@ -214,19 +214,19 @@
   text-align: center;
   padding: 80px 16px;
   background: var(--color-white);
-  border-radius: 14px;
+  border-radius: var(--radius-xl);
   border: 1.5px solid var(--color-border-light);
 }
 
 .cat-empty-title {
   font-family: var(--font-display);
   font-size: 1.4rem;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--tracking-normal);
   color: var(--color-text);
   margin-bottom: 8px;
 }
 
 .cat-empty-sub {
-  font-size: 0.85rem;
+  font-size: var(--text-md);
   color: var(--color-text-faint);
 }
