@@ -33,8 +33,7 @@ export default function VariantRow({ variant, onStockChange, onDelete }) {
       await deleteVariant(variant.id);
       onDelete(variant.id);
     } catch (error) {
-      console.error(error);
-      showToast("Erreur lors de la suppression de la variante.", "error");
+      showToast(error.message || "Erreur lors de la suppression de la variante.", "error");
     }
   };
 

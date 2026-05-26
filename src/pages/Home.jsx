@@ -60,7 +60,7 @@ const Home = () => {
               </p>
               {categories[0] && (
                 <Link to={`/category/${categories[0].slug}`} className={styles.hHeroCta}>
-                  Voir la boutique →
+                  Voir la boutique <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style={{display:"inline-block",verticalAlign:"middle",marginLeft:"4px"}}><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </Link>
               )}
             </div>

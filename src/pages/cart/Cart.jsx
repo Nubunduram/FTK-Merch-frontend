@@ -1,7 +1,7 @@
 import { useCart } from "../../context/CartContext";
 import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { postOrder } from "../../api/orders";
+import { createCheckoutSession } from "../../api/orders";
 import { getUserAddresses } from "../../api/users";
 import { useAuth } from "../../context/AuthContext";
 import { FaTrash, FaShoppingBag, FaArrowLeft, FaTruck, FaLock } from "react-icons/fa";
@@ -77,9 +77,9 @@ export default function Cart() {
         })),
         address: { street, city, postal_code }
       };
-      const order = await postOrder(orderData);
-      clearCart();
-      navigate(`/order/${order.id}`, { state: { order } });
+      const { url } = await createCheckoutSession(orderData);
+      // Redirection vers la page de paiement Stripe (externe)
+      window.location.href = url;
     } catch (err) {
       if (err.message === "STOCK_ERROR") {
         setStockError(err.stockItems);
@@ -87,7 +87,6 @@ export default function Cart() {
         console.error("Erreur lors de la commande:", err);
         setErrorMsg("Une erreur est survenue. Veuillez réessayer.");
       }
-    } finally {
       setLoading(false);
     }
   };

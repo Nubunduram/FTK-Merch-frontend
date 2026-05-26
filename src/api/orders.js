@@ -17,9 +17,9 @@ export async function getOrderById(orderId) {
   return handleResponse(res);
 }
 
-// POST orders
-export async function postOrder(orderData) {
-  const res = await fetch(`${API_URL}/orders`, {
+// POST create Stripe checkout session
+export async function createCheckoutSession(orderData) {
+  const res = await fetch(`${API_URL}/payments/create-checkout-session`, {
     method: "POST",
     headers: getHeaders(true, true),
     body: JSON.stringify(orderData),
